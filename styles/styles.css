@@ -12,15 +12,15 @@
 
  :root {
   /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
+  --link-color: #e72325;
+  --link-hover-color: #b33027;
   --background-color: #fff;
   --overlay-background-color: #eee;
-  --highlight-background-color: #ccc;
+  --highlight-background-color: #ececec;
   --text-color: #000;
 
   /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
+  --body-font-family: 'Roboto', sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
@@ -41,7 +41,7 @@
   --nav-height: 64px;
 
 }
-
+/* 
 @media (min-width: 900px) {
   :root {
     --heading-font-size-xxl: 60px;
@@ -51,7 +51,7 @@
     --heading-font-size-s: 24px;
     --heading-font-size-xs: 22px;
   }
-}
+} */
 
 body {
   font-size: var(--body-font-size-m);
@@ -134,27 +134,24 @@ a:hover {
 /* buttons */
 a.button:any-link, button {
   font-family: var(--body-font-family);
+  background: var(--link-color);
+  color: #fff;
+  text-transform: uppercase;
   display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
   text-align: center;
-  font-style: normal;
-  font-weight: 600;
+  border-radius: 5px;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color .2s;
+  border-style: none;
   cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus  {
   background-color: var(--link-hover-color);
   cursor: pointer;
+  text-decoration: none;
 }
 
 button:disabled, button:disabled:hover {
@@ -220,14 +217,35 @@ main img {
   width: 100%;
 }
 
-main .section {
-  padding: 64px 16px;
+main {
+  background-color: var(--highlight-background-color);
+}
+
+main .default-content-wrapper {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+main .default-content-wrapper h1 {
+  font-size: 36px;
+  margin-top: 0;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+main .default-content-wrapper h2 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+main .default-content-wrapper img {
+  margin-top: 2rem;
 }
 
 @media (min-width: 600px) {
-  main .section {
+  /* main .section {
     padding: 64px 32px;
-  }
+  } */
 }
 
 @media (min-width: 900px) {

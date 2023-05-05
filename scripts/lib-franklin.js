@@ -297,7 +297,7 @@ export function decorateSections(main) {
     let defaultContent = false;
     [...section.children].forEach((e) => {
       if (e.tagName === 'DIV' || !defaultContent) {
-        const wrapper = document.createElement('div');
+        const wrapper = document.createElement('div'); // section
         wrappers.push(wrapper);
         defaultContent = e.tagName !== 'DIV';
         if (defaultContent) wrapper.classList.add('default-content-wrapper');
