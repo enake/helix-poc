@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
 import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 
 // media query match that indicates mobile/tablet width
@@ -104,7 +106,7 @@ export default async function decorate(block) {
         </div>
       </div>
     </div>`;
-  //const resp = await fetch(`${navPath}.plain.html`);
+  // const resp = await fetch(`${navPath}.plain.html`);
 
   // if (resp.ok) {
   //   const html = await resp.text();
@@ -137,7 +139,7 @@ export default async function decorate(block) {
   //   // hamburger for mobile
   //   const hamburger = document.createElement('div');
   //   hamburger.classList.add('nav-hamburger');
-  //   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+  //  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
   //       <span class="nav-hamburger-icon"></span>
   //     </button>`;
   //   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));

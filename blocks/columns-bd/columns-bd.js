@@ -33,7 +33,7 @@ function handleContentColumn(col, textContainer) {
 
   const awardsPictures = document.createElement('div');
   col.querySelectorAll('p:not(:nth-child(1)) > picture').forEach((picture) => {
-    picture.querySelector('img').classList.add('tw-h-14')
+    picture.querySelector('img').classList.add('tw-h-14');
     awardsPictures.appendChild(picture);
   });
 
