@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line no-unused-vars
 import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
@@ -7,8 +8,8 @@ import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // const cfg = readBlockConfig(block);
-  // block.textContent = '';
+  const cfg = readBlockConfig(block);
+  block.textContent = '';
 
   // // fetch footer content
   // const footerPath = cfg.footer || '/footer';

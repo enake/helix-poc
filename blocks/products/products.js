@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
 export default function decorate(block) {
-  console.log(block);
+  // console.log(block);
 
   const div = document.createElement('div');
 
