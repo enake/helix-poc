@@ -218,7 +218,7 @@ main img {
 }
 
 main {
-  background-color: var(--highlight-background-color);
+  background-color: var(--background-color);
 }
 
 main .default-content-wrapper {
