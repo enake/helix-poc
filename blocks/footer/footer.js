@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+// eslint-disable-next-line no-unused-vars
 import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
 
 /**
@@ -10,6 +13,7 @@ export default async function decorate(block) {
 
   // // fetch footer content
   // const footerPath = cfg.footer || '/footer';
+  // eslint-disable-next-line max-len
   // const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
 
   // if (resp.ok) {
@@ -19,7 +23,7 @@ export default async function decorate(block) {
   //   const footer = document.createElement('div');
   //   footer.innerHTML = html;
 
-  //   decorateIcons(footer);
-  //   block.append(footer);
-  // }
+//   decorateIcons(footer);
+//   block.append(footer);
+// }
 }

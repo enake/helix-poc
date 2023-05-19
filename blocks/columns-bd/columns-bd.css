@@ -1,0 +1,289 @@
+/* eslint-disable */
+/* .columns-bd > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-bd > div > div {
+  order: 1;
+}
+
+.columns-bd > div > .columns-bd-img-col {
+  order: 0;
+}
+
+.columns-bd > div > .columns-bd-img-col img {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .columns-bd > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 32px;
+  }
+
+  .columns-bd > div > div {
+    flex: 1;
+    order: unset;
+  }
+} */
+
+
+.columns-bd {
+  /*! CSS Used from: https://download.bitdefender.com/resources/themes/draco/css/lite_v2/bootstrap-grid.min.css */
+  /*! CSS Used from: https://download.bitdefender.com/resources/themes/draco/css/lite_v2/reset.css */
+  /*! CSS Used from: https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer-vcd-opt/css/tw.css */
+  /*! CSS Used from: Embedded */
+}
+.columns-bd div, .columns-bd span, .columns-bd h3, .columns-bd p, .columns-bd a, .columns-bd img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.columns-bd a {
+  text-decoration: none;
+  color: #0066ff;
+  outline: none;
+}
+.columns-bd *, .columns-bd :after, .columns-bd :before {
+  box-sizing: border-box;
+  border: 0 solid #e5e7eb;
+}
+.columns-bd :after, .columns-bd :before {
+  --tw-content:"";
+}
+.columns-bd h3 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+.columns-bd a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.columns-bd h3, .columns-bd p {
+  margin: 0;
+}
+.columns-bd :disabled {
+  cursor: default;
+}
+.columns-bd img, .columns-bd svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.columns-bd *, .columns-bd :after, .columns-bd :before {
+  --tw-border-spacing-x:0;
+  --tw-border-spacing-y:0;
+  --tw-translate-x:0;
+  --tw-translate-y:0;
+  --tw-rotate:0;
+  --tw-skew-x:0;
+  --tw-skew-y:0;
+  --tw-scale-x:1;
+  --tw-scale-y:1;
+  --tw-scroll-snap-strictness:proximity;
+  --tw-ring-offset-width:0px;
+  --tw-ring-offset-color:#fff;
+  --tw-ring-color:#3b82f680;
+  --tw-ring-offset-shadow:0 0 #0000;
+  --tw-ring-shadow:0 0 #0000;
+  --tw-shadow:0 0 #0000;
+  --tw-shadow-colored:0 0 #0000;
+}
+.columns-bd .tw-absolute {
+  position: absolute;
+}
+.columns-bd .tw-relative {
+  position: relative;
+}
+.columns-bd .tw-inset-0 {
+  right: 0;
+  left: 0;
+}
+.columns-bd .tw-inset-0 {
+  top: 0;
+  bottom: 0;
+}
+.columns-bd .tw-my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.columns-bd .tw-mb-4 {
+  margin-bottom: 1rem;
+}
+.columns-bd .tw-mb-8 {
+  margin-bottom: 2rem;
+}
+.columns-bd .tw-block {
+  display: block;
+}
+.columns-bd .tw-flex {
+  display: flex;
+}
+.columns-bd .tw-hidden {
+  display: none;
+}
+.columns-bd .tw-h-3 {
+  height: 0.75rem;
+}
+.columns-bd .tw-h-full {
+  height: 100%;
+}
+.columns-bd .tw-h-16 {
+  height: 4rem;
+}
+.columns-bd .tw-h-14 {
+  height: 3.5rem;
+}
+.columns-bd .tw-w-full {
+  width: 100%;
+}
+.columns-bd .tw-w-1\/2 {
+  width: 50%;
+}
+.columns-bd .tw-w-3 {
+  width: 0.75rem;
+}
+.columns-bd .tw-w-16 {
+  width: 4rem;
+}
+.columns-bd .tw-items-center {
+  align-items: center;
+}
+.columns-bd .tw-space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse:0;
+  margin-right: calc(1rem*var(--tw-space-x-reverse));
+  margin-left: calc(1rem*(1 - var(--tw-space-x-reverse)));
+}
+.columns-bd .tw-rounded-lg {
+  border-radius: 0.5rem;
+}
+.columns-bd .tw-rounded-3xl {
+  border-radius: 1.5rem;
+}
+.columns-bd .tw-rounded-r-3xl {
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+}
+.columns-bd .tw-border-2 {
+  border-width: 2px;
+}
+.columns-bd .tw-border-solid {
+  border-style: solid;
+}
+.columns-bd .tw-border-custom-red {
+  --tw-border-opacity:1;
+  border-color: rgb(231 35 37/var(--tw-border-opacity));
+}
+.columns-bd .tw-bg-custom-red {
+  --tw-bg-opacity:1;
+  background-color: rgb(231 35 37/var(--tw-bg-opacity));
+}
+.columns-bd .tw-bg-\[\#F5F5F7\] {
+  --tw-bg-opacity:1;
+  background-color: rgb(245 245 247/var(--tw-bg-opacity));
+}
+.columns-bd .tw-bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+.columns-bd .tw-from-\[\#ffffff\] {
+  --tw-gradient-from:#fff;
+  --tw-gradient-to:#fff0;
+  --tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to);
+}
+.columns-bd .tw-via-\[\#F5F5F700\] {
+  --tw-gradient-to:#f5f5f700;
+  --tw-gradient-stops:var(--tw-gradient-from),#f5f5f700,var(--tw-gradient-to);
+}
+.columns-bd .tw-to-\[\#00000000\] {
+  --tw-gradient-to:#0000;
+}
+.columns-bd .tw-object-cover {
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.columns-bd .tw-object-center {
+  -o-object-position: center;
+  object-position: center;
+}
+.columns-bd .tw-py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.columns-bd .tw-px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.columns-bd .tw-px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.columns-bd .tw-pb-24 {
+  padding-bottom: 6rem;
+}
+.columns-bd .tw-pt-16 {
+  padding-top: 4rem;
+}
+.columns-bd .tw-text-center {
+  text-align: center;
+}
+.columns-bd .tw-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.columns-bd .tw-text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.columns-bd .tw-font-bold {
+  font-weight: 700;
+}
+.columns-bd .tw-uppercase {
+  text-transform: uppercase;
+}
+.columns-bd .tw-text-white {
+  --tw-text-opacity:1;
+  color: rgb(255 255 255/var(--tw-text-opacity));
+}
+.columns-bd .tw-opacity-50 {
+  opacity: 0.5;
+}
+.columns-bd .hover\:tw-border-red-700:hover {
+  --tw-border-opacity:1;
+  border-color: rgb(185 28 28/var(--tw-border-opacity));
+}
+.columns-bd .hover\:tw-bg-red-700:hover {
+  --tw-bg-opacity:1;
+  background-color: rgb(185 28 28/var(--tw-bg-opacity));
+}
+@media (min-width: 768px) {
+  .columns-bd .md\:tw-block {
+    display: block;
+  }
+  .columns-bd .md\:tw-w-1\/2 {
+    width: 50%;
+  }
+  .columns-bd .md\:tw-px-7 {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+  .columns-bd .md\:tw-pt-12 {
+    padding-top: 3rem;
+  }
+  .columns-bd .md\:tw-pb-16 {
+    padding-bottom: 4rem;
+  }
+}
+@media (min-width: 992px) {
+  .columns-bd .lg\:tw-px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+.columns-bd .tw-group:hover .group-hover\:tw-inline-block {
+  display: inline-block;
+}
