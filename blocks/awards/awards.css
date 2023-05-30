@@ -1,0 +1,38 @@
+
+.awards-container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.awards {
+    border-radius: 0.25rem;
+    background-color: rgb(242 242 242 / 75%);
+    padding: 2rem 0;
+    margin: 3rem 0;
+}
+
+.awards > div {
+    display: flex;
+    justify-content: space-around;
+}
+
+.awards > div > div > p {
+    display: flex;
+    justify-content: center;
+}
+
+.awards > div > div > p:nth-child(2) {
+    color: #fea660;
+}
+
+.awards > div > div > p:nth-child(3) {
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.awards img {
+    height: 100px;
+}
