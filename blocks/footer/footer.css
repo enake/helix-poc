@@ -1,14 +1,67 @@
-footer {
-  padding: 2rem;
-  background-color: var(--background-color);
-  font-size: var(--body-font-size-s);
+#blueFooter23 {
+  background: #006EFF;
+  color: white;
+  padding: 50px 0;
+  clear: both;
+}
+#blueFooter23 .row {
+  padding: 0 15px;
+}
+#blueFooter23 .footer__links a, .footer__copy {
+  color: white;
+}
+#blueFooter23 .footer__links a:hover {
+  opacity: 0.6;
+  color: white;
+}
+#blueFooter23 .footer__links li::after {
+  background: white;
+  height: 10px;
+}
+#blueFooter23 .footer__copy {
+  margin: 2px 0 0px 0;
+  padding-bottom: 0px;
+}
+#blueFooter23 p.trustedAlways {
+  font: normal normal bold 32px/40px Roboto;
 }
 
-footer .footer {
-  max-width: 1200px;
+#blueFooter23 .footer__links {
+  margin-top: 15px;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+#blueFooter23 .footer__links a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  transition: .2s color;
+  padding: 0 2px;
+}
+
+.footer__links li {
+  display: inline-block;
+  position: relative;
+  padding: 0 6px 0 0;
+}
+
+#blueFooter23 .footer__links li::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  height: 15px;
+  background: #ffffff;
   margin: auto;
 }
 
-footer .footer p {
-  margin: 0;
+#blueFooter23 .footer__links li:last-child {
+  padding-right: 0;
+}
+
+#blueFooter23 .footer__links li:last-child::after {
+  display: none;
 }

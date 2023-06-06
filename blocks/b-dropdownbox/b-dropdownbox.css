@@ -1,0 +1,118 @@
+/* b-boxes .b-dropdownbox-container*/
+.b-dropdownbox-container .block img {
+  width: 20px;
+}
+.b-dropdownbox-container .block > div {
+  padding: 15px 30px;
+}
+
+.b-dropdownbox-container .block > div:not(:first-child) {
+  padding: 0;
+  font-weight: 500;
+}
+
+.b-dropdownbox-container .block > div:not(:first-child) > div {
+  width: 29%;
+  padding: 15px 2%;
+  display: inline-block;
+}
+
+.b-dropdownbox-container .block.inactive > div:not(:first-child) > div, .b-dropdownbox-container .block.closed > div:not(:first-child) > div {
+  display: none;
+}
+.b-dropdownbox-container .block.closed.inactive > div:not(:first-child) > div {
+  display: inline-block;
+}
+
+.b-dropdownbox-container .block > div > div:nth-child(1), .b-dropdownbox-container .block > div > div:nth-child(1) {
+  background-color: #e4f2ff;
+}
+.b-dropdownbox-container .block > div > div:nth-child(2), .b-dropdownbox-container .block > div > div:nth-child(2) {
+  background-color: #f6f6f6;
+}
+
+/* blue tbs */
+.b-dropdownbox-container .block > div:nth-child(1) {
+  padding: 0;
+}
+.b-dropdownbox-container .block > div:nth-child(1) > div {
+  color: #fff;
+  font-weight: 500;
+  background-color: #006eff;
+  cursor: pointer;
+  padding: 15px 30px;
+}
+
+/* handling - arrow down/up */
+.b-dropdownbox-container .block > div:nth-child(1) > div::before, .b-dropdownbox-container .block.closed.inactive > div:nth-child(1) > div::before {
+  content: "";
+  width: 17px;
+  height: 19px;
+  background: url(../../images/icons/arrow_down.png) top left no-repeat transparent;
+  float: left;
+  margin-right: 9px;
+  background-size: 100%;
+  transform: rotate(180deg);
+}
+.b-dropdownbox-container .block.inactive > div:nth-child(1) > div::before, .b-dropdownbox-container .block.closed > div:nth-child(1) > div::before  {
+  background: url(../../images/icons/arrow_down.png) bottom left no-repeat transparent;
+  transform: rotate(0deg);
+  background-size: 100%;
+}
+
+/* for mobile */
+@media (max-width: 768px) {
+  .b-boxes-container {
+    float: none;
+  }
+  .b-boxes-container .b-boxes > div {
+    float: none;
+  }
+  .b-boxes-container .b-boxes > div:nth-child(2) > div {
+    width: 92%;
+    float: none;
+    margin: 1em auto;
+  }
+  .b-boxes-container .b-boxes > div:nth-child(2) > div:first-child {
+    min-height: auto;
+  }
+  .b-boxes-container .b-boxes > div:nth-child(1) p {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 576px) {
+  .b-boxes-container {
+    padding: 1em 0;
+    float: none;
+    width: 100%;
+  }
+
+  .b-boxes-container .b-boxes > div {
+    margin: 0.5em 0;
+    width: 100%;
+  }
+  .b-boxes-container .b-boxes > div:nth-child(1) h3 {
+    font-size: 22px;
+  }
+  .b-boxes-container p, .b-boxes-container strong {
+    font-size: 15px!important;
+    line-height: 22px;
+    display: block;
+  }
+  .b-boxes-container .b-boxes > div:nth-child(2) > p:nth-child(2)  {
+    margin-top: 0!important;
+  }
+  .b-boxes-container .b-boxes > div:nth-child(2) > div {
+    width: 92%;
+    float: none;
+    margin: 1em 1%!important;
+  }
+  .b-boxes-container .b-boxes > div:nth-child(2) > div:first-child {
+    min-height: auto;
+  }
+  .b-boxes-container .b-boxes > div:nth-child(2) h3 {
+    font-size: 19px;
+  }
+  
+}

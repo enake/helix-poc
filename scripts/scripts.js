@@ -121,6 +121,75 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+// clean cleanBlockDOM
+export const cleanBlockDOM = (element)  => {
+  document.querySelector(element).innerHTML = '';
+}
+
+// create a DOM element
+export const createDomElement = (parent, tagName, idName, className, content, addAttr) => {
+  let err = false;
+  var element = '';
+
+  if (typeof parent === 'undefined' || parent == '') {
+    parent = 'main';
+  }
+
+  if (typeof tagName !== 'undefined' && tagName !== '') {
+    element = document.createElement(tagName);
+  } else {
+    err = true;
+  }
+
+  if (typeof idName !== 'undefined' && idName !== '') {
+    element.id = idName;
+  }
+  
+  if (typeof className !== 'undefined' && className !== '') {
+    element.className = className;
+  }
+
+  if (typeof content !== 'undefined' && content !== '') {
+    element.textContent = content;
+  }
+
+  if (typeof addAttr !== 'undefined' && addAttr.length > 0) {
+    element.setAttribute(addAttr['name'], addAttr['value']);
+  }
+
+  console.log(document.querySelector(parent))
+  if (!err && typeof parent !== 'undefined' && document.querySelector(parent) !== null) {
+    document.querySelector(parent).appendChild(element);
+  }
+  
+}
+
+// append to DOM specific element
+export const appendDomElement = (parent, content) => {
+  if (typeof parent === 'undefined' &&  parent === '') {
+    parent = 'main';
+  }
+
+  console.log(content);
+  if (typeof content !== 'undefined' & content !== '') {
+    if (content.innerHTML.includes('[') && content.innerHTML.includes(']')) {
+      // content = content.innerHTML.replace("[", '<span class="greenBck">').replace("]", '</span>');
+    }
+    
+    document.querySelector(parent).appendChild(content);
+  }
+}
+
+// add specific Attribute to a DOM element
+export const addAttr2DomElement = (attrName, attrValue, element) => {
+  if (typeof attrName !== 'undefined' &&  attrName !== '' && typeof attrValue !== 'undefined' &&  attrValue !== '' && typeof element !== 'undefined' &&  element !== '') {
+    document.querySelector(element).setAttribute(attrName, attrValue);
+  } else {
+    console.log('insuficient data');
+  }
+}
+
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
