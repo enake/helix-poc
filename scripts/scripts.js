@@ -52,7 +52,7 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  buildAutoBlocks(main);
+  // buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
 }
@@ -195,5 +195,28 @@ async function loadPage() {
   await loadLazy(document);
   loadDelayed();
 }
+
+/*
+* @viewport: 'mobile' | 'tablet' | 'desktop'
+* */
+function initMobileDetector(viewport) {
+  const mobileDetectorDiv = document.createElement('div');
+  mobileDetectorDiv.setAttribute(`data-${viewport}-detector`, '');
+  document.body.prepend(mobileDetectorDiv);
+}
+
+function addScript(src, callback) {
+  const s = document.createElement('script');
+  s.setAttribute('src', src);
+  s.setAttribute('type', 'module');
+  s.onload = callback;
+  document.body.appendChild(s);
+}
+
+addScript('./scripts/utils.js');
+
+initMobileDetector('mobile');
+initMobileDetector('tablet');
+initMobileDetector('desktop');
 
 loadPage();

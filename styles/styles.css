@@ -175,6 +175,36 @@ header .container {
   }
 }
 
+body [data-mobile-detector] {
+  display: block;
+}
+
+body [data-tablet-detector] {
+  display: none;
+}
+
+body [data-desktop-detector] {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  body [data-mobile-detector] {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  body [data-tablet-detector] {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  body [data-desktop-detector] {
+    display: block;
+  }
+}
+
 header {
   height: var(--nav-height);
 }
