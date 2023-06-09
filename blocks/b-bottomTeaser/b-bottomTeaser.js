@@ -2,6 +2,7 @@ import isView from '../../scripts/utils.js';
 
 export default function decorate(block) {
   const [quoteElement, authorElement, positionElement] = block.children;
+  const [pictureElement] = block.children[3].getElementsByTagName('picture');
   let isDesktopView = isView('desktop');
 
   render();
@@ -19,7 +20,7 @@ export default function decorate(block) {
           </div>
         </div>
       </div>
-      ${isDesktopView ? '<img alt="" src="https://www.bitdefender.com/media/html/business/cross-sell-flash-sale-pm-2023/images/testimonialsBG_1920X558.jpg" />' : ''}
+      ${isDesktopView ? pictureElement.outerHTML : ''}
     </div>`;
 
     const ref = document.querySelector('.b-bottomteaser-container .main-wrapper');
