@@ -23,7 +23,7 @@ export default function decorate(block) {
       ${isDesktopView ? pictureElement.outerHTML : ''}
     </div>`;
 
-    const ref = document.querySelector('.b-bottomteaser-container .main-wrapper');
+    const ref = document.querySelector('.b-single-quote-container .main-wrapper');
 
     const resizeObserver = new ResizeObserver(() => {
       const newViewportView = isView('desktop');
