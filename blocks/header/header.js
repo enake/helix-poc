@@ -93,19 +93,19 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  */
 export default async function decorate(block) {
   // fetch nav content
-  // const navMeta = getMetadata('nav');
-  // const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
-  // block.className = 'lp-header py-3';
-  // block.innerHTML = `
-  //   <div class="container">
-  //     <div class="">
-  //       <div class="">
-  //         <a class="d-inline-block" href="/">
-  //           <img alt="Bitdefender" class="img-fluid d-block menu__logo" src="https://download.bitdefender.com/resources/themes/draco/images/lite_v2/logo-white.svg">
-  //         </a>
-  //       </div>
-  //     </div>
-  //   </div>`;
+  const navMeta = getMetadata('nav');
+  const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
+  block.className = 'lp-header py-3';
+  block.innerHTML = `
+    <div class="container">
+      <div class="">
+        <div class="">
+          <a class="d-inline-block" href="/">
+            <img alt="Bitdefender" class="img-fluid d-block menu__logo" src="https://download.bitdefender.com/resources/themes/draco/images/lite_v2/logo-white.svg">
+          </a>
+        </div>
+      </div>
+    </div>`;
   // const resp = await fetch(`${navPath}.plain.html`);
 
   // if (resp.ok) {
