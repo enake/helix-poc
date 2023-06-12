@@ -17,6 +17,11 @@ npm i
 npm run lint
 ```
 
+## Bootstrap
+
+This template uses bootstrap. 5.x version in combination with `purgecss`. `styles/vendor/bootstrap.min.css` only
+imports the css classes that being used the project. In order to update the file, use: `npm run purge-css`
+
 ## Local development
 
 1. Create a new repository based on the `helix-project-boilerplate` template and add a mountpoint in the `fstab.yaml`
