@@ -213,6 +213,14 @@ function addScript(src, callback) {
   document.body.appendChild(s);
 }
 
+/*
+* @viewport: 'mobile' | 'tablet' | 'desktop'
+* */
+export function isView(viewport) {
+  const element = document.querySelectorAll(`[data-${viewport}-detector]`)[0];
+  return !!(element && getComputedStyle(element).display !== 'none');
+}
+
 addScript('./scripts/utils.js');
 
 initMobileDetector('mobile');

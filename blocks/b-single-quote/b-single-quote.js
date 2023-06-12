@@ -1,4 +1,4 @@
-import isView from '../../scripts/utils.js';
+import { isView } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const [quoteElement, authorElement, positionElement] = block.children;
