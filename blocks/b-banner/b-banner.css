@@ -37,7 +37,6 @@
 @media (max-width: 768px) {
   #heroBanner {
     min-height: auto;
-    /*padding: 3%;*/
     background-position: right -8em top;
   }
   #heroBanner h1 {

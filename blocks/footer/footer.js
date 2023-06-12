@@ -26,5 +26,4 @@ console.log(resp);
     decorateIcons(footer);
     block.append(footer);
   }
-
 }
