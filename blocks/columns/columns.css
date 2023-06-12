@@ -13,17 +13,23 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+  max-width: calc(100% + 24px);
+  margin-left: -12px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: 32px;
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  .columns > div > .columns-img-col img {
+    max-width: 100%;
+    margin-left: auto;
   }
 }

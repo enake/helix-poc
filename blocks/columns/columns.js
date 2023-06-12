@@ -1,6 +1,7 @@
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
+  block.classList.add('container-sm');
 
   // setup image columns
   [...block.children].forEach((row) => {
@@ -12,6 +13,12 @@ export default function decorate(block) {
           // picture is only content in column
           picWrapper.classList.add('columns-img-col');
         }
+      } else {
+        col.innerHTML = `
+          <div class="pt-3 p-md-3">
+            ${col.innerHTML}
+          </div>
+        `;
       }
     });
   });
