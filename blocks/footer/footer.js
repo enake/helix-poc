@@ -8,22 +8,22 @@ import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  const cfg = readBlockConfig(block);
-  block.textContent = '';
-
-  // fetch footer content
-  const footerPath = cfg.footer || '/footer';
-  console.log(footerPath);
-  const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
-console.log(resp);
-  if (resp.ok) {
-    const html = await resp.text();
-
-    // decorate footer DOM
-    const footer = document.createElement('div');
-    footer.innerHTML = html;
-
-    decorateIcons(footer);
-    block.append(footer);
-  }
+//   const cfg = readBlockConfig(block);
+//   block.textContent = '';
+//
+//   // fetch footer content
+//   const footerPath = cfg.footer || '/footer';
+//   console.log(footerPath);
+//   const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
+// console.log(resp);
+//   if (resp.ok) {
+//     const html = await resp.text();
+//
+//     // decorate footer DOM
+//     const footer = document.createElement('div');
+//     footer.innerHTML = html;
+//
+//     decorateIcons(footer);
+//     block.append(footer);
+//   }
 }

@@ -69,13 +69,6 @@ body.appear {
   display: unset;
 }
 
-/* eslint-disable */
-*,
-::after,
-::before {
-  box-sizing: inherit;
-}
-
 .row>* {
   width: auto;
   max-width: none;
