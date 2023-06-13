@@ -1,0 +1,97 @@
+/* global overrides */
+.button-container {
+    margin: 0;
+}
+
+.b-single-quote-container > .b-single-quote-wrapper {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* end */
+
+.b-single-quote-container .main-wrapper {
+    position: relative;
+    background: black;
+    color: white;
+    box-sizing: border-box;
+}
+
+.b-single-quote-container .main-wrapper .inner-wrapper {
+    padding: 20px 0;
+}
+
+.b-single-quote-container .main-wrapper q {
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    font-size: 24px;
+}
+
+.b-single-quote-container .main-wrapper .author {
+    font-size: 16px;
+}
+
+.b-single-quote-container .main-wrapper .position {
+    font-size: 14px;
+    opacity: .8;
+}
+
+.b-single-quote-container .separator {
+    height: 2px;
+    width: 24px;
+    background: #008cff;
+    margin: 40px 0 10px;
+}
+
+@media screen and (min-width: 992px) {
+        .b-single-quote-container .main-wrapper {
+            height: 550px;
+        }
+
+    .b-single-quote-container .main-wrapper::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: #000;
+        width: 57.4%;
+        height: 169%;
+        border-radius: 0 50% 50% 0;
+        z-index: 1;
+    }
+
+    .b-single-quote-container .main-wrapper .inner-wrapper {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+        color: white;
+    }
+
+    .b-single-quote-container .main-wrapper .inner-wrapper .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 100%;
+    }
+
+    .b-single-quote-container .main-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .b-single-quote-container .main-wrapper q {
+        display: block;
+        font-size: 32px;
+        max-width: 550px;
+    }
+
+    .b-single-quote-container .main-wrapper .author {
+        font-weight: 500;
+        font-size: 18px;
+    }
+}

@@ -314,4 +314,25 @@ async function loadPage() {
   loadDelayed();
 }
 
+/*
+* @viewport: 'mobile' | 'tablet' | 'desktop'
+* */
+function initMobileDetector(viewport) {
+  const mobileDetectorDiv = document.createElement('div');
+  mobileDetectorDiv.setAttribute(`data-${viewport}-detector`, '');
+  document.body.prepend(mobileDetectorDiv);
+}
+
+/*
+* @viewport: 'mobile' | 'tablet' | 'desktop'
+* */
+export function isView(viewport) {
+  const element = document.querySelectorAll(`[data-${viewport}-detector]`)[0];
+  return !!(element && getComputedStyle(element).display !== 'none');
+}
+
+initMobileDetector('mobile');
+initMobileDetector('tablet');
+initMobileDetector('desktop');
+
 loadPage();

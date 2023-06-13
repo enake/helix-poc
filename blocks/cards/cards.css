@@ -1,4 +1,4 @@
-.cards > ul {
+.cards .container > ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -7,25 +7,28 @@
   grid-gap: 16px;
 }
 
-.cards > ul > li {
-  border: 1px solid var(--highlight-background-color);
+.cards .container > ul > li {
   background-color: var(--background-color)
 }
 
-.cards .cards-card-body {
-  margin: 16px;
-}
-
-.cards .cards-card-image {
+.cards .container .cards-card-image {
   line-height: 0;
 }
 
-.cards .cards-card-body > *:first-child {
-  margin-top: 0;
-}
-
-.cards > ul > li img {
-  width: 100%;
+.cards .container > ul > li img {
+  max-width: calc(100% + 24px);
+  margin-left: -12px;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+@media screen and (min-width: 768px) {
+  .cards .container > ul > li {
+    border: 1px solid var(--highlight-background-color);
+  }
+
+  .cards .container > ul > li img {
+    max-width: 100%;
+    margin-left: auto;
+  }
 }

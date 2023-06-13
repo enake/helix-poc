@@ -1,0 +1,40 @@
+
+.tos-container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tos ul {
+    display: none;
+}
+
+.tos .tos__link--active {
+    transform: rotate(180deg);
+}
+
+.tos > div:nth-child(1) {
+    font-size: 18px;
+    color: #234cff;
+    margin-bottom: 16px;
+}
+
+.tos h3 {
+    cursor: pointer;
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem!important;
+    -ms-flex-align: center!important;
+    align-items: center!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+    font-size: 16px;
+    margin-bottom: 1.5rem !important;
+}
+
+.tos li {
+    list-style: disc;
+    margin: 0 0 10px 20px;
+    font-size: 16px;
+}
