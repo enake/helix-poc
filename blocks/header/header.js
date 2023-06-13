@@ -98,8 +98,8 @@ export default async function decorate(block) {
   block.className = 'lp-header py-3';
   block.innerHTML = `
     <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-sm-4 col-12">
+      <div class="">
+        <div class="">
           <a class="d-inline-block" href="/">
             <img alt="Bitdefender" class="img-fluid d-block menu__logo" src="https://download.bitdefender.com/resources/themes/draco/images/lite_v2/logo-white.svg">
           </a>
