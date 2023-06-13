@@ -1,38 +1,57 @@
-#blueFooter23 {
+footer {
   background: #006EFF;
   color: white;
   padding: 50px 0;
   clear: both;
 }
-#blueFooter23 .row {
+footer .default-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+footer .row {
   padding: 0 15px;
 }
-#blueFooter23 .footer__links a, .footer__copy {
-  color: white;
+footer img {
+  width: 160px;
+  height: auto;
+  margin-bottom: 15px;
 }
-#blueFooter23 .footer__links a:hover {
+footer p {
+  margin: 0;
+  font-size: 16px;
+}
+footer .footer__links a, .footer__copy, footer a {
+  color: white!important;
+  font-size: 16px;
+  padding: 0 2px;
+}
+footer .footer__links a:hover, footer a:hover {
   opacity: 0.6;
   color: white;
 }
-#blueFooter23 .footer__links li::after {
+footer .footer__links li::after {
   background: white;
   height: 10px;
 }
-#blueFooter23 .footer__copy {
+footer strong {
+  font: normal normal bold 32px/40px Roboto;
+  color: white;
+}
+footer .footer__copy {
   margin: 2px 0 0px 0;
   padding-bottom: 0px;
 }
-#blueFooter23 p.trustedAlways {
+footer p.trustedAlways {
   font: normal normal bold 32px/40px Roboto;
 }
 
-#blueFooter23 .footer__links {
+footer .footer__links {
   margin-top: 15px;
   padding-left: 0;
   margin-bottom: 0;
 }
 
-#blueFooter23 .footer__links a {
+footer .footer__links a {
   color: #ffffff;
   text-decoration: none;
   display: block;
@@ -46,7 +65,7 @@
   padding: 0 6px 0 0;
 }
 
-#blueFooter23 .footer__links li::after {
+footer .footer__links li::after {
   content: "";
   position: absolute;
   right: 2px;
@@ -58,10 +77,39 @@
   margin: auto;
 }
 
-#blueFooter23 .footer__links li:last-child {
+footer .footer__links li:last-child {
   padding-right: 0;
 }
 
-#blueFooter23 .footer__links li:last-child::after {
+footer .footer__links li:last-child::after {
   display: none;
+}
+
+/* for mobile */
+@media (max-width: 768px) {
+}
+
+@media (max-width: 576px) {
+  footer {
+    padding: 18px 0;
+  }
+  footer .default-content-wrapper {
+    display: block;
+  }
+  footer img {
+    margin-bottom: 0;
+  }
+  footer .footer__links a, .footer__copy, footer a {
+    font-size: 13px;
+    padding: 0 1px;
+  }
+  footer p {
+    font-size: 13px;
+  }
+  footer strong {
+    font: normal normal bold 26px/22px Roboto;
+    text-align: right;
+    display: block;
+    margin-top: 9px;
+  }
 }

@@ -133,5 +133,9 @@
   .b-boxes-container .b-boxes > div:nth-child(2) h3 {
     font-size: 19px;
   }
+  .b-boxes-container {
+    padding: 10px 0;
+    margin: 1em 0;
+  }
   
 }

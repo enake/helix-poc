@@ -23,7 +23,7 @@ export default function decorate(block) {
     tab.addEventListener("click", function() {
       tab.parentNode.classList.toggle("inactive")
     });
-  });
+  }); 
 
 
   /*[...block.children].forEach((row, k) => {

@@ -164,13 +164,31 @@ export const createDomElement = (parent, tagName, idName, className, content, ad
   
 }
 
+/**
+ * Loads a fragment.
+ * @param {string} path The path to the fragment
+ * @returns {HTMLElement} The root element of the fragment
+ */
+export async function loadFragment(path) {
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+      decorateMain(main);
+      await loadBlocks(main);
+      return main;
+    }
+  }
+  return null;
+}
+
 // append to DOM specific element
 export const appendDomElement = (parent, content) => {
   if (typeof parent === 'undefined' &&  parent === '') {
     parent = 'main';
   }
 
-  console.log(content);
   if (typeof content !== 'undefined' & content !== '') {
     if (content.innerHTML.includes('[') && content.innerHTML.includes(']')) {
       // content = content.innerHTML.replace("[", '<span class="greenBck">').replace("]", '</span>');
@@ -188,6 +206,106 @@ export const addAttr2DomElement = (attrName, attrValue, element) => {
     console.log('insuficient data');
   }
 }
+
+// split only the last element
+export const splitLastOccurrence = (string, element) => {
+  const lastIndex = string.indexOf(element);
+  const before = string.slice(0, lastIndex);
+  const after = string.slice(lastIndex + 1);
+
+  return [before, after];
+}
+
+// add new script file
+export const addScriptFile = (script_url) => {
+  const script = document.createElement('script');
+  script.setAttribute(
+    'src',
+    script_url,
+  );
+  // script.setAttribute('async', '');
+
+  script.onload = function handleScriptLoaded() {
+    console.log('script has loaded');
+  };
+  script.onerror = function handleScriptError() {
+    console.log('error loading script');
+  };
+  document.head.appendChild(script);
+}
+
+// add showDiscoutOrFullPrice
+export function showDiscoutOrFullPrice(storeObj) {
+
+  var currency_label = storeObj.selected_variation.currency_label;
+  var region_id = storeObj.selected_variation.region_id;
+
+  var productName = '';
+  switch (storeObj.config.product_id) {
+      case 'av':
+          var productName = 'av';
+          break;
+      case 'is':
+          var productName = 'is';
+          break;
+      case 'tsmd':
+          var productName = 'tsmd';
+          break;
+      case 'tsvpn':
+          var productName = 'tsvpn';
+          break;
+      case 'fp':
+          var productName = 'fp';
+          break;
+      case 'soho':
+          var productName = 'soho';
+          break;
+      case 'bus-security':
+          var productName = 'bus-security';
+          break;
+      case 'bus_bundle':
+          var productName = 'bus_bundle';
+          break;
+      case 'elite_1000':
+          var productName = 'elite_1000';
+          break;
+  }
+
+  if (currency_label !== '$') {
+      $('.products3.lp-cl-campaign.v2019 .buybox .new-price').css("font-size", "1.8em");
+      $('.comparison2018.lp2019 .redBtn').css("max-width", "15em");
+  }
+
+  if (typeof storeObj.selected_variation.discount === "object") {
+      var full_price = StoreProducts.formatPrice(storeObj.selected_variation.price, currency_label, region_id);
+      var offer_price = StoreProducts.formatPrice(storeObj.selected_variation.discount.discounted_price, currency_label, region_id);
+      var savings_price = storeObj.selected_variation.price - storeObj.selected_variation.discount.discounted_price;
+      var savings = StoreProducts.formatPrice(savings_price.toFixed(0), currency_label, region_id);
+      // var percentage_sticker = (((storeObj.selected_variation.price - storeObj.selected_variation.discount.discounted_price) * 100) / storeObj.selected_variation.price).toFixed(0);
+      var percentage_sticker = (((storeObj.selected_variation.price - storeObj.selected_variation.discount.discounted_price) / storeObj.selected_variation.price) * 100).toFixed(0);
+      // console.log(percentage_sticker);
+
+      $('.oldprice-' + productName).show().html(full_price);
+      $('.newprice-' + productName).html(offer_price);
+      $('.save-' + productName).css('visibility', 'visible').html(savings);
+      $('.percent-' + productName).css('visibility', 'visible').html(percentage_sticker + '%');
+      // $('.bulina-' + productName).css('visibility', 'visible');
+      $('.show_save_' + productName).show();
+  } else {
+      var full_price = StoreProducts.formatPrice(storeObj.selected_variation.price, currency_label, region_id);
+      $('.newprice-' + productName).html(full_price);
+      $('.oldprice-' + productName).hide();
+      $('.save-' + productName).html("0").parent().siblings('div').css({
+          'visibility': 'hidden',
+          'display': 'none'
+      });
+      $('.percent-' + productName).parent().css({ 'visibility': 'hidden', 'display': 'none' });
+      $('.oldprice-' + productName + ', .save-' + productName).closest('.info-row').css({ 'display': 'none' });
+      $('.show_save_' + productName).hide();
+      // $('.bulina-' + productName).parent().css({'visibility': 'hidden'});
+  }
+}
+
 
 
 async function loadPage() {
