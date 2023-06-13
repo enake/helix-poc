@@ -260,4 +260,5 @@ main .default-content-wrapper img {
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+  color: black;
 }
