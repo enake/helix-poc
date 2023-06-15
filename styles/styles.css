@@ -69,11 +69,6 @@ body.appear {
   display: unset;
 }
 
-.row>* {
-  width: auto;
-  max-width: none;
-}
-
 *[data-align="center"] {
   text-align: center;
 }
