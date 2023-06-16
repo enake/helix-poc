@@ -1,10 +1,17 @@
 .b-banner-container {
   color: white;
   background-size: cover;
-  min-height: 450px;
-  padding: 40px 0;
+  max-height: 496px;
   background-repeat: no-repeat;
   background-position: top right;
+  overflow: hidden;
+}
+
+.b-banner-container .b-banner-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 5%;
 }
 
 .b-banner-container h1 {
@@ -38,6 +45,32 @@
   margin-top: 0;
 }
 
+.b-banner-container a.button {
+  background: #e72325!important;
+  color: #fff!important;
+  text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  padding: 13px 3%;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color .2s;
+  width: auto;
+  border-style: none;
+  cursor: pointer;
+  margin: 5px 0;
+}
+.b-banner-container a.button:hover {
+  background: #b33027!important;
+  text-decoration: none;
+}
+
+.b-banner-container img {
+  width: 100%;
+}
+
+
 /* for lower devices */
 @media (max-width: 992px) {
 
@@ -46,7 +79,13 @@
 @media (max-width: 768px) {
   .b-banner-container {
     min-height: auto;
-    padding: 3% 0;
+  }
+  .b-banner-container .b-banner-wrapper {
+    position: relative;
+    margin: 10px 0;
+  }
+  .b-banner-container img {
+    display: none;
   }
   .b-banner-container h1 {
     font-size: 24px;
@@ -54,10 +93,12 @@
     margin-top: 0;
   }
   .b-banner-container h2 {
-    font-size: 24px;
+    font-size: 21px;
     max-width: unset;
-    margin-top: 1em;
+    margin-top: 10px;
   }
+  
+ 
 }
 
 /* for mobile */

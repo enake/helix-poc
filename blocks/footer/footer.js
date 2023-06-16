@@ -14,3 +14,5 @@ export default async function decorate(block) {
   footer.innerHTML = footer.innerHTML.replace("[year]", new Date().getFullYear());
 
 }
+
+

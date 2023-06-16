@@ -87,9 +87,6 @@ footer .footer__links li:last-child::after {
 
 /* for mobile */
 @media (max-width: 768px) {
-}
-
-@media (max-width: 576px) {
   footer {
     padding: 18px 0;
   }
@@ -107,9 +104,13 @@ footer .footer__links li:last-child::after {
     font-size: 13px;
   }
   footer strong {
-    font: normal normal bold 26px/22px Roboto;
-    text-align: right;
+    font: normal normal bold 20px/22px Roboto;
+    text-align: left;
     display: block;
     margin-top: 9px;
   }
+}
+
+@media (max-width: 576px) {
+  
 }

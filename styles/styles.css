@@ -348,7 +348,7 @@ main .section.highlight {
 .strong span {
   font-weight: bold;
 }
-.prod-percent.green_bck {
+.prod-percent.green_bck_pill {
   background-color: rgb(47, 180, 62);
   font-size: 18px;
   display: inline-block;
@@ -357,7 +357,7 @@ main .section.highlight {
   border-radius: 15px;
   margin-top: 15px;
 }
-.prod-percent.green_bck_round {
+.prod-percent.green_bck_circle {
   position: relative;
   right: -9px;
   background: #2cb43d;
@@ -371,10 +371,17 @@ main .section.highlight {
   color: rgb(255, 255, 255);
   display: inline-block;
 }
-.prod-percent.green_bck_round span:before {
+.prod-percent.green_bck_circle span:before {
   content: "-";
 }
 
+.prices_box {
+  text-align: center;
+}
+.prices_box span {
+  display: block;
+  margin: 2px 0;
+}
 .prod-percent.green_txt {
   color: #2cb43d;
   background-color: rgba(44, 180, 61, 0.2);
@@ -395,6 +402,9 @@ main .section.highlight {
   font-size: 22px;
   line-height: 22px;
   font-weight: bold;
+}
+.prod-taxes {
+  font-size: 11px;
 }
 
 .selectorBox {
@@ -481,16 +491,53 @@ main .section.highlight {
   text-decoration: none;
 }
 
-.b-loadselectors-container {}
-.b-loadselectors-container label {
-  font-size: 14px;
-  margin-bottom: -11px;
-  display: block;
+#fakeSelectors_bottom {
+  clear: both;
+  position: fixed;
+  top: 20%;
+  left: 10px;
+  display: none;
 }
-.b-loadselectors-container select {
+#fakeSelectors_bottom label {
+  font-weight: bold;
   display: block;
-  width: 150px;
-  margin: 10px 0;
-  padding: 5px;
-  border-radius: 4px;
+  font-size: 13px;
+  color: grey
+}
+#fakeSelectors_bottom label {
+  font-weight: bold;
+  display: block;
+  font-size: 13px;
+}
+#fakeSelectors_bottom select {
+  width: 160px;
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  header  {
+    border-bottom: 1px solid white;
+  }
+  header .container {
+    padding: 10px;
+  }
+  .section {
+    padding: 10px;
+  }
+  .red-buy-button {
+    padding: 8px 3%;
+    font-size: 13px;
+  }
+  .selectorBox {
+    margin: 6px 0;
+    padding: 5px;
+    width: 100% !important;
+  }
+  .prod-percent.green_bck_pill {
+    margin-left: 0!important;
+    font-size: 16px;
+    padding: 2px 11px;
+  }
+
 }

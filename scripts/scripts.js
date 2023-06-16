@@ -13,13 +13,25 @@ import {
   loadCSS,
 } from './lib-franklin.js';
 
+export const productAliases = (name) => {
+  name = name.trim()
+  if (name === 'elite') {
+    name = 'elite_1000'
+  } else if (name === 'bs') {
+    name = 'bus-security'
+  }
+ 
+  return name
+}
+
+
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
-function buildHeroBlock(main) {
+const buildHeroBlock = main => {
   const h1 = main.querySelector('h1');
   const picture = main.querySelector('picture');
   // eslint-disable-next-line no-bitwise
@@ -34,7 +46,7 @@ function buildHeroBlock(main) {
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
-function buildAutoBlocks(main) {
+const buildAutoBlocks = main => {
   try {
     buildHeroBlock(main);
   } catch (error) {
@@ -48,7 +60,7 @@ function buildAutoBlocks(main) {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
-export function decorateMain(main) {
+export const decorateMain = main => {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
@@ -61,7 +73,7 @@ export function decorateMain(main) {
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
-async function loadEager(doc) {
+const loadEager = async doc => {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
@@ -76,7 +88,7 @@ async function loadEager(doc) {
  * Adds the favicon.
  * @param {string} href The favicon URL
  */
-export function addFavIcon(href) {
+const addFavIcon = href => {
   const link = document.createElement('link');
   link.rel = 'icon';
   link.type = 'image/svg+xml';
@@ -93,7 +105,7 @@ export function addFavIcon(href) {
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
-async function loadLazy(doc) {
+const loadLazy = async doc => {
   const main = doc.querySelector('main');
   await loadBlocks(main);
 
@@ -115,7 +127,7 @@ async function loadLazy(doc) {
  * Loads everything that happens a lot later,
  * without impacting the user experience.
  */
-function loadDelayed() {
+const loadDelayed = () => {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
@@ -157,7 +169,7 @@ export const createDomElement = (parent, tagName, idName, className, content, ad
     element.setAttribute(addAttr['name'], addAttr['value']);
   }
 
-  console.log(document.querySelector(parent))
+  // console.log(document.querySelector(parent))
   if (!err && typeof parent !== 'undefined' && document.querySelector(parent) !== null) {
     document.querySelector(parent).appendChild(element);
   }
@@ -235,7 +247,7 @@ export const addScriptFile = (script_url) => {
 }
 
 // add showDiscoutOrFullPrice
-export function showDiscoutOrFullPrice(storeObj) {
+export const showDiscoutOrFullPrice = (storeObj) => {
 
   var currency_label = storeObj.selected_variation.currency_label;
   var region_id = storeObj.selected_variation.region_id;
@@ -306,18 +318,82 @@ export function showDiscoutOrFullPrice(storeObj) {
   }
 }
 
+// check & update ProductsList
+const productsList = [];
+export const updateProductsList = (item) => {
+  if (productsList.indexOf(item) === -1) {
+    productsList.push(item)
+  }
+  return [...productsList];
+}
 
+const initSelectors = () => {
+  // console.log('productsList: ', productsList);
+  if (typeof productsList !== 'undefined' && productsList.length > 0) {
+    const fakeSelectors_bottom = document.createElement('div');
+    fakeSelectors_bottom.id = 'fakeSelectors_bottom';
+    document.querySelector("footer").before(fakeSelectors_bottom);
+    
+    productsList.map(prod => {
+      const prodSplit = prod.split('/');
+      const prodAlias = productAliases(prodSplit[0].trim());
+      const prodUsers = prodSplit[1].trim();
+      const prodYears = prodSplit[2].trim();
 
-async function loadPage() {
+      if (document.querySelector("users_" + prodAlias + "_fake") === null) {
+        fakeSelectors_bottom.innerHTML += "<label>Fake Devices for " + prodAlias + ": </label>";
+        const createSelect = document.createElement('select');
+        createSelect.className = "users_" + prodAlias + "_fake";
+        document.getElementById("fakeSelectors_bottom").append(createSelect);
+      }
+      if (document.querySelector("users_" + prodAlias + "_fake") === null) {
+        fakeSelectors_bottom.innerHTML += "<label>Fake Years for " + prodAlias + ": </label>";
+        const createSelect = document.createElement('select');
+        createSelect.className = "years_" + prodAlias + "_fake";
+        document.getElementById("fakeSelectors_bottom").append(createSelect);
+      }
+
+      StoreProducts.initSelector({
+        product_id: prodAlias,
+        full_price_class: "oldprice-" + prodAlias,
+        discounted_price_class: "newprice-" + prodAlias,
+        price_class: "price-" + prodAlias,
+        buy_class: "buylink-" + prodAlias,
+        selected_users: prodUsers,
+        selected_years: prodYears,
+        users_class: "users_" + prodAlias + "_fake",
+        years_class: "years_" + prodAlias + "_fake",
+  
+        //extra_params: { pid: pid_code },
+  
+        onSelectorLoad: function () {
+          try {
+            let fp = this;
+            showDiscoutOrFullPrice(fp);
+          } catch (ex) {
+            console.log(ex);
+          }
+        },
+        onChangeUsers: function () {
+        },
+      });
+    })
+    
+  }
+
+}
+
+const loadPage = async () => {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
+  initSelectors();
 }
 
 /*
 * @viewport: 'mobile' | 'tablet' | 'desktop'
 * */
-function initMobileDetector(viewport) {
+const initMobileDetector = viewport => {
   const mobileDetectorDiv = document.createElement('div');
   mobileDetectorDiv.setAttribute(`data-${viewport}-detector`, '');
   document.body.prepend(mobileDetectorDiv);
@@ -326,9 +402,35 @@ function initMobileDetector(viewport) {
 /*
 * @viewport: 'mobile' | 'tablet' | 'desktop'
 * */
-export function isView(viewport) {
+export const isView = viewport => {
   const element = document.querySelectorAll(`[data-${viewport}-detector]`)[0];
   return !!(element && getComputedStyle(element).display !== 'none');
+}
+
+
+// Create the link element
+var linkElement = document.createElement('link');
+
+// Set the attributes of the link element
+linkElement.rel = 'stylesheet';
+linkElement.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css';
+linkElement.integrity = 'sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65';
+linkElement.crossOrigin = 'anonymous';
+
+// Inject the link element into the head tag
+document.head.appendChild(linkElement);
+
+// add new script file
+const addScript = src => {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+
+    s.setAttribute('src', src);
+    s.addEventListener('load', resolve);
+    s.addEventListener('error', reject);
+
+    document.body.appendChild(s);
+  });
 }
 
 initMobileDetector('mobile');
@@ -336,3 +438,8 @@ initMobileDetector('tablet');
 initMobileDetector('desktop');
 
 loadPage();
+
+await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
+await addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
+
+console.log('StoreProducts', window.StoreProducts);
