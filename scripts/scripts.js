@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable */
+
 import {
   sampleRUM,
   buildBlock,
@@ -252,36 +255,7 @@ export const showDiscoutOrFullPrice = (storeObj) => {
   var currency_label = storeObj.selected_variation.currency_label;
   var region_id = storeObj.selected_variation.region_id;
 
-  var productName = '';
-  switch (storeObj.config.product_id) {
-      case 'av':
-          var productName = 'av';
-          break;
-      case 'is':
-          var productName = 'is';
-          break;
-      case 'tsmd':
-          var productName = 'tsmd';
-          break;
-      case 'tsvpn':
-          var productName = 'tsvpn';
-          break;
-      case 'fp':
-          var productName = 'fp';
-          break;
-      case 'soho':
-          var productName = 'soho';
-          break;
-      case 'bus-security':
-          var productName = 'bus-security';
-          break;
-      case 'bus_bundle':
-          var productName = 'bus_bundle';
-          break;
-      case 'elite_1000':
-          var productName = 'elite_1000';
-          break;
-  }
+  const productName = storeObj.config.product_id;
 
   if (currency_label !== '$') {
       $('.products3.lp-cl-campaign.v2019 .buybox .new-price').css("font-size", "1.8em");
@@ -300,7 +274,8 @@ export const showDiscoutOrFullPrice = (storeObj) => {
       $('.oldprice-' + productName).show().html(full_price);
       $('.newprice-' + productName).html(offer_price);
       $('.save-' + productName).css('visibility', 'visible').html(savings);
-      $('.percent-' + productName).css('visibility', 'visible').html(percentage_sticker + '%');
+      $('.percent-' + productName).css('visibility', 'visible !important').html(percentage_sticker + '%');
+      $('.percent-' + productName).parent().css('visibility', 'visible');
       // $('.bulina-' + productName).css('visibility', 'visible');
       $('.show_save_' + productName).show();
   } else {
@@ -320,16 +295,15 @@ export const showDiscoutOrFullPrice = (storeObj) => {
 
 // check & update ProductsList
 const productsList = [];
-export const updateProductsList = (item) => {
-  if (productsList.indexOf(item) === -1) {
-    productsList.push(item)
+
+export const updateProductsList = (product) => {
+  if (productsList.indexOf(product) === -1) {
+    productsList.push(product)
   }
-  return [...productsList];
 }
 
 const initSelectors = () => {
-  // console.log('productsList: ', productsList);
-  if (typeof productsList !== 'undefined' && productsList.length > 0) {
+  if (productsList.length > 0) {
     const fakeSelectors_bottom = document.createElement('div');
     fakeSelectors_bottom.id = 'fakeSelectors_bottom';
     document.querySelector("footer").before(fakeSelectors_bottom);
@@ -340,18 +314,16 @@ const initSelectors = () => {
       const prodUsers = prodSplit[1].trim();
       const prodYears = prodSplit[2].trim();
 
-      if (document.querySelector("users_" + prodAlias + "_fake") === null) {
-        fakeSelectors_bottom.innerHTML += "<label>Fake Devices for " + prodAlias + ": </label>";
-        const createSelect = document.createElement('select');
-        createSelect.className = "users_" + prodAlias + "_fake";
-        document.getElementById("fakeSelectors_bottom").append(createSelect);
-      }
-      if (document.querySelector("users_" + prodAlias + "_fake") === null) {
-        fakeSelectors_bottom.innerHTML += "<label>Fake Years for " + prodAlias + ": </label>";
-        const createSelect = document.createElement('select');
-        createSelect.className = "years_" + prodAlias + "_fake";
-        document.getElementById("fakeSelectors_bottom").append(createSelect);
-      }
+      fakeSelectors_bottom.innerHTML += "<label>Fake Devices for " + prodAlias + ": </label>";
+      const createSelectForDevices = document.createElement('select');
+      createSelectForDevices.className = "users_" + prodAlias + "_fake";
+      document.getElementById("fakeSelectors_bottom").append(createSelectForDevices);
+
+      fakeSelectors_bottom.innerHTML += "<label>Fake Years for " + prodAlias + ": </label>";
+      const createSelectForYears = document.createElement('select');
+      createSelectForYears.className = "years_" + prodAlias + "_fake";
+      document.getElementById("fakeSelectors_bottom").append(createSelectForYears);
+
 
       StoreProducts.initSelector({
         product_id: prodAlias,
@@ -374,13 +346,9 @@ const initSelectors = () => {
             console.log(ex);
           }
         },
-        onChangeUsers: function () {
-        },
       });
     })
-    
   }
-
 }
 
 const loadPage = async () => {

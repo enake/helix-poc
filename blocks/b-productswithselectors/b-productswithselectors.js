@@ -1,6 +1,10 @@
-/* 
+/* eslint-disable linebreak-style */
+/* eslint-disable */
+
+
+/*
   Informations: 
-  - displaies 3 boxes positioned in flex mode: 
+  - displays 3 boxes positioned in flex mode:
     1. selectors
     2. product 1
     3. product 3
@@ -20,21 +24,17 @@ import { updateProductsList, productAliases } from "../../scripts/scripts.js";
 
 export default function decorate(block) {
     //////////////////////////////////////////////////////////////////////////
-    // get data attributes set in metaDatas
+    // get data attributes set in metaData
     const parentSelector = block.closest('.section');
-    const metaDatas = parentSelector.dataset;
-    const { products, selectorsName, taxesText, discountText, buttonText } = metaDatas;
-    console.log(metaDatas);
+    const metaData = parentSelector.dataset;
+    const { products, selectorsName, taxesText, discountText, buttonText } = metaData;
 
-    if (typeof products !== 'undefined' && products !== '') {
+    const productsAsList = products.split(',');
+
+    if (productsAsList.length) {
       //////////////////////////////////////////////////////////////////////////
       // check and add products into the final array
-      if (products.indexOf(',') !== -1) {
-        var prodsSplit = products.split(',')
-        prodsSplit.map(prod => updateProductsList(prod))
-      } else {
-        updateProductsList(products)
-      }
+      productsAsList.forEach(prod => updateProductsList(prod));
       
       //////////////////////////////////////////////////////////////////////////
       // create the 2 selectors
@@ -43,7 +43,7 @@ export default function decorate(block) {
       let optionsDevices = Array(100).fill().map((_, d) => {
           if (d < 5) return // starts from 5
           let selected = ''
-          if (d == 10) {  // default value selected = 10
+          if (d === 10) {  // default value selected = 10
             selected = ' selected'
           }
           return `<option value="${d}" ${selected}>${d}</option>`
@@ -54,11 +54,12 @@ export default function decorate(block) {
       let optionsYears = Array(4).fill().map((_, y) => {
           if (y < 1) return // starts from 1
           let selected = ''
-          if (y == 1) {  // default value selected = 1
+          if (y === 1) {  // default value selected = 1
             selected = ' selected'
           }
           return `<option value="${y}" ${selected}>${y}</option>`
       });
+
       block.querySelector('p:nth-child(3)').innerHTML += `<div class="selectorBox"><label>${labelName[1].trim()}</label><select id="select${labelName[1].trim()}" data-trigger="years">${optionsYears}</select></div>`
       
  
@@ -70,15 +71,14 @@ export default function decorate(block) {
             const triggerType = item.children[1].getAttribute('data-trigger')
             const triggerValue = e.target.value
 
-            if (triggerType == 'users') {
-              var fileServers_1stProd = Math.ceil((Number(triggerValue)) * 0.35);
-              var fileServers_2ndProd = Math.ceil((Number(triggerValue)) * 0.3);
+            if (triggerType === 'users') {
+              let fileServers_1stProd = Math.ceil((Number(triggerValue)) * 0.35);
+              let fileServers_2ndProd = Math.ceil((Number(triggerValue)) * 0.3);
               block.querySelector('.b-productswithselectors > div:nth-child(2) ul:last-of-type li:nth-child(2) strong').innerHTML = fileServers_1stProd
               block.querySelector('.b-productswithselectors > div:nth-child(3) ul:last-of-type li:nth-child(2) strong').innerHTML = fileServers_2ndProd
-
             }
             
-            prodsSplit.map((prod) => {
+            productsAsList.map((prod) => {
               const prodName = productAliases(prod.split('/')[0])
               if (document.querySelector(`.${triggerType}_${prodName}_fake`)) {
                 const fakeSelector = document.querySelector(`.${triggerType}_${prodName}_fake`);
@@ -93,8 +93,8 @@ export default function decorate(block) {
 
       //////////////////////////////////////////////////////////////////////////
       // create prices sections
-      [].forEach.call(block.querySelectorAll('.b-productswithselectors > div:not(:first-child)'), (item, k) => {
-        const prodName = productAliases(prodsSplit[k].split('/')[0])
+      productsAsList.forEach((item, idx) => {
+        const prodName = productAliases(productsAsList[idx].split('/')[0])
         const pricesDiv = document.createElement("div");
         pricesDiv.id = 'pricesBox'
         pricesDiv.className = 'prices_box'
@@ -103,9 +103,9 @@ export default function decorate(block) {
         pricesDiv.innerHTML += '<span class="prod-newprice newprice-' + prodName +'"></span>'
         pricesDiv.innerHTML += '<span class="prod-taxes">' + taxesText + '</span>'
         pricesDiv.innerHTML += '<a class="red-buy-button buylink-' + prodName +'">' + buttonText + '</a>'
-        item.querySelector('ul').after(pricesDiv)
+
+        const renderedProductSection = block.querySelector(`.b-productswithselectors > div:nth-child(${idx + 2})`);
+        renderedProductSection.querySelector('ul').after(pricesDiv)
       });
-
-
     }
 }
