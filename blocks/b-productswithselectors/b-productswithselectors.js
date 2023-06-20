@@ -72,10 +72,17 @@ export default function decorate(block) {
             const triggerValue = e.target.value
 
             if (triggerType === 'users') {
-              let fileServers_1stProd = Math.ceil((Number(triggerValue)) * 0.35);
-              let fileServers_2ndProd = Math.ceil((Number(triggerValue)) * 0.3);
+              let fileServers_1stProd = Math.ceil((Number(triggerValue)) * 0.35)
+              let fileServers_2ndProd = Math.ceil((Number(triggerValue)) * 0.3)
+              let mailboxes = Math.ceil((Number(triggerValue)/100) * 150)
+
+              block.querySelector('.b-productswithselectors > div:nth-child(2) ul:last-of-type li:nth-child(1) strong').innerHTML = triggerValue
+              block.querySelector('.b-productswithselectors > div:nth-child(3) ul:last-of-type li:nth-child(1) strong').innerHTML = triggerValue
+              
               block.querySelector('.b-productswithselectors > div:nth-child(2) ul:last-of-type li:nth-child(2) strong').innerHTML = fileServers_1stProd
               block.querySelector('.b-productswithselectors > div:nth-child(3) ul:last-of-type li:nth-child(2) strong').innerHTML = fileServers_2ndProd
+
+              block.querySelector('.b-productswithselectors > div:nth-child(2) ul:last-of-type li:nth-child(3) strong').innerHTML = mailboxes
             }
             
             productsAsList.map((prod) => {
