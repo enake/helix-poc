@@ -405,7 +405,7 @@ function initBaseUri() {
   const domainName = 'bitdefender';
   const domainExtension = window.location.hostname.split('.').pop(); // com | ro | other
 
-  window.BASE_URI = ['com', 'ro'].includes(domainExtension) ? `${window.location.protocol}//www.${domainName}.${domainExtension}` : `${window.location.protocol}//www.${domainName}.com`;
+  window.BASE_URI = ['com', 'ro'].includes(domainExtension) ? `${window.location.protocol}//www.${domainName}.${domainExtension}/site` : `${window.location.protocol}//www.${domainName}.com/site`;
 }
 
 initMobileDetector('mobile');
