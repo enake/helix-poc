@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable */
+import ColumnComponent from '/components/column/column.js';
 
 export default function decorate(block) {
     console.log('columns-two', block);
@@ -10,9 +11,7 @@ export default function decorate(block) {
           <div class="row">
             ${ columns.map(col => `
                 <div class="col-12 col-md-6">
-                  <div class="inner-container">
-                     ${ col.innerHTML }
-                  </div>
+                  ${ new ColumnComponent(col).render() }
                 </div>`)
             .join('') }
           </div>
