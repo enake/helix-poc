@@ -405,6 +405,8 @@ initMobileDetector('mobile');
 initMobileDetector('tablet');
 initMobileDetector('desktop');
 
+var BASE_URI = "https://www.bitdefenderrr.com/site";
+
 loadPage();
 
 await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
