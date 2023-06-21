@@ -401,11 +401,17 @@ const addScript = src => {
   });
 }
 
+function initBaseUri() {
+  const domainExtension = window.location.hostname.split('.').pop(); // com | ro | other
+
+  window.BASE_URI = ['com', 'ro'].includes(domainExtension) ? domainExtension : 'com';
+}
+
 initMobileDetector('mobile');
 initMobileDetector('tablet');
 initMobileDetector('desktop');
 
-window.BASE_URI = "https://www.bitdefenderrr.com/site";
+initBaseUri();
 
 loadPage();
 
