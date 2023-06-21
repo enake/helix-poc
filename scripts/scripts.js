@@ -405,7 +405,7 @@ initMobileDetector('mobile');
 initMobileDetector('tablet');
 initMobileDetector('desktop');
 
-var BASE_URI = "https://www.bitdefenderrr.com/site";
+window.BASE_URI = "https://www.bitdefenderrr.com/site";
 
 loadPage();
 
