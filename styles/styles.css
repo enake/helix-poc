@@ -12,6 +12,12 @@
  * governing permissions and limitations under the License.
  */
 
+/* todo: use webpack / mini-css-extract-plugin */
+
+/* load components style */
+
+@import url("/components/column/column.css");
+
  :root {
   /* colors */
   --link-color: #000000;

@@ -1,4 +1,7 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable */
+import ColumnComponent from '/components/column/column.js';
+
 function createContainer() {
   const container = document.createElement('div');
   container.classList = 'tw-flex tw-my-10 tw-bg-[#F5F5F7] tw-rounded-3xl';
@@ -12,6 +15,7 @@ function createTextContainer() {
 }
 
 function handleImageColumn(picWrapper, newContainer) {
+  console.log('handleImageColumn');
   picWrapper.classList.add('columns-bd-img-col');
   picWrapper.classList += ' tw-hidden md:tw-block tw-w-1/2 tw-relative tw-rounded-3xl';
   picWrapper.querySelector('picture > img').classList = 'tw-h-full';
@@ -59,26 +63,42 @@ function handleContentColumn(col, textContainer) {
 }
 
 export default function decorate(block) {
-  const cols = Array.from(block.firstElementChild.children);
-  block.classList.add(`columns-bd-${cols.length}-cols`);
+  console.log('columns-bd', block);
+  const [firstCol, pictureCol] = Array.from(block.firstElementChild.children);
 
-  const newContainer = createContainer();
-  const textContainer = createTextContainer();
-  newContainer.appendChild(textContainer);
+  block.innerHTML = `
+    <div class="container">
+      <div class="row g-0">
+        <div class="col-12 col-md-6">
+          ${ new ColumnComponent(firstCol, 'secondary').render() }
+        </div>
+        <div class="col-12 col-md-6">
+          ${ pictureCol.innerHTML }
+        </div>
+      </div>
+    </div>
+  `;
 
-  [...block.children].forEach((row) => {
-    [...row.children].forEach((col) => {
-      const pic = col.querySelector('picture');
-      if (pic) {
-        const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
-          handleImageColumn(picWrapper, newContainer);
-        } else {
-          handleContentColumn(col, textContainer);
-        }
-      }
-    });
-  });
-
-  block.appendChild(newContainer);
+  // block.classList.add(`columns-bd-${cols.length}-cols`);
+  //
+  // const newContainer = createContainer();
+  // const textContainer = createTextContainer();
+  // newContainer.appendChild(textContainer);
+  //
+  // [...block.children].forEach((row) => {
+  //   [...row.children].forEach((col) => {
+  //     const pic = col.querySelector('picture');
+  //     if (pic) {
+  //       debugger;
+  //       const picWrapper = pic.closest('div');
+  //       if (picWrapper && picWrapper.children.length === 1) {
+  //         handleImageColumn(picWrapper, newContainer);
+  //       } else {
+  //         handleContentColumn(col, textContainer);
+  //       }
+  //     }
+  //   });
+  // });
+  //
+  // block.appendChild(newContainer);
 }
