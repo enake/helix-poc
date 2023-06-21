@@ -8,8 +8,6 @@
 */
 
 export default function decorate(block) {
-  // console.log('here: ',block);
-
   // search for [] to replace with span greeenTag class
   let getFirstDivs = document.querySelectorAll('.b-dropdownbox-container .block > div > div:nth-child(1)');
   [].forEach.call(getFirstDivs, function(item) {
@@ -23,11 +21,6 @@ export default function decorate(block) {
     tab.addEventListener("click", function() {
       tab.parentNode.classList.toggle("inactive")
     });
-  });
-
-
-  /*[...block.children].forEach((row, k) => {
-    // console.log("row ",row);
-  });*/
+  }); 
 
 }

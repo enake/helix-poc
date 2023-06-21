@@ -1,7 +1,21 @@
 /* b-boxes .b-dropdownbox-container*/
-.b-dropdownbox-container {
-  clear: both;
+.b-loadselectors-container {
+  display: none;
 }
+
+.b-loadselectors-container label {
+  font-size: 14px;
+  margin-bottom: -11px;
+  display: block;
+}
+.b-loadselectors-container select {
+  display: block;
+  width: 150px;
+  margin: 10px 0;
+  padding: 5px;
+  border-radius: 4px;
+}
+
 .b-dropdownbox-container .block img {
   width: 20px;
 }
@@ -12,10 +26,10 @@
 .b-dropdownbox-container .block > div:not(:first-child) {
   padding: 0;
   font-weight: 500;
+  display: flex;
 }
 
 .b-dropdownbox-container .block > div:not(:first-child) > div {
-  width: 29%;
   padding: 15px 2%;
   display: inline-block;
 }
@@ -63,39 +77,9 @@
   background-size: 100%;
 }
 
-
 /* for mobile */
 @media (max-width: 768px) {
-  .b-dropdownbox-container {
-    clear: both;
-    padding: 0 15px 5px;
-  }
-  .b-dropdownbox-container .block > div:not(:first-child) > div:nth-child(1) {
-    width: 100%;
-  }
-  .b-dropdownbox-container .block > div:nth-child(1) > div {
-    font-size: 15px;
-    line-height: 17px;
-  }
-  .b-dropdownbox-container .block > div:nth-child(1) > div::before, .b-dropdownbox-container .block.closed.inactive > div:nth-child(1) > div::before {
-    width: 15px!important;
-    height: 16px!important;
-  }
-  .b-dropdownbox-container .block > div:nth-child(1) > div {
-    padding: 10px 3%!important;
-    display: flex;
-  }
-  .b-dropdownbox-container .block > div:not(:first-child) > div {
-    padding: 8px 2%!important;
-    font-size: 15px;
-  }
-  .b-dropdownbox-container .block img {
-    width: 15px;
-  }
-  
 }
 
 @media (max-width: 576px) {
-  
-
 }
