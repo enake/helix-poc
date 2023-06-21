@@ -3,7 +3,6 @@
 import ColumnComponent from '/components/column/column.js';
 
 export default function decorate(block) {
-  console.log('columns-bd', block);
   const [firstCol, pictureCol] = Array.from(block.firstElementChild.children);
 
   block.innerHTML = `
