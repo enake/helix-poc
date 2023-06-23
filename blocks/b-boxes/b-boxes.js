@@ -1,5 +1,4 @@
 export default function decorate(block) {
-  // console.log('here: ',block);
   //cleanBlockDOM('.b-boxes-container');
 
   const extra_classes = block.classList[1];
