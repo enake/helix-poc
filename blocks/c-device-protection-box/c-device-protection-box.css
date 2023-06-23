@@ -1,0 +1,27 @@
+.c-device-protection-box-container {
+    padding: 40px 0;
+}
+
+/* heading */
+.c-device-protection-box-container .row-box > :nth-child(2) > *:first-child {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* subtext */
+.c-device-protection-box-container .row-box > :nth-child(2) > :not(:first-child) {
+    font-size: 12px;
+}
+
+@media screen and (min-width: 992px) {
+    /* heading */
+    .c-device-protection-box-container .row-box > :nth-child(2) > *:first-child {
+        font-size: 18px;
+    }
+
+    /* subtext */
+    .c-device-protection-box-container .row-box > :nth-child(2) > :not(:first-child) {
+        font-size: 14px;
+    }
+}

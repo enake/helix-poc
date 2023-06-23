@@ -17,6 +17,7 @@
 /* load components style */
 
 @import url("/components/column/column.css");
+@import url("/components/review/review.css");
 
  :root {
   /* colors */

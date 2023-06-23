@@ -418,5 +418,3 @@ loadPage();
 
 await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
 await addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
-
-console.log('StoreProducts', window.StoreProducts);

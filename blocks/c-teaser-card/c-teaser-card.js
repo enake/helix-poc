@@ -2,8 +2,8 @@
 /* eslint-disable */
 
 export default function decorate(block) {
-  console.log('c-teaser-block', block);
   const [heading, subtitle, picture] = block.children;
+
   block.innerHTML = `
     <div class="main-wrapper">
       <div class="inner-wrapper">
