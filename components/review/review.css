@@ -1,0 +1,56 @@
+review-component .main-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+review-component .main-wrapper--left {
+    align-items: flex-start;
+    text-align: left;
+}
+
+review-component .main-wrapper--right {
+    align-items: flex-end;
+    text-align: right;
+}
+
+review-component .main-wrapper--center {
+    align-items: center;
+    text-align: center;
+}
+
+
+review-component .star {
+    width: 1em;
+    height: 1em;
+    color: #ff9f00;
+    margin-right: 3px;
+}
+
+review-component .separator {
+    margin: 10px 0;
+    display: block;
+    height: 1px;
+    width: 150px;
+    background: #e0dbd3;
+}
+
+review-component .author {
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+review-component q {
+    font-size: 13px;
+}
+
+@media (min-width:992px) {
+    review-component .author {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    review-component q {
+        font-size: 16px;
+    }
+}

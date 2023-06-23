@@ -21,6 +21,7 @@
 
 .awards img {
     height: 100px;
+    object-fit: contain;
 }
 
 @media screen and (min-width: 992px) {

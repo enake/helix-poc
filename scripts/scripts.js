@@ -401,13 +401,20 @@ const addScript = src => {
   });
 }
 
+function initBaseUri() {
+  const domainName = 'bitdefender';
+  const domainExtension = window.location.hostname.split('.').pop(); // com | ro | other
+
+  window.BASE_URI = ['com', 'ro'].includes(domainExtension) ? `${window.location.protocol}//www.${domainName}.${domainExtension}/site` : `${window.location.protocol}//www.${domainName}.com/site`;
+}
+
 initMobileDetector('mobile');
 initMobileDetector('tablet');
 initMobileDetector('desktop');
+
+initBaseUri();
 
 loadPage();
 
 await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
 await addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
-
-console.log('StoreProducts', window.StoreProducts);
