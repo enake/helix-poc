@@ -11,7 +11,6 @@ export default class SvgLoaderComponent {
   * @svgSize {String} small or medium
   * */
   constructor(svgName, svgColor = 'black', svgSize = 'small') {
-    console.log('svgName', svgName);
     this.#svgName = svgName;
     this.#style = this.#reduceStyle(svgColor, svgSize);
   }
@@ -37,8 +36,6 @@ export default class SvgLoaderComponent {
       color: svgColor,
       ...SvgLoaderComponent.#generateSvgSize(svgSize)
     };
-
-    console.log('styleObj', styleObj);
 
     return Object
       .keys(styleObj)

@@ -418,3 +418,5 @@ loadPage();
 
 await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
 await addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
+// todo optimize bundle size
+await addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js');
