@@ -34,7 +34,7 @@ export default function decorate(block) {
           <div class="col-md-12 col-lg">
             <div class="d-flex flex-column justify-content-start">
               ${ new SvgLoaderComponent(col.svgName, svgColor, svgSize).render() }
-              <h6 class="title">${ col.title }</h6>
+              <h6 class="title">${ col.title }</h6> 
               <p class="subtitle">${ col.subtitle }</p>
             </div>
           </div>

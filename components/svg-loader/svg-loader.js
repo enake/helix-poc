@@ -7,11 +7,10 @@ export default class SvgLoaderComponent {
 
   /*
   * @svgName {String} svg name
-  * @svgColor {String} "blue" or hex color value "#dsa321"
+  * @svgColor {String} "blue" | 'rgb()' | '#dsa213'
   * @svgSize {String} small or medium
   * */
   constructor(svgName, svgColor = 'black', svgSize = 'small') {
-    console.log('svgName', svgName);
     this.#svgName = svgName;
     this.#style = this.#reduceStyle(svgColor, svgSize);
   }
@@ -38,8 +37,6 @@ export default class SvgLoaderComponent {
       ...SvgLoaderComponent.#generateSvgSize(svgSize)
     };
 
-    console.log('styleObj', styleObj);
-
     return Object
       .keys(styleObj)
       .reduce((inlineStyleString, styleProperty) =>
@@ -65,6 +62,12 @@ export default class SvgLoaderComponent {
 
       case 'apple-crate':
         return `<svg style="${this.#style}" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="apple-crate" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"> <path fill="currentColor" d="M402.22 50.47c11.29-12.19 14.43-32.03 13.22-50.22-12.88-.86-35.67-.12-50.02 13.28-16.53 16.6-13.77 46.36-13.22 50.22 18.47 1.23 37.77-1.85 50.02-13.28zM496 224h-25.49c2.76-8.11 5.17-16.56 6.74-25.82 13.63-73.34-25.2-156.03-125.56-99.88-65.68-36.75-94.55-7.64-95.74-6.72-1.19-.92-30.28-30.02-95.94 6.72C59.44 42.04 20.98 125.78 34.44 198.18c1.56 9.26 3.98 17.71 6.74 25.82H16c-8.84 0-16 7.16-16 16v256c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16V240c0-8.84-7.16-16-16-16zm-159.94-97.77l15.62 8.74 15.62-8.74c54.74-30.63 67.11-3.69 67.76-2.75 12.04 17.42 14.51 48.48 10.63 69.37-1.98 11.71-5.51 21.76-9.67 31.15h-157.2c2.76-8.11 5.18-16.56 6.74-25.82 4.26-22.9 2.52-56.47-9.98-82.12 14.81-10.61 50.82 4.76 60.48 10.17zm-259.31-2.8c.65-.94 12.87-27.84 67.63 2.8l15.62 8.74 15.62-8.74c54.74-30.63 67.11-3.69 67.76-2.75 12.04 17.42 14.51 48.48 10.63 69.37-1.98 11.71-5.51 21.77-9.67 31.15H75.66c-4.17-9.45-7.73-19.63-9.77-31.66-3.82-20.61-.81-52.02 10.86-68.91zM480 480H32v-96h448v96zm0-128H32v-96h448v96zM80 320c8.84 0 16-7.16 16-16s-7.16-16-16-16-16 7.16-16 16 7.16 16 16 16zm0 128c8.84 0 16-7.16 16-16s-7.16-16-16-16-16 7.16-16 16 7.16 16 16 16zm352-128c8.84 0 16-7.16 16-16s-7.16-16-16-16-16 7.16-16 16 7.16 16 16 16zm0 128c8.84 0 16-7.16 16-16s-7.16-16-16-16-16 7.16-16 16 7.16 16 16 16zM210.53 50.47c11.29-12.19 14.43-32.03 13.22-50.22-12.88-.86-35.67-.12-50.02 13.28-16.53 16.6-13.77 46.36-13.22 50.22 18.47 1.23 37.77-1.85 50.02-13.28z"></path></svg>`;
+
+      case 'shield-check':
+        return `<svg style="${this.#style}" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="shield-check" role="img" viewBox="0 0 51.1 68.5" xmlns="http://www.w3.org/2000/svg"><path d="M49.1 28.2V9.4S33 9.4 25.5 2C18.1 9.4 2 9.4 2 9.4v26c0 22.3 23.6 31 23.6 31s23.6-8.7 23.6-31V28.2z" fill="none" stroke="#050e81" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"></path><path d="M19.4 34.9l3.7 4.1 12-13.4" fill="none" stroke="#050e81" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="4"></path></svg>`;
+
+      case 'gauge-indicator':
+        return `<svg style="${this.#style}" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="gauge-indicator" role="img" viewBox="0 0 82 82" xmlns="http://www.w3.org/2000/svg"><path d="M41,0C18.4,0,0,18.4,0,41s18.4,41,41,41s41-18.4,41-41S63.6,0,41,0z M41,78C20.6,78,4,61.4,4,41S20.6,4,41,4 s37,16.6,37,37S61.4,78,41,78z" fill="#050e81"></path><path d="M66.7,48H51.9c-0.4-2.1-1.4-4-2.8-5.5l14.1-20.8c0.6-0.9,0.4-2.2-0.5-2.8c-0.9-0.6-2.2-0.4-2.8,0.5L45.8,40.1 c-1.4-0.7-3.1-1.1-4.8-1.1c-5.4,0-9.9,3.9-10.8,9H15.3c-1.1,0-2,0.9-2,2s0.9,2,2,2h16.6c0.1,0,0.1,0,0.2,0c1.1,0,2-0.9,2-2 c0-3.9,3.1-7,7-7c3.8,0,7,3.1,7,7c0,0,0,0,0,0c0,0.3,0.1,0.5,0.2,0.8c0.3,0.7,1,1.2,1.8,1.2c0.1,0,0.1,0,0.2,0h16.4 c1.1,0,2-0.9,2-2S67.8,48,66.7,48z" fill="url(#svg-gradient) #203694"></path><circle cx="14" cy="41" fill="#050e81" r="4"></circle><circle cx="69" cy="41" fill="#050e81" r="4"></circle><circle cx="41" cy="14" fill="#050e81" r="4"></circle><circle cx="22" cy="22" fill="#050e81" r="4"></circle><path d="M57.9,55.9H24.2c-1.1,0-2,0.9-2,2s0.9,2,2,2h33.7c1.1,0,2-0.9,2-2S59,55.9,57.9,55.9z" fill="#050e81"></path></svg>`;
 
     }
   }

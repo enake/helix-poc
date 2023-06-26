@@ -1,6 +1,15 @@
+.columns h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 0.7px;
+  margin-bottom: 30px;
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
+  padding: 15px;
 }
 
 .columns > div > div {
@@ -21,6 +30,7 @@
   .columns > div {
     align-items: center;
     flex-direction: unset;
+    padding: 18px;
   }
 
   .columns > div > div {
@@ -28,8 +38,13 @@
     order: unset;
   }
 
-  .columns > div > .columns-img-col img {
+  .columns > div > .columns-img-col--left img {
     max-width: 100%;
     margin-left: auto;
+  }
+
+  .columns > div > .columns-img-col--right img {
+    max-width: 100%;
+    margin-right: auto;
   }
 }

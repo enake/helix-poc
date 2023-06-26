@@ -3,7 +3,6 @@
 import ColumnComponent from '/components/column/column.js';
 
 export default function decorate(block) {
-    console.log('columns-two', block);
     const columns = [...block.children[0].children];
 
     block.innerHTML = `

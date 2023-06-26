@@ -3,15 +3,25 @@ export default function decorate(block) {
   block.classList.add(`columns-${cols.length}-cols`);
   block.classList.add('container-sm');
 
+  // todo export this to reusable utils
+  const parentSelector = block.closest('.section');
+  const metaData = parentSelector.dataset;
+
+  const backgroundColor = metaData.backgroundcolor || undefined;
+
+  if (backgroundColor) {
+    block.style.backgroundColor = backgroundColor;
+  }
+
   // setup image columns
   [...block.children].forEach((row) => {
-    [...row.children].forEach((col) => {
+    [...row.children].forEach((col, idx) => {
       const pic = col.querySelector('picture');
       if (pic) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
-          picWrapper.classList.add('columns-img-col');
+          picWrapper.classList.add('columns-img-col', `columns-img-col--${idx % 2 === 0 ? 'right' : 'left'}`);
         }
       } else {
         col.innerHTML = `
