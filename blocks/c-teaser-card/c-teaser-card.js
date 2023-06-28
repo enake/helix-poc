@@ -7,11 +7,10 @@ export default function decorate(block) {
   block.innerHTML = `
     <div class="main-wrapper">
       <div class="inner-wrapper">
-        <h3>${ heading.innerText }</h3>
+        <h3>${ heading.innerHTML}</h3>
         <div class="subtitle">${ subtitle.innerText }</div>
       </div>
-
-      ${ picture.children[0].innerHTML }
     </div>
+    ${ picture.children[0].innerHTML }
   `;
 }

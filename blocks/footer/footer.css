@@ -94,7 +94,7 @@ footer .footer__links li:last-child::after {
     display: block;
   }
   footer img {
-    margin-bottom: 0;
+    margin-bottom: 10px;
   }
   footer .footer__links a, .footer__copy, footer a {
     font-size: 13px;
