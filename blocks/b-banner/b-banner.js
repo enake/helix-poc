@@ -11,6 +11,8 @@
   - product : ex: elite/10/1 (alias_name/nr_devices/nr_years)
   - discount_text : ex: OFF special offer (comes after the percent discount) ((not necessary for default discount_style))
   - button_type: external-link, go-to-section-link, buy-link
+  - background_color: ex: #f5f5f5, default is white.
+  - image_variation: ex: small, default is big for large hero banners.
 
   Samples:
   - default(circle): https://www.bitdefender.com/media/html/business/cross-sell-flash-sale-pm-2023/existing.html
@@ -30,7 +32,23 @@ export default function decorate(block) {
 
   // config new elements
   const paragraph = block.querySelector('p');
-  const { product, discountStyle, discountText } = metaData;
+  const { product, discountStyle, discountText, backgroundColor, imageVariation } = metaData;
+ 
+  // update background color if set
+  if (typeof backgroundColor !== 'undefined') {
+    var block1 = document.querySelector('.b-banner-container');
+    block1.style.backgroundColor = backgroundColor;
+  }
+
+  if (typeof imageVariation !== 'undefined') {
+    if (imageVariation === 'small') {
+      var block2 = document.querySelector('.b-banner-container');
+      block2.classList.add('d-flex');
+
+      var block3 = document.querySelector('picture');
+      block3.style.marginLeft = 'auto';
+    }
+  }
 
   if (typeof product !== 'undefined' && product !== '') {
     const prodSplit = product.split('/');
