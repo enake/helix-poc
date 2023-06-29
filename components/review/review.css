@@ -35,13 +35,23 @@ review-component .separator {
 }
 
 review-component .author {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 12px;
     margin-bottom: 30px;
 }
 
 review-component q {
     font-size: 13px;
+    width: 35em;
+}
+
+review-component a {
+    line-height: 20px;
+}
+review-component a:hover {
+    opacity: 0.8;
+    color: #000000;
+    text-decoration: none;
 }
 
 @media (min-width:992px) {
@@ -52,5 +62,12 @@ review-component q {
 
     review-component q {
         font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    review-component q {
+        font-size: 13px;
+        width: 100%;
     }
 }
