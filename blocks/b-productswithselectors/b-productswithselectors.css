@@ -129,11 +129,7 @@
 
 /* for mobile */
 @media (max-width: 768px) {
-    .b-banner-container img {
-        width: auto;
-        height: 100%;
-        max-width: initial;
-    }
+    
     .b-productswithselectors-container {
         margin-top: 0em;
     }
@@ -184,14 +180,6 @@
     .b-productswithselectors > div:not(:first-child) ul:first-of-type {
         min-height: 14.5em;
         margin: 6px 0;
-    }
-    .b-dropdownbox-container .block > div:not(:first-child) > div:nth-child(1)  {
-        width: 96%;
-        text-align: center;
-    }
-    .b-dropdownbox-container .block > div:not(:first-child) > div:not(:first-child) {
-        width: 50%;
-        float: left;
     }
 }
 

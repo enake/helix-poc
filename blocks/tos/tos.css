@@ -1,8 +1,7 @@
 
 .tos-container {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding: 3em 15px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -11,8 +10,17 @@
     font-size: 1rem;
 }
 
+.tos > div:not(:first-child) {
+    margin-bottom: 1em;
+}
+.tos > div:last-of-type a {
+    color: #0066ff;
+}
+
 .tos ul {
     display: none;
+    padding: 0;
+    margin-top: 0;
 }
 
 .tos .tos__link--active {
@@ -28,7 +36,10 @@
 .tos h3 {
     cursor: pointer;
     font-size: 1rem;
-    margin: 0 0 1rem;
+    margin: 0 0 10px 0
+}
+.tos h3:hover {
+    opacity: 0.7;
 }
 
 .tos svg {
@@ -37,6 +48,18 @@
 
 .tos li {
     list-style: disc;
-    margin: 0 0 10px 20px;
+    margin: 0 0 4px 20px;
     font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .tos-container {
+        padding: 1em 0;
+    }
+    .tos {
+        font-size: 15px;
+    }
+    .tos > div:not(:first-child) {
+        margin-bottom: 10px;
+    }
 }
