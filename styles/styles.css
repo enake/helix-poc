@@ -422,6 +422,16 @@ main .section.highlight {
 .prod-percent.green_bck_circle.bigger span.bulina_text1 {
   margin-top: 39px;
 }
+.prod-percent.green_bck_circle.bigger.has3txt span.bulina_text1 {
+  margin-top: 0;
+}
+.prod-percent.green_bck_circle.bigger.has3txt > span:first-of-type {
+  margin-top: 18%;
+}
+.prod-percent.green_bck_circle.bigger span.bulina_text {
+  font-weight: 500;
+  font-size: 15px;
+}
 .prod-percent.green_bck_circle.bigger span.bulina_text1 b {
   font-size: 28px;
 }
@@ -662,6 +672,9 @@ main .section.highlight {
   }
   main .default-content-wrapper p {
     font-size: 16px;
+  }
+  .red-buy-button p em {
+    font-size: 13px;
   }
 
 }

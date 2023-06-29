@@ -24,9 +24,18 @@ export default function decorate(block) {
     // get data attributes set in metaData
     const parentSelector = block.closest('.section');
     const metaData = parentSelector.dataset;
-    const { products, tagText, bulinaText1, bulinaText2 } = metaData;
-
+    const { products, bulinaText, bulinaText1, bulinaText2 } = metaData;
     const productsAsList = products.split(',');
+
+
+    // set class with numbers of products
+     if (productsAsList.length > 3) {
+      document.querySelectorAll('.c-productswithvpn-container').forEach(item => {
+        item.classList.add('has4boxes', 'table_fixed_h');
+      })
+      
+     }
+
 
     if (productsAsList.length) {
       //////////////////////////////////////////////////////////////////////////
@@ -40,10 +49,13 @@ export default function decorate(block) {
       //////////////////////////////////////////////////////////////////////////
       // create procent - bulina
       const firstProd = productsAsList[0].split('/')[0]
-      const divBulina = `<div class="prod-percent green_bck_circle bigger bulina-${firstProd}">
-        <span class="bulina_text1"><b class="percent-${firstProd}"></b> ${bulinaText1}</span>
-        <span class="bulina_text2">${bulinaText2}</span>
-      </div>`
+      let divBulina = `<div class="prod-percent green_bck_circle bigger bulina-${firstProd} ${bulinaText ? 'has3txt' : '' }">`
+      if (bulinaText) {
+        divBulina += `<span class="bulina_text">${bulinaText}</span>`
+      }
+      divBulina += `<span class="bulina_text1"><b class="percent-${firstProd}"></b> ${bulinaText1}</span>`
+      divBulina += `<span class="bulina_text2">${bulinaText2}</span>`
+      divBulina += `</div>`
 
       // add to the previous element
       document.querySelectorAll('.c-productswithvpn-container').forEach((item) => {
@@ -61,24 +73,24 @@ export default function decorate(block) {
   
         block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table`).after(pricesDiv)
 
+      
         //////////////////////////////////////////////////////////////////////////
-        // replace in vpn box
-        const replace_data = {
-          'X': '<span class="newprice-vpn"></span>',
-          'Y': '<span class="oldprice-vpn"></span>',
-          'Z': '<span class="percent-vpn"></span>'
-        };
-
-        let table_vpn = block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table:nth-of-type(2)`)
-
-        //////////////////////////////////////////////////////////////////////////
-        // adding input vpn
-        const input_checkbox = `<input id="checkboxVPN-${prodName}" class="checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`
+        // adding top tag to the each box
+        let tagTextKey = `tagText${idx}`;
+        if (idx == 0) {
+          tagTextKey = `tagText`;
+        }
+        if (metaData[tagTextKey]) {
+          const div_tag = document.createElement('div');
+          div_tag.innerText = metaData[tagTextKey];
+          div_tag.className = 'green_tag';
+          block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) p:nth-child(1)`).before(div_tag)
+        }
         
-        table_vpn.innerHTML = input_checkbox + table_vpn.innerHTML.replace(/[XYZ]/g, m => replace_data[m])
 
         //////////////////////////////////////////////////////////////////////////
         // add buybtn div & anchor
+        let table_vpn = block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table:nth-of-type(2)`)
         let table_buybtn = block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table:nth-of-type(3) td`)
         
         const a_buybtn = document.createElement('a')
@@ -92,23 +104,41 @@ export default function decorate(block) {
         table_vpn.after(div_buybtn)
         div_buybtn.appendChild(a_buybtn)
 
+
         //////////////////////////////////////////////////////////////////////////
-        // addEventListener on each VPN table to trigger checkbox input
-        block.querySelectorAll(`.c-productswithvpn > div:nth-child(${idx + 1}) table:nth-of-type(2)`).forEach(item => {
-          item.addEventListener('click', () => {
-            item.querySelector('input').click()
-          })
-        })
+        let hasVPN = false;
+        if (table_vpn.innerText.indexOf('X') !== -1 && table_vpn.innerText.indexOf('Y') !== -1 && table_vpn.innerText.indexOf('Z') !== -1) {
+          hasVPN = true;
+        }
+        
+        // adding input vpn
+        if (hasVPN) { // has VPN
+            table_vpn.className = 'vpn_box'
+            // replace in vpn box
+            const replace_data = {
+              'X': '<span class="newprice-vpn"></span>',
+              'Y': '<span class="oldprice-vpn"></span>',
+              'Z': '<span class="percent-vpn"></span>'
+            };
+            const input_checkbox = `<input id="checkboxVPN-${prodName}" class="checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`
+          
+            table_vpn.innerHTML = input_checkbox + table_vpn.innerHTML.replace(/[XYZ]/g, m => replace_data[m])
+            
+            // addEventListener on each VPN table to trigger checkbox input
+            block.querySelectorAll(`.c-productswithvpn > div:nth-child(${idx + 1}) table:nth-of-type(2) tbody`).forEach(item => {
+              item.addEventListener('click', () => {
+                item.parentNode.querySelector('input').click()
+              })
+            })
+
+        } else { // no VPN
+          
+        }
+
         
         block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table:last-of-type`).remove()
         
       });
-
-      //////////////////////////////////////////////////////////////////////////
-      // adding top tag to the 1st box
-      const div_tag = document.createElement('div');
-      div_tag.innerText = tagText;
-      div_tag.className = 'green_tag';
-      block.querySelector('.c-productswithvpn > div:nth-child(1) p:nth-child(1)').before(div_tag)
+      
     }
 }
