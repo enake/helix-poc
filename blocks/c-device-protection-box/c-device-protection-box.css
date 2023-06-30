@@ -21,6 +21,7 @@
     max-width: unset;
 }
 
+
 @media screen and (min-width: 992px) {
     /* heading */
     .c-device-protection-box-container .row-box > :nth-child(2) > *:first-child {
@@ -37,11 +38,13 @@
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 992px) {
     .c-device-protection-box-container img {
         width: 100%;
         margin-left: 0;
     }
+}
+@media (max-width: 768px) {
     .c-device-protection-box-container {
         padding: 1em 0;
     }

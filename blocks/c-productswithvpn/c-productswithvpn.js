@@ -12,9 +12,16 @@
   - background : ex: grey (background-color of full section)
   - products : ex: tsmd/5/1, is/3/1, av/3/1 (alias_name/nr_devices/nr_years)
   - tag_text: ex: BEST BANG FOR YOUR BUCK!
+  - tag_text2: ex: PREMIUM SECURITY AND PRIVACY PACK
+  - tag_text3: ex: BEST BANG FOR YOUR BUCK!
+  - bulina_text: ex: UP TO
+                        0% OFF
+                      SALE TODAY
+
 
   Samples:
-  - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/last-offer.html
+  - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/last-offer.html - http://localhost:3000/consumer/en/last-offer
+  - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/ultimate-flv1.html - http://localhost:3000/consumer/en/ultimate-flv1
 */
 
 import { updateProductsList, productAliases } from "../../scripts/scripts.js";
@@ -22,46 +29,45 @@ import { updateProductsList, productAliases } from "../../scripts/scripts.js";
 export default function decorate(block) {
     //////////////////////////////////////////////////////////////////////////
     // get data attributes set in metaData
-    const parentSelector = block.closest('.section');
+    const parentSelector = block.closest('.section')
     const metaData = parentSelector.dataset;
-    const { products, bulinaText, bulinaText1, bulinaText2 } = metaData;
-    const productsAsList = products.split(',');
-
-
-    // set class with numbers of products
-     if (productsAsList.length > 3) {
-      document.querySelectorAll('.c-productswithvpn-container').forEach(item => {
-        item.classList.add('has4boxes', 'table_fixed_h');
-      })
-      
-     }
+    const { products, bulinaText } = metaData;
+    const productsAsList = products.split(',')
 
 
     if (productsAsList.length) {
-      //////////////////////////////////////////////////////////////////////////
+      // get first prod from the list
+      const firstProd = productsAsList[0].split('/')[0]
+
       // check and add products into the final array
       productsAsList.forEach(prod => updateProductsList(prod));
 
       // add VPN
       updateProductsList('vpn/10/1')
-      
+
+      //////////////////////////////////////////////////////////////////////////
+      // set top class with numbers of products
+      parentSelector.classList.add(`has${productsAsList.length}boxes`)
 
       //////////////////////////////////////////////////////////////////////////
       // create procent - bulina
-      const firstProd = productsAsList[0].split('/')[0]
-      let divBulina = `<div class="prod-percent green_bck_circle bigger bulina-${firstProd} ${bulinaText ? 'has3txt' : '' }">`
       if (bulinaText) {
-        divBulina += `<span class="bulina_text">${bulinaText}</span>`
-      }
-      divBulina += `<span class="bulina_text1"><b class="percent-${firstProd}"></b> ${bulinaText1}</span>`
-      divBulina += `<span class="bulina_text2">${bulinaText2}</span>`
-      divBulina += `</div>`
+        const bulina_splitted = bulinaText.split(',')
+        let divBulina = `<div class="prod-percent green_bck_circle bigger bulina-${firstProd} has${bulina_splitted.length}txt">`
+        bulina_splitted.forEach((item, idx) => {
+          if (item.indexOf('0%') !== -1) {
+            item = item.replace(/0%/g, '<b class="percent-' + firstProd +'"></b>')
+          }
+          divBulina += `<span class="bulina_text${idx + 1}">${item}</span>`
+          
+        })
+        divBulina += `</div>`
 
-      // add to the previous element
-      document.querySelectorAll('.c-productswithvpn-container').forEach((item) => {
-        item.previousElementSibling.innerHTML += divBulina
-      })
-      
+        // add to the previous element
+        block.parentNode.parentNode.previousElementSibling.innerHTML += divBulina
+      }
+
+ 
       //////////////////////////////////////////////////////////////////////////
       // create prices sections
       productsAsList.forEach((item, idx) => {
@@ -130,12 +136,15 @@ export default function decorate(block) {
                 item.parentNode.querySelector('input').click()
               })
             })
-
         } else { // no VPN
+          // if we don't have vpn we need to set a min-height for the text that comes in place of it
+          parentSelector.classList.contains('table_fixed_h')
+          if (!parentSelector.classList.contains('table_fixed_h')) {
+            parentSelector.classList.add('table_fixed_h')
+          }
           
         }
 
-        
         block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table:last-of-type`).remove()
         
       });
