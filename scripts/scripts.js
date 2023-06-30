@@ -19,6 +19,8 @@ import {
 const productsList = [];
 export const DEFAULT_LANGUAGE = window.location.pathname.split("/")[2]
 
+import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
+
 export const productAliases = (name) => {
   name = name.trim()
   if (name === 'elite') {
@@ -36,6 +38,7 @@ export const geoip_code = () => {
   }, "jsonp");
 }
 
+// TODO: use the function from adobeDataLayer.js
 export const getParam = (param) => {
   var g_urlParams = {};
   try {
@@ -61,6 +64,23 @@ export const getParam = (param) => {
   } catch (ex) {}
 }
 
+/**
+ * Returns the instance name based on the hostname
+ * @returns {String}
+ */
+export const instance = (() => {
+  const hostToInstance = {
+    'pages.bitdefender.com': 'prod',
+    'hlx.page': 'stage',
+    'hlx.live': 'stage',
+  };
+
+  for (let [host, instance] of Object.entries(hostToInstance)) {
+    if (window.location.hostname.includes(host)) return instance;
+  }
+
+  return 'dev';
+})();
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
@@ -150,11 +170,20 @@ const loadLazy = async doc => {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
+  sendAnalyticsPageEvent();
+  sendAnalyticsUserInfo();
+
   loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
+  addFavIcon(`https://www.bitdefender.com/favicon.ico`);
+
+  if (instance === 'prod')
+    addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js');
+  else
+    addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js');
+
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
@@ -441,6 +470,8 @@ const showPrice = (storeObj) => {
 }
 
 // check & update ProductsList
+// TODO: have a look at StoreProducts.product & StoreProducts.initCount
+// maybe we can use them instead of this function
 export const updateProductsList = (product) => {
   if (productsList.indexOf(product) === -1) {
     productsList.push(product)
@@ -983,6 +1014,7 @@ const initSelectors = () => {
         extra_params: { pid: getParam('pid') },
   
         onSelectorLoad: function () {
+          sendAnalyticsProducts(this);
           try {
             let fp = this;
             if (prodAlias === 'vpn') {
