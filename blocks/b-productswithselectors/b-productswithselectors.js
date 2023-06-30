@@ -39,7 +39,7 @@ export default function decorate(block) {
       // create the 2 selectors
       const labelName = selectorsName.split(',');
       // devices
-      let optionsDevices = Array(100).fill().map((_, d) => {
+      let optionsDevices = Array(101).fill().map((_, d) => {
           if (d < 5) return // starts from 5
           let selected = ''
           if (d === 10) {  // default value selected = 10
