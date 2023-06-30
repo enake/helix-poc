@@ -47,6 +47,7 @@
     font-weight: 600;
     text-decoration: none;
     font-size: 14px;
+    line-height: 14px;
 }
 
 .c-productswithvpn > div div.prices_box span.prod-oldprice {
@@ -160,6 +161,7 @@
     margin-bottom: 0;
     z-index: 1;
     margin-left: 15px;
+    cursor: pointer;
 }
 
 .c-productswithvpn > div div.buybtn_box {
@@ -228,6 +230,11 @@
 
 
 /* for mobile */
+@media (min-width: 1450px) {
+    .c-productswithvpn-container.has4boxes .c-productswithvpn-wrapper {
+        max-width: 1450px;
+    }
+}
 @media (max-width: 989px) {
     .c-productswithvpn-container.has4boxes .c-productswithvpn {
         display: block;
