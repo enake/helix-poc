@@ -35,6 +35,7 @@
   color: white;
   margin: 1em 0px 0px;
   margin-right: 10px;
+  max-width: 595px;
 }
 
 .b-banner-container .float-p p {
