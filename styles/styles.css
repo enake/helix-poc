@@ -340,6 +340,10 @@ main .default-content-wrapper p.button-container {
   margin: 1em 0;
 }
 
+main .default-content-wrapper {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 main .default-content-wrapper img {
   margin-top: 2rem;
 }
@@ -418,7 +422,7 @@ main .section.highlight {
   font-weight: 500;
   position: absolute;
   right: 16%;
-  top: 10%;
+  top: 25%;
 }
 .prod-percent.green_bck_circle.bigger span {
   display: block;
@@ -427,10 +431,20 @@ main .section.highlight {
 .prod-percent.green_bck_circle.bigger span.bulina_text1 {
   margin-top: 39px;
 }
+.prod-percent.green_bck_circle.bigger.has3txt span:nth-of-type(2) {
+  margin-top: 0;
+}
+.prod-percent.green_bck_circle.bigger.has3txt > span:first-of-type {
+  margin-top: 18%;
+}
+.prod-percent.green_bck_circle.bigger span.bulina_text {
+  font-weight: 500;
+  font-size: 15px;
+}
 .prod-percent.green_bck_circle.bigger span.bulina_text1 b {
   font-size: 28px;
 }
-.prod-percent.green_bck_circle.bigger span.bulina_text2 {
+.prod-percent.green_bck_circle.bigger span:last-of-type {
   font-size: 13px;
 }
 
@@ -654,11 +668,6 @@ main .section.highlight {
     padding: 1em 0;
   }
 
-  main .section {
-    padding-left: 15px!important;
-    padding-right: 15px!important;
-  }
-
   main .default-content-wrapper {
     padding-top: 1em;
   }
@@ -667,6 +676,9 @@ main .section.highlight {
   }
   main .default-content-wrapper p {
     font-size: 16px;
+  }
+  .red-buy-button p em {
+    font-size: 13px;
   }
 
 }
