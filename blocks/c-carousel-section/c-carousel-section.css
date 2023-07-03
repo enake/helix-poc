@@ -1,6 +1,6 @@
 .c-carousel-section-container h2,
 .c-carousel-section-container h3 {
-    font-size: 24px;
+    font-size: 32px;
     color: #172462;
     font-weight: 500;
     line-height: 1.2;
@@ -48,6 +48,8 @@
 .c-carousel-section-container .carousel-item q {
     color: #ff9f00;
     display: block;
+    font-size: 16px;
+    line-height: 21px;
 }
 
 .c-carousel-section-container .carousel-item .author {
@@ -63,3 +65,11 @@
     margin: 0;
 }
 
+@media (max-width: 768px) {
+    .c-carousel-section-container h2, .c-carousel-section-container h3 {
+        font-size: 27px;
+        line-height: 30px;
+        margin-top: 10px;
+        font-weight: 600;
+    }
+}
