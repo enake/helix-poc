@@ -20,8 +20,8 @@
 
 
   Samples:
-  - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/last-offer.html - http://localhost:3000/consumer/en/last-offer
-  - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/ultimate-flv1.html - http://localhost:3000/consumer/en/ultimate-flv1
+  - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/last-offer.html - http://localhost:3000/consumer/en/new/last-offer
+  - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/ultimate-flv1.html - http://localhost:3000/consumer/en/new/ultimate-flv1
 */
 
 import { updateProductsList, productAliases } from "../../scripts/scripts.js";
@@ -81,7 +81,7 @@ export default function decorate(block) {
 
       
         //////////////////////////////////////////////////////////////////////////
-        // adding top tag to the each box
+        // adding top tag to each box
         let tagTextKey = `tagText${idx}`;
         if (idx == 0) {
           tagTextKey = `tagText`;
@@ -119,23 +119,30 @@ export default function decorate(block) {
         
         // adding input vpn
         if (hasVPN) { // has VPN
-            table_vpn.className = 'vpn_box'
+            //table_vpn.className = 'vpn_box'
             // replace in vpn box
             const replace_data = {
               'X': '<span class="newprice-vpn"></span>',
               'Y': '<span class="oldprice-vpn"></span>',
               'Z': '<span class="percent-vpn"></span>'
             };
-            const input_checkbox = `<input id="checkboxVPN-${prodName}" class="checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`
-          
-            table_vpn.innerHTML = input_checkbox + table_vpn.innerHTML.replace(/[XYZ]/g, m => replace_data[m])
-            
-            // addEventListener on each VPN table to trigger checkbox input
-            block.querySelectorAll(`.c-productswithvpn > div:nth-child(${idx + 1}) table:nth-of-type(2) tbody`).forEach(item => {
-              item.addEventListener('click', () => {
-                item.parentNode.querySelector('input').click()
-              })
+
+            const vpn_prices = `<b><span class="prod-oldprice oldprice-${prodName}">$69.99</span><span class="prod-newprice newprice-${prodName}">$69.99</span></b>`
+            let vpn_div = document.createElement('div')
+            vpn_div.className = 'vpn_box'
+
+            let vpn_content = `<input id="checkboxVPN-${prodName}" class="checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`
+            vpn_content += `<label for="checkboxVPN-${prodName}${idx + 1}">`
+            table_vpn.querySelectorAll('td').forEach(item => {
+              vpn_content += `<span>${item.innerHTML.replace(/[XYZ]/g, m => replace_data[m])}</span>`
             })
+            vpn_content += '</label>'
+
+            vpn_div.innerHTML = vpn_content
+
+            table_vpn.before(vpn_div)
+            table_vpn.remove()
+
         } else { // no VPN
           // if we don't have vpn we need to set a min-height for the text that comes in place of it
           parentSelector.classList.contains('table_fixed_h')

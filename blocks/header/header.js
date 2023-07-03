@@ -101,7 +101,7 @@ export default async function decorate(block) {
       <div class="">
         <div class="">
           <a class="d-inline-block" href="/">
-            <img alt="Bitdefender" class="img-fluid d-block menu__logo" src="https://download.bitdefender.com/resources/themes/draco/images/lite_v2/logo-white.svg">
+            <img alt="Bitdefender" class="img-fluid d-block menu__logo" src="https://download.bitdefender.com/resources/themes/draco/images/lite_v2/logo-white.svg" with="160px" height="25px">
           </a>
         </div>
       </div>

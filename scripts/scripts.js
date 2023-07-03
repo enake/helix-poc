@@ -32,11 +32,11 @@ export const productAliases = (name) => {
   return name
 }
 
-export const geoip_code = () => {
+/*export const geoip_code = () => {
   $.get("https://ipinfo.io", function(response) {
     return response.country.toUpperCase();
   }, "jsonp");
-}
+}*/
 
 // TODO: use the function from adobeDataLayer.js
 export const getParam = (param) => {
@@ -479,9 +479,9 @@ export const updateProductsList = (product) => {
 }
 
 const addVpnBD = (data, show_vpn) => {
-    if (geoip_code() == 'cn' || geoip_code() == 'in') {
+    /*if (geoip_code() == 'cn' || geoip_code() == 'in') {
       return false;
-    }
+    }*/
         
     const product_id = data.config.product_id;
     const disc_price_class = data.config.discounted_price_class;
@@ -955,7 +955,6 @@ const addVpnBD = (data, show_vpn) => {
               item.innerHTML = new_price;
             })
           }
-           
         }
 
         if (document.querySelector("." + buy_class)) {
@@ -966,6 +965,12 @@ const addVpnBD = (data, show_vpn) => {
 
         if (full_price != '' && document.querySelector("." + price_class)) {
           document.querySelectorAll("." + price_class).forEach(item => {
+            item.innerHTML = full_price;
+          })
+        }
+
+        if (full_price != '' && document.querySelector(".old" + price_class)) {
+          document.querySelectorAll(".old" + price_class).forEach(item => {
             item.innerHTML = full_price;
           })
         }

@@ -25,7 +25,7 @@ export default function decorate(block) {
         }
       } else {
         col.innerHTML = `
-          <div class="pt-3 p-md-3">
+          <div>
             ${col.innerHTML}
           </div>
         `;
