@@ -4,59 +4,66 @@ footer {
   padding: 50px 0;
   clear: both;
 }
+
 footer .default-content-wrapper {
   display: flex;
   justify-content: space-between;
 }
+
 footer .row {
   padding: 0 15px;
 }
+
 footer img {
   width: 160px;
   height: auto;
   margin-bottom: 15px;
 }
+
 footer p {
   margin: 0;
   font-size: 16px;
 }
-footer .footer__links a, .footer__copy, footer a {
+
+footer a, footer .footer__links a, .footer__copy {
   color: white!important;
   font-size: 16px;
   padding: 0 2px;
 }
-footer .footer__links a:hover, footer a:hover {
+
+footer .footer__links a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  transition: .2s color;
+  padding: 0 2px;
+}
+
+footer a:hover, footer .footer__links a:hover {
   opacity: 0.6;
   color: white;
 }
-footer .footer__links li::after {
-  background: white;
-  height: 10px;
-}
+
 footer strong {
-  font: normal normal bold 32px/40px Roboto;
+  font-size: 32px;
+  font-weight: bold;
   color: white;
 }
+
 footer .footer__copy {
-  margin: 2px 0 0px 0;
-  padding-bottom: 0px;
+  margin: 2px 0 0;
+  padding-bottom: 0;
 }
+
 footer p.trustedAlways {
-  font: normal normal bold 32px/40px Roboto;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 footer .footer__links {
   margin-top: 15px;
   padding-left: 0;
   margin-bottom: 0;
-}
-
-footer .footer__links a {
-  color: #ffffff;
-  text-decoration: none;
-  display: block;
-  transition: .2s color;
-  padding: 0 2px;
 }
 
 .footer__links li {
@@ -73,7 +80,7 @@ footer .footer__links li::after {
   bottom: 0;
   width: 1px;
   height: 15px;
-  background: #ffffff;
+  background: #fff;
   margin: auto;
 }
 
@@ -90,27 +97,28 @@ footer .footer__links li:last-child::after {
   footer {
     padding: 18px 0;
   }
+
   footer .default-content-wrapper {
     display: block;
   }
+
   footer img {
     margin-bottom: 10px;
   }
-  footer .footer__links a, .footer__copy, footer a {
+
+  footer a, footer .footer__links a, .footer__copy {
     font-size: 13px;
     padding: 0 1px;
   }
+
   footer p {
     font-size: 13px;
   }
+
   footer strong {
-    font: normal normal bold 20px/22px Roboto;
+    font-size: 20px;
     text-align: left;
     display: block;
     margin-top: 9px;
   }
-}
-
-@media (max-width: 576px) {
-  
 }

@@ -6,12 +6,9 @@
 }
 
 .awards .title {
-    color: #ff9f00;
-}
-
-.awards .title {
     font-size: .875rem;
     line-height: 1.25rem;
+    color: #ff9f00;
 }
 
 .awards .subtitle {

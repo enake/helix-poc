@@ -1,6 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable */
-import ReviewComponent from '/components/review/review.js';
+import ReviewComponent from '../../components/review/review.js';
 
 /*
   Information:
@@ -30,17 +28,17 @@ export default function decorate(block) {
   block.innerHTML = `
     <div class="container">
       <div class="row">
-        ${ formattedDataColumns.map(col => `
+        ${formattedDataColumns.map((col) => `
           <div class="col-12 col-sm">
-            ${ new ReviewComponent(col, textstyle).render() }
+            ${new ReviewComponent(col, textstyle).render()}
           </div>
-        `).join('') }
+        `).join('')}
       </div>
-      ${ bottomtext ? `
+      ${bottomtext ? `
         <div class="row">
           <div class="col bottom-text">${bottomtext}</div>
         </div>
-      ` : '' }
+      ` : ''}
     </div>
   `;
 }

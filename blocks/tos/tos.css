@@ -13,8 +13,9 @@
 .tos > div:not(:first-child) {
     margin-bottom: 1em;
 }
+
 .tos > div:last-of-type a {
-    color: #0066ff;
+    color: #06f;
 }
 
 .tos ul {
@@ -36,8 +37,9 @@
 .tos h3 {
     cursor: pointer;
     font-size: 1rem;
-    margin: 0 0 10px 0
+    margin: 0 0 10px
 }
+
 .tos h3:hover {
     opacity: 0.7;
 }
@@ -56,9 +58,11 @@
     .tos-container {
         padding: 1em 0;
     }
+
     .tos {
         font-size: 15px;
     }
+
     .tos > div:not(:first-child) {
         margin-bottom: 10px;
     }

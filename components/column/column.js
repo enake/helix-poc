@@ -1,8 +1,6 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable */
-
 export default class ColumnComponent {
   #el;
+
   #variant;
 
   /*

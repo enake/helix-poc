@@ -1,7 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable */
-
-import SvgLoaderComponent from "/components/svg-loader/svg-loader.js";
+import SvgLoaderComponent from '../../components/svg-loader/svg-loader.js';
 
 export default function decorate(block) {
   const [title, subtitle] = block.children;
@@ -13,18 +10,16 @@ export default function decorate(block) {
       subtitle: null,
       footer: null,
       progresses: [],
-      progressMax: []
+      progressMax: [],
     },
     {
       title: null,
       subtitle: null,
       footer: null,
       progresses: [],
-      progressMax: []
-    }
+      progressMax: [],
+    },
   ];
-
-  formatData();
 
   function formatData() {
     slices.forEach((item, idx) => {
@@ -36,7 +31,7 @@ export default function decorate(block) {
       } else if (idx === 1) {
         formattedDataColumns[0].subtitle = first.innerText;
         formattedDataColumns[1].subtitle = second.innerText;
-      } else if (idx >= 2 && idx < slices.length -1) {
+      } else if (idx >= 2 && idx < slices.length - 1) {
         formattedDataColumns[0].progresses = formattedDataColumns[0].progresses.concat({
           text: first.innerText,
           progress: second.innerText,
@@ -61,54 +56,57 @@ export default function decorate(block) {
   }
 
   function calcProgressBarWidth(current, max) {
-    return `${ (current / max * 100).toFixed(2)}%`;
+    return `${((current / max) * 100).toFixed(2)}%`;
   }
+
+  formatData();
 
   block.innerHTML = `
     <div class="container">
       <div class="row">
-        <div class="col-12"><h3 class="heading">${ title.innerText }</h3></div>
+        <div class="col-12"><h3 class="heading">${title.innerText}</h3></div>
       </div>
       <div class="row">
-        <div class="col-12"><h2 class="subheading">${ subtitle.innerText }</h2></div>
+        <div class="col-12"><h2 class="subheading">${subtitle.innerText}</h2></div>
       </div>
       
       <div class="row">
-        ${ formattedDataColumns.map((col, parentIdx) => `
+        ${formattedDataColumns.map((col, parentIdx) => `
           <div class="col-12 col-md-6 mt-4">
             <div class="inner-wrapper">
               <div class="svg-icon">
-                ${ new SvgLoaderComponent(
-                  parentIdx === 0 ? 'shield-check' : 'gauge-indicator',
-                  'rgb(5, 14, 129)').render()
-                }
+                ${new SvgLoaderComponent(
+    parentIdx === 0 ? 'shield-check' : 'gauge-indicator',
+    'rgb(5, 14, 129)',
+  ).render()
+}
               </div>
               <div class="ms-3 w-100">
-                <h2 class="title">${ col.title }</h2>
-                <p class="subtitle">${ col.subtitle }</p>
+                <h2 class="title">${col.title}</h2>
+                <p class="subtitle">${col.subtitle}</p>
                 
-                ${ col.progresses.map((p, idx) => `
+                ${col.progresses.map((p, idx) => `
                   <div class="d-flex align-items-center">
                     <div 
                       class="progress"
                       role="progressbar"
                       aria-label="Basic example"
                       aria-valuemin="0"
-                      aria-valuemax="${ col.progressMax }"
-                      aria-valuenow="${ p.progress }">
-                        <div class="progress-bar ${ idx === 0 ? 'progress-bar--first' : '' }" style="width: ${ calcProgressBarWidth(p.progress, col.progressMax) }">
-                          ${ p.text }
+                      aria-valuemax="${col.progressMax}"
+                      aria-valuenow="${p.progress}">
+                        <div class="progress-bar ${idx === 0 ? 'progress-bar--first' : ''}" style="width: ${calcProgressBarWidth(p.progress, col.progressMax)}">
+                          ${p.text}
                         </div>
                     </div>
-                    <div class="ms-3 progress-number">${ p.progress }</div>
+                    <div class="ms-3 progress-number">${p.progress}</div>
                   </div>
-                `).join('') }
+                `).join('')}
                 
-                <p class="footer mt-4">${ col.footer }</p>
+                <p class="footer mt-4">${col.footer}</p>
               </div>
             </div>
           </div>
-        `).join('') }
+        `).join('')}
       </div>
     </div>
   `;

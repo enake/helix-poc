@@ -1,4 +1,5 @@
-import { instance, DEFAULT_LANGUAGE, getIpCountry } from "./scripts.js";
+import { DEFAULT_LANGUAGE, instance } from './utils.js';
+import { getIpCountry } from "./scripts.js";
 
 export function clearDataLayer() {
   window.adobeDataLayer = [];
@@ -18,13 +19,10 @@ function getPageNameAndSections() {
   const pageSectionParts = window.location.pathname.split('/').filter((subPath) => subPath !== '');
   const subSubSection = pageSectionParts[0];
 
-  if (DEFAULT_LANGUAGE === 'en')
-    pageSectionParts[0] = 'us';
-  else
-    pageSectionParts[0] = DEFAULT_LANGUAGE;
+  if (DEFAULT_LANGUAGE === 'en') pageSectionParts[0] = 'us';
+  else pageSectionParts[0] = DEFAULT_LANGUAGE;
 
-  if (pageSectionParts[1].length === 2)
-    pageSectionParts[1] = 'offers'; // landing pages
+  if (pageSectionParts[1].length === 2) pageSectionParts[1] = 'offers'; // landing pages
 
   pageSectionParts.splice(2, 0, subSubSection);
 
@@ -49,25 +47,26 @@ function getParamValue(paramName) {
  * @returns {String}
  */
 const operatingSystem = (() => {
-  const userAgent = window.navigator.userAgent;
+  const { userAgent } = window.navigator;
   const systems = [
-    ["Windows NT 10.0", "Windows 10"],
-    ["Windows NT 6.2", "Windows 8"],
-    ["Windows NT 6.1", "Windows 7"],
-    ["Windows NT 6.0", "Windows Vista"],
-    ["Windows NT 5.1", "Windows XP"],
-    ["Windows NT 5.0", "Windows 2000"],
-    ["X11", "X11"],
-    ["Mac", "MacOS"],
-    ["Linux", "Linux"],
-    ["Android", "Android"],
-    ["like Mac", "iOS"]
+    ['Windows NT 10.0', 'Windows 10'],
+    ['Windows NT 6.2', 'Windows 8'],
+    ['Windows NT 6.1', 'Windows 7'],
+    ['Windows NT 6.0', 'Windows Vista'],
+    ['Windows NT 5.1', 'Windows XP'],
+    ['Windows NT 5.0', 'Windows 2000'],
+    ['X11', 'X11'],
+    ['Mac', 'MacOS'],
+    ['Linux', 'Linux'],
+    ['Android', 'Android'],
+    ['like Mac', 'iOS'],
   ];
 
-  for (let [substr, name] of systems) {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [substr, name] of systems) {
     if (userAgent.includes(substr)) return name;
   }
-  return "Unknown";
+  return 'Unknown';
 })();
 
 /**
@@ -102,10 +101,10 @@ const currentGMTDate = (() => {
  * Sends the page load started event to the Adobe Data Layer
  */
 export const sendAnalyticsPageEvent = async () => {
-  const dl = window.adobeDataLayer = window.adobeDataLayer || [];
+  window.adobeDataLayer = window.adobeDataLayer || [];
 
   const { pageName, sections } = getPageNameAndSections();
-  dl.push({
+  window.adobeDataLayer.push({
     event: 'page load started',
     pageInstanceID: instance,
     page: {
@@ -130,9 +129,9 @@ export const sendAnalyticsPageEvent = async () => {
         time: formatUserTime,
         date: currentGMTDate,
         domain: window.location.hostname,
-        domainPeriod: window.location.hostname.split('.').length
-      }
-    }
+        domainPeriod: window.location.hostname.split('.').length,
+      },
+    },
   });
 }
 
@@ -140,31 +139,31 @@ export const sendAnalyticsPageEvent = async () => {
  * Sends the user detected event to the Adobe Data Layer
 */
 export async function sendAnalyticsUserInfo() {
-  const dl = window.adobeDataLayer = window.adobeDataLayer || []
-  let user = {}
-  user.loggedIN = "false"
-  user.emarsysID = getParamValue('ems-uid') || getParamValue('sc_uid') || undefined
-  user.ID = localStorage.getItem('rhvID') || getParamValue('sc_customer') || undefined
-  user.productFinding = 'campaign page'
+  window.adobeDataLayer = window.adobeDataLayer || [];
+  const user = {};
+  user.loggedIN = 'false';
+  user.emarsysID = getParamValue('ems-uid') || getParamValue('sc_uid') || undefined;
+  user.ID = localStorage.getItem('rhvID') || getParamValue('sc_customer') || undefined;
+  user.productFinding = 'campaign page';
 
-  if (typeof user.ID != 'undefined') {
-    user.loggedIN = "true"
+  if (typeof user.ID !== 'undefined') {
+    user.loggedIN = 'true';
   }
 
   // Remove properties that are undefined
-  Object.keys(user).forEach(key => user[key] === undefined && delete user[key]);
+  Object.keys(user).forEach((key) => user[key] === undefined && delete user[key]);
 
-  dl.push({
-    "event": "user detected",
-    "user": user
+  window.adobeDataLayer.push({
+    event: 'user detected',
+    user,
   });
 }
 
-const productsInAdobe = []
+const productsInAdobe = [];
 
 export async function sendAnalyticsProducts(product) {
-  let productID = product.selected_variation.product_id
-  let productDetails = StoreProducts.product[productID]
+  const productID = product.selected_variation.product_id;
+  const productDetails = StoreProducts.product[productID];
   productsInAdobe.push({
     info: {
       ID: product.selected_variation.platform_product_id,
@@ -174,20 +173,20 @@ export async function sendAnalyticsProducts(product) {
       version: '',
       basePrice: product.selected_variation.price,
       discountValue: Math.round((product.selected_variation.price - product.selected_variation.discount.discounted_price) * 100) / 100,
-      discountRate: Math.round((product.selected_variation.price - product.selected_variation.discount.discounted_price) * 100 / product.selected_variation.price).toString(),
+      discountRate: Math.round(((product.selected_variation.price - product.selected_variation.discount.discounted_price) * 100) / product.selected_variation.price).toString(),
       currency: product.selected_variation.currency_iso,
-      priceWithTax: product.selected_variation.discount.discounted_price
-    }
-  })
+      priceWithTax: product.selected_variation.discount.discounted_price,
+    },
+  });
 
   if (productsInAdobe.length === StoreProducts.initCount) {
     window.adobeDataLayer.push({
-      event: "campaign product",
-      product: productsInAdobe
+      event: 'campaign product',
+      product: productsInAdobe,
     });
 
     window.adobeDataLayer.push({
-      event: "page loaded",
+      event: 'page loaded',
     });
   }
 }
@@ -197,14 +196,12 @@ export async function sendAnalyticsPageLoadedEvent() {
     return;
   }
 
-  const hasPageLoadedEvent = window.adobeDataLayer.some(obj => obj.event === "page loaded");
+  const hasPageLoadedEvent = window.adobeDataLayer.some((obj) => obj.event === 'page loaded');
   if (hasPageLoadedEvent) {
     return;
   }
 
   if (StoreProducts?.initCount === 0) {
-    window.adobeDataLayer.push({ event: "page loaded" });
+    window.adobeDataLayer.push({ event: 'page loaded' });
   }
-
-  return;
 }

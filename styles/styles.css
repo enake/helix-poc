@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -12,8 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-/* todo: use webpack / mini-css-extract-plugin */
-
 /* load components style */
 
 @import url("/components/column/column.css");
@@ -21,7 +17,7 @@
 
  :root {
   /* colors */
-  --link-color: #000000;
+  --link-color: #000;
   --link-hover-color: #006EFF;
   --background-color: #fff;
   --overlay-background-color: #eee;
@@ -50,6 +46,7 @@
   --nav-height: 64px;
 
 }
+
 /* 
 @media (min-width: 900px) {
   :root {
@@ -76,10 +73,13 @@ body.appear {
   display: unset;
 }
 
-/*.row>* {*/
-/*  width: auto;*/
-/*  max-width: none;*/
-/*}*/
+/* .row>* { */
+
+/*  width: auto; */
+
+/*  max-width: none; */
+
+/* } */
 
 *[data-align="center"] {
   text-align: center;
@@ -87,6 +87,7 @@ body.appear {
 
 header {
   background-color: black;
+  height: var(--nav-height);
 }
 
 header .container {
@@ -146,10 +147,6 @@ body [data-desktop-detector] {
   body [data-desktop-detector] {
     display: block;
   }
-}
-
-header {
-  height: var(--nav-height);
 }
 
 h1, h2, h3,
@@ -212,10 +209,6 @@ a:hover {
   color: var(--link-hover-color);
 }
 
-main .section {
-  position: relative;
-}
-
 /* buttons */
 a.button:any-link, button {
   background: #e72325;
@@ -233,14 +226,14 @@ a.button:any-link, button {
   cursor: pointer;
 }
 
-a.button:any-link:hover, button:hover {
-  background: #b33027;
-}
-
 a.button:hover, a.button:focus, button:hover, button:focus  {
   background-color: #b33027;
   cursor: pointer;
   text-decoration: none;
+}
+
+a.button:any-link:hover, button:hover {
+  background: #b33027;
 }
 
 button:disabled, button:disabled:hover {
@@ -311,28 +304,38 @@ main {
 }
 
 main .section {
+  position: relative;
   padding-left: 15px;
   padding-right: 15px;
-}
-
-main .default-content-wrapper {
-  text-align: center;
-  padding-top: 2rem;
 }
 
 main .default-content-wrapper h1, main .default-content-wrapper h2 {
   font-size: 32px;
   color: #111;
   font-weight: 600;
-  margin-bottom: 20px;
-  margin: 0;
+  margin: 0 0 20px;
 }
-main .section[data-size="bigger"] .default-content-wrapper h1, main .section[data-size="bigger"] .default-content-wrapper h2 {
-  font-size: 38px;
+
+.red-buy-button p {
+  padding: 0!important;
+  margin: 0!important;
+  color: white!important;
+  line-height: 11px;
+}
+
+main .default-content-wrapper {
+  text-align: center;
+  padding-top: 2rem;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 main .default-content-wrapper h1:last-of-type, main .default-content-wrapper h2:last-of-type {
   margin-bottom: 15px;
+}
+
+main .section[data-size="bigger"] .default-content-wrapper h1, main .section[data-size="bigger"] .default-content-wrapper h2 {
+  font-size: 38px;
 }
 
 main .default-content-wrapper p {
@@ -340,14 +343,11 @@ main .default-content-wrapper p {
   font-weight: normal;
   margin: 0;
 }
+
 main .default-content-wrapper p.button-container {
   margin: 1em 0;
 }
 
-main .default-content-wrapper {
-  padding-left: 15px;
-  padding-right: 15px;
-}
 main .default-content-wrapper img {
   margin-top: 2rem;
 }
@@ -359,6 +359,7 @@ main .default-content-wrapper img {
   letter-spacing: 0.7px;
   margin-bottom: 30px;
 }
+
 .topHeader .subheading {
   font-size: 32px;
   color: #172462;
@@ -391,11 +392,11 @@ main .section.highlight {
 }
 
 .greenTag {
-  background-color: rgb(47, 180, 62);
+  background-color: rgb(47 180 62);
   font-size: 11px;
   display: inline;
   padding: 2px 6px;
-  color: rgb(255, 255, 255);
+  color: rgb(255 255 255);
   border-radius: 10px;
   font-weight: bold;
   line-height: 15px;
@@ -405,15 +406,31 @@ main .section.highlight {
 .strong span {
   font-weight: bold;
 }
+
+.prices_box {
+  text-align: center;
+}
+
+.prices_box span {
+  display: block;
+  margin: 2px 0;
+}
+
+.prod-percent.green_bck_circle.bigger span {
+  display: block;
+  line-height: 21px;
+}
+
 .prod-percent.green_bck_pill {
-  background-color: rgb(47, 180, 62);
+  background-color: rgb(47 180 62);
   font-size: 18px;
   display: inline-block;
   padding: 5px 20px;
-  color: rgb(255, 255, 255);
+  color: rgb(255 255 255);
   border-radius: 15px;
   margin-top: 15px;
 }
+
 .prod-percent.green_bck_circle {
   position: relative;
   background: #2cb43d;
@@ -424,7 +441,7 @@ main .section.highlight {
   line-height: 81px;
   text-align: center;
   padding: 0;
-  color: rgb(255, 255, 255);
+  color: rgb(255 255 255);
   display: inline-block;
 }
 
@@ -434,6 +451,7 @@ main .section.highlight {
   font-weight: bold;
   line-height: 1;
 }
+
 .prod-percent.green_bck_circle.medium span:last-of-type {
   font-size: 13px;
   line-height: 14px;
@@ -458,44 +476,39 @@ main .section.highlight {
   right: 16%;
   top: 25%;
 }
-.prod-percent.green_bck_circle.bigger span {
-  display: block;
-  line-height: 21px;
-}
-.prod-percent.green_bck_circle.bigger span.bulina_text1 {
-  margin-top: 39px;
-}
-.prod-percent.green_bck_circle.bigger.has3txt span:nth-of-type(2) {
-  margin-top: 0;
-}
-.prod-percent.green_bck_circle.bigger.has3txt > span:first-of-type {
-  margin-top: 18%;
-}
-.prod-percent.green_bck_circle.bigger span.bulina_text {
-  font-weight: 500;
-  font-size: 15px;
-}
-.prod-percent.green_bck_circle.bigger span.bulina_text1 b {
-  font-size: 28px;
-}
+
 .prod-percent.green_bck_circle.bigger span:last-of-type {
   font-size: 13px;
 }
 
-.prod-percent.green_bck_circle.bigger span:before {
+.prod-percent.green_bck_circle.bigger span.bulina_text1 {
+  margin-top: 39px;
+}
+
+.prod-percent.green_bck_circle.bigger.has3txt span:nth-of-type(2) {
+  margin-top: 0;
+}
+
+.prod-percent.green_bck_circle.bigger.has3txt > span:first-of-type {
+  margin-top: 18%;
+}
+
+.prod-percent.green_bck_circle.bigger span.bulina_text {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.prod-percent.green_bck_circle.bigger span.bulina_text1 b {
+  font-size: 28px;
+}
+
+.prod-percent.green_bck_circle.bigger span::before {
   display: none;
 }
 
-.prices_box {
-  text-align: center;
-}
-.prices_box span {
-  display: block;
-  margin: 2px 0;
-}
 .prod-percent.green_txt {
   color: #2cb43d;
-  background-color: rgba(44, 180, 61, 0.2);
+  background-color: rgb(44 180 61 / 20%);
   border-radius: 8px;
   display: inline-block;
   font-size: 14px;
@@ -503,17 +516,20 @@ main .section.highlight {
   padding: 4px 8px;
   font-weight: bold;
 }
+
 .prod-oldprice {
   color: #3c3c3c;
   font-size: 14px;
   line-height: 14px;
   text-decoration: line-through;
 }
+
 .prod-newprice {
   font-size: 22px;
   line-height: 22px;
   font-weight: bold;
 }
+
 .prod-taxes {
   font-size: 11px;
 }
@@ -530,10 +546,10 @@ main .section.highlight {
   position: relative;
   font-size: 18px;
   font-weight: 400;
-  -webkit-transition: border 0.3s ease-in-out;
   transition: border 0.3s ease-in-out;
 }
-.selectorBox:after {
+
+.selectorBox::after {
   content: "";
   position: absolute;
   top: 13px;
@@ -542,13 +558,11 @@ main .section.highlight {
   height: 11px;
   border-bottom: 2px solid #3c3c3c;
   border-right: 2px solid #3c3c3c;
-  -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
 .selectorBox label {
-  font-family: roboto;
   font-size: 10px;
   font-weight: 700;
   line-height: 2.4;
@@ -561,22 +575,22 @@ main .section.highlight {
   left: 11px;
   z-index: 1;
   text-transform: uppercase;
-  -webkit-transition: color 0.3s ease-in-out;
   transition: color 0.3s ease-in-out;
 }
+
 .selectorBox select {
   display: block;
   padding: 5px 2%;
   font-size: 1pc;
   font-weight: 400;
   position: relative;
-  -webkit-transition: background-color 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
   width: 96%;
   border: 0 none;
   appearance: none;
   cursor: pointer;
 }
+
 .selectorBox select:focus {
   outline: none;
 }
@@ -598,16 +612,12 @@ main .section.highlight {
   margin: 5px 0;
   text-decoration: none;
 }
+
 .red-buy-button:hover {
   background: #b33027!important;
   text-decoration: none;
 }
-.red-buy-button p {
-  padding: 0!important;
-  margin: 0!important;
-  color: white!important;
-  line-height: 11px;
-}
+
 .red-buy-button p em {
   font-weight: 300;
   font-size: 14px;
@@ -620,17 +630,14 @@ main .section.highlight {
   left: 10px;
   display: none;
 }
+
 #fakeSelectors_bottom label {
   font-weight: bold;
   display: block;
   font-size: 13px;
   color: grey
 }
-#fakeSelectors_bottom label {
-  font-weight: bold;
-  display: block;
-  font-size: 13px;
-}
+
 #fakeSelectors_bottom select {
   width: 160px;
   padding: 2px;
@@ -647,15 +654,15 @@ main .section.highlight {
   .prod-percent.green_bck_circle.bigger {
     right: 1%;
   }
+
   .prod-percent.green_bck_circle.bigger span.bulina_text1 b {
     font-size: 22px;
   }
+
   .prod-percent.green_bck_circle.bigger span.bulina_text1 {
     margin-top: 28px;
   }
 }
-
-
 
 @media (max-width: 989px) {
   .prod-percent.green_bck_circle.bigger {
@@ -665,35 +672,35 @@ main .section.highlight {
 }
 
 @media (max-width: 768px) {
-  .prod-percent.green_bck_circle.bigger {
-
-  }
-}
-
-@media (max-width: 768px) {
   header  {
     border-bottom: 1px solid white;
   }
+
   header .container {
     padding: 10px;
   }
+
   .section {
     padding: 10px;
   }
+
   .red-buy-button {
     padding: 8px 3%;
     font-size: 13px;
   }
+
   .selectorBox {
     margin: 6px 0;
     padding: 5px;
     width: 100% !important;
   }
+
   .prod-percent.green_bck_pill {
     margin-left: 0!important;
     font-size: 16px;
     padding: 2px 11px;
   }
+
   .prod-percent.green_bck_circle.bigger {
     display: none;
   }
@@ -701,9 +708,11 @@ main .section.highlight {
   .section[data-backround="grey"] {
     padding: 1em 0;
   }
+
   .awards img {
     height: 65px;
   }
+
   .awards .title {
     margin-bottom: 0!important;
   }
@@ -711,12 +720,15 @@ main .section.highlight {
   main .default-content-wrapper {
     padding-top: 1em;
   }
+
   main .default-content-wrapper h1, main .default-content-wrapper h2 {
     font-size: 23px;
   }
+
   main .default-content-wrapper p {
     font-size: 16px;
   }
+
   .red-buy-button p em {
     font-size: 13px;
   }
@@ -724,10 +736,10 @@ main .section.highlight {
   .topHeader .heading {
     margin-bottom: 0;
   }
+
   .topHeader .subheading {
     font-size: 27px;
     line-height: 30px;
     margin-top: 10px;
   }
-
 }

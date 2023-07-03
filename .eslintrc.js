@@ -3,6 +3,11 @@ module.exports = {
   extends: 'airbnb-base',
   env: {
     browser: true,
+    jquery: true,
+  },
+  globals: {
+    StoreProducts: true,
+    adobeDataLayer: true,
   },
   parser: '@babel/eslint-parser',
   parserOptions: {
@@ -13,9 +18,11 @@ module.exports = {
   rules: {
     // allow reassigning param
     'no-param-reassign': [2, { props: false }],
+    'prefer-destructuring': ['error', { object: false, array: false }],
     'linebreak-style': ['error', 'unix'],
     'import/extensions': ['error', {
       js: 'always',
     }],
+    'max-len': 'off',
   },
 };
