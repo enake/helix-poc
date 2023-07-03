@@ -32,17 +32,22 @@ export const productAliases = (name) => {
   return name
 }
 
-export async function getIpCountry() {
+let cachedIpCountry;
+export const getIpCountry = async () => {
+  if (cachedIpCountry) {
+    return cachedIpCountry;
+  }
+
   try {
     const response = await fetch('https://pages.bitdefender.com/ip.json');
   
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
-      const ipCountry = response.headers.get('X-Cf-Ipcountry');
+      const ipCountry = response.headers.get('X-Cf-Ipcountry').toLowerCase();
   
       if (ipCountry) {
-        console.log('Your IP country is', ipCountry);
+        cachedIpCountry = ipCountry;
         return ipCountry;
       } else {
         throw new Error('X-Cf-Ipcountry header not found');
@@ -185,10 +190,11 @@ const loadLazy = async doc => {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  sendAnalyticsPageEvent();
+  loadHeader(doc.querySelector('header'));
+  
+  await sendAnalyticsPageEvent();
   sendAnalyticsUserInfo();
 
-  loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
