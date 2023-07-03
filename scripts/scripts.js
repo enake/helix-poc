@@ -128,10 +128,21 @@ const addFavIcon = (href) => {
 };
 
 // add new script file
-export const addScript = (src) => new Promise((resolve, reject) => {
+const addScript = (src, data) => new Promise((resolve, reject) => {
   const s = document.createElement('script');
 
   s.setAttribute('src', src);
+
+  if (typeof data === 'object' && data !== null) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in data) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (data.hasOwnProperty(key)) {
+        s.dataset[key] = data[key];
+      }
+    }
+  }
+
   s.addEventListener('load', resolve);
   s.addEventListener('error', reject);
 
