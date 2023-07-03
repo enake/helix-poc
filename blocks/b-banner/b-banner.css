@@ -19,8 +19,8 @@
 }
 
 .b-banner-container h1 {
-  font-size: 40px;
-  max-width: 595px;
+  font-size: 35px;
+  max-width: 610px;
   font-weight: normal;
   padding-bottom: 0;
   margin-bottom: 0;
@@ -28,7 +28,7 @@
 
 .b-banner-container h2 {
   font-weight: 700;
-  font-size: 40px;
+  font-size: 35px;
   max-width: 595px;
   margin-top: 0;
 }
