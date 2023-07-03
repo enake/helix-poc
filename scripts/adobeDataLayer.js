@@ -1,4 +1,4 @@
-import { instance, DEFAULT_LANGUAGE } from "./scripts.js";
+import { instance, DEFAULT_LANGUAGE, getIpCountry } from "./scripts.js";
 
 export function clearDataLayer() {
   window.adobeDataLayer = [];
@@ -101,7 +101,7 @@ const currentGMTDate = (() => {
 /**
  * Sends the page load started event to the Adobe Data Layer
  */
-export async function sendAnalyticsPageEvent() {
+export const sendAnalyticsPageEvent = async () => {
   const dl = window.adobeDataLayer = window.adobeDataLayer || [];
 
   const { pageName, sections } = getPageNameAndSections();
@@ -120,7 +120,7 @@ export async function sendAnalyticsPageEvent() {
         referringURL: getParamValue('ref') || getParamValue('adobe_mc') || document.referrer || '',
         serverName: 'hlx.live',
         language: navigator.language || navigator.userLanguage || DEFAULT_LANGUAGE,
-        geoRegion: 'ro',
+        geoRegion: await getIpCountry(),
         sysEnv: operatingSystem,
       },
       attributes: {
