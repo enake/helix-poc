@@ -7,6 +7,10 @@
   overflow: hidden;
 }
 
+.section.b-banner-container {
+  padding-right: 0;
+}
+
 .b-banner-container .b-banner-wrapper {
   position: absolute;
   left: 0;
@@ -35,6 +39,7 @@
   color: white;
   margin: 1em 0px 0px;
   margin-right: 10px;
+  max-width: 595px;
 }
 
 .b-banner-container .float-p p {
@@ -70,10 +75,16 @@
   width: 100%;
 }
 
+/* for lower devices */
+@media (max-width: 1199px) {
+  .b-banner-container .b-banner-wrapper {
+    padding-left: 15px;
+  }
+}
 
 /* for lower devices */
 @media (max-width: 992px) {
-
+  
 }
 
 @media (max-width: 768px) {
@@ -82,7 +93,7 @@
   }
   .b-banner-container .b-banner-wrapper {
     position: relative;
-    margin: 10px 0;
+    padding-left: 0;
   }
   .b-banner-container img {
     display: none;

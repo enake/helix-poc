@@ -63,7 +63,7 @@
 } */
 
 body {
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-xs);
   margin: 0;
   font-family: var(--body-font-family);
   line-height: 1.6;
@@ -114,7 +114,7 @@ header .container {
 /* todo: import bootstrap used classes in a more fashioned way */
 @media (min-width:1200px) {
   .container {
-    max-width: 1140px;
+    max-width: 1200px;
   }
 }
 
@@ -311,8 +311,8 @@ main {
 }
 
 main .section {
-  padding-left: 15px!important;
-  padding-right: 15px!important;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 main .default-content-wrapper {

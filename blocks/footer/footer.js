@@ -1,7 +1,9 @@
 import { loadFragment } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const fragment = await loadFragment('/footer');
+  // TODO: investigate what's the deal with fragments
+  //const fragment = await loadFragment('/footer');
+  const fragment = false;
   const footer = block.closest('.footer-wrapper');
 
   if (fragment) {
