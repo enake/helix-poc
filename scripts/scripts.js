@@ -40,12 +40,12 @@ export const getIpCountry = async () => {
 
   try {
     const response = await fetch('https://pages.bitdefender.com/ip.json');
-  
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
       const ipCountry = response.headers.get('X-Cf-Ipcountry').toLowerCase();
-  
+
       if (ipCountry) {
         cachedIpCountry = ipCountry;
         return ipCountry;
@@ -191,7 +191,7 @@ const loadLazy = async doc => {
   if (hash && element) element.scrollIntoView();
 
   loadHeader(doc.querySelector('header'));
-  
+
   await sendAnalyticsPageEvent();
   sendAnalyticsUserInfo();
 
@@ -963,18 +963,18 @@ const addVpnBD = async (data, show_vpn) => {
       save = StoreProducts.formatPrice(save, s_variation['currency_label'], s_variation['region_id'], s_variation['currency_iso']);
       new_price = StoreProducts.formatPrice(new_price, s_variation['currency_label'], s_variation['region_id'], s_variation['currency_iso']);
 
-          if (document.querySelector("." + buy_class)) {
-            document.querySelectorAll("." + disc_price_class).forEach(item => {
-              item.setAttribute('href', default_link);
-            })
-          }
-      
-          if (document.querySelector("." + disc_price_class)) {
-            document.querySelectorAll("." + disc_price_class).forEach(item => {
-              item.innerHTML = new_price;
-            })
-          }
-        }
+      if (document.querySelector("." + buy_class)) {
+        document.querySelectorAll("." + disc_price_class).forEach(item => {
+          item.setAttribute('href', default_link);
+        })
+      }
+
+      if (document.querySelector("." + disc_price_class)) {
+        document.querySelectorAll("." + disc_price_class).forEach(item => {
+          item.innerHTML = new_price;
+        })
+      }
+    }
 
     if (document.querySelector("." + buy_class)) {
       document.querySelectorAll("." + buy_class).forEach(item => {
@@ -988,17 +988,17 @@ const addVpnBD = async (data, show_vpn) => {
       })
     }
 
-        if (full_price != '' && document.querySelector(".old" + price_class)) {
-          document.querySelectorAll(".old" + price_class).forEach(item => {
-            item.innerHTML = full_price;
-          })
-        }
+    if (full_price != '' && document.querySelector(".old" + price_class)) {
+      document.querySelectorAll(".old" + price_class).forEach(item => {
+        item.innerHTML = full_price;
+      })
+    }
 
-        if (document.querySelector("." + save_class)) {
-          document.querySelectorAll("." + save_class).forEach(item => {
-            item.innerHTML = save;
-          })
-        }
+    if (document.querySelector("." + save_class)) {
+      document.querySelectorAll("." + save_class).forEach(item => {
+        item.innerHTML = save;
+      })
+    }
 
   };
 }
