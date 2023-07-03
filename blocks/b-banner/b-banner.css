@@ -9,6 +9,7 @@
 
 .section.b-banner-container {
   padding-right: 0;
+  padding-left: 0;
 }
 
 .b-banner-container .b-banner-wrapper {
@@ -32,6 +33,12 @@
   max-width: 595px;
   margin-top: 0;
 }
+
+.b-banner-container .w-full h1, .b-banner-container .w-full h2 {
+  max-width: 100%;
+}
+
+
 
 .b-banner-container p {
   font-size: 21px;
