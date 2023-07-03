@@ -17,7 +17,7 @@
 
 import { splitLastOccurrence, addScriptFile, showDiscoutOrFullPrice } from '../../scripts/scripts.js';
 
-export default function decorate(block) {
+export default function decorate() {
   const aliasNamesList = [];
   const allPs = document.querySelectorAll('p');
 
@@ -27,7 +27,8 @@ export default function decorate(block) {
       const initialText = item.innerText.replace("[", '').replace("]", '');
       const itemSplit = initialText.split("|");
       
-      if (item.innerText.indexOf("price") !== -1) { // if it's price: [type|alias_class extra_classes|default_value] - [price|newprice-elite|$570.49]
+       // if it's price: [type|alias_class extra_classes|default_value] - [price|newprice-elite|$570.49]
+      if (item.innerText.indexOf("price") !== -1) {
         // console.log("items: ", item.innerText);
         let className = itemSplit[1];
         let classNameSplit = className.split('-')[0];
@@ -35,7 +36,8 @@ export default function decorate(block) {
         item.innerHTML = '<span class="prod-'+ classNameSplit + ' ' + className + '">' + valueName + '</span>';
       }
 
-      if (item.innerText.indexOf("percent") !== -1) { // if it's percent: [type|alias_class extra_classeses|default_value|extra_text] - [percent|percent-elite_100 green_txt|30%|OFF]
+      // if it's percent: [type|alias_class extra_classeses|default_value|extra_text] - [percent|percent-elite_100 green_txt|30%|OFF]
+      if (item.innerText.indexOf("percent") !== -1) {
         // console.log("items: ", item.innerText);
         const classList = itemSplit[1];
         const [aliasClassName, extraClassName] = splitLastOccurrence(classList, ' ');
@@ -45,7 +47,8 @@ export default function decorate(block) {
         item.innerHTML = '<div class="prod-percent '+ extraClassName + '"><span class="'+ aliasClassName + '">' + valueName + '</span> '+ extraText +'</div>';
       }
 
-      if (item.innerText.indexOf("buylink") !== -1) { // if it's buylink: [type|alias_class|default_value] - [buylink|buylink-bus-security|10-1|BUY NOW]
+      // if it's buylink: [type|alias_class|default_value] - [buylink|buylink-bus-security|10-1|BUY NOW]
+      if (item.innerText.indexOf("buylink") !== -1) {
         // console.log("items: ", item.innerText);
         let className = itemSplit[1];
 
@@ -60,7 +63,8 @@ export default function decorate(block) {
         item.innerHTML = '<a class="red-buy-button prod-'+ classNameSplit + ' ' + className+'" href="#" title="Bitdefender">' + valueName + '</a>';
       }
 
-      if (item.innerText.indexOf("go2link") !== -1) { // if it's go2link: [type|classes|block_name|default_value] - [go2link|red-buy-button|B-ProductsWithSelectors|GET THE OFFER NOW]
+      // if it's go2link: [type|classes|block_name|default_value] - [go2link|red-buy-button|B-ProductsWithSelectors|GET THE OFFER NOW]/
+      if (item.innerText.indexOf("go2link") !== -1) {
         // console.log("items: ", item.innerText);
         let className = itemSplit[1];
         let go2block = itemSplit[2].toLowerCase();
@@ -70,7 +74,8 @@ export default function decorate(block) {
         item.innerHTML = item.innerHTML.replace(initialText, '');
       }
       
-      if (item.innerText.indexOf("selector") !== -1) { // if it's selector: [type|label_name|alias_class|intervalMIn-intervalMax|default_value] - [selector|devices|selector_devices|1-100|10]
+      // if it's selector: [type|label_name|alias_class|intervalMIn-intervalMax|default_value] - [selector|devices|selector_devices|1-100|10]
+      if (item.innerText.indexOf("selector") !== -1) {
         // console.log("items: ", item.innerText);
         let labelName = itemSplit[1];
         let uppercaseLabelName = labelName.charAt(0).toUpperCase() + labelName.slice(1);
@@ -198,11 +203,5 @@ export default function decorate(block) {
     }, 1000);
     
   }
-
-
-
-  /*[...block.children].forEach((row, k) => {
-    // console.log("row ",row);
-  });*/
 
 }
