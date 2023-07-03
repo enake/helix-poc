@@ -128,7 +128,7 @@ const addFavIcon = (href) => {
 };
 
 // add new script file
-const addScript = (src, data) => new Promise((resolve, reject) => {
+export const addScript = (src, data) => new Promise((resolve, reject) => {
   const s = document.createElement('script');
 
   s.setAttribute('src', src);
