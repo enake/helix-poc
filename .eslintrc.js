@@ -24,5 +24,6 @@ module.exports = {
       js: 'always',
     }],
     'max-len': 'off',
+    'no-console': 'off',
   },
 };

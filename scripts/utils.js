@@ -18,3 +18,29 @@ export const instance = (() => {
 
   return 'dev';
 })();
+
+let cachedIpCountry;
+export const getIpCountry = async () => {
+  if (cachedIpCountry) {
+    return cachedIpCountry;
+  }
+
+  try {
+    const response = await fetch('https://pages.bitdefender.com/ip.json');
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      const ipCountry = response.headers.get('X-Cf-Ipcountry').toLowerCase();
+
+      if (ipCountry) {
+        cachedIpCountry = ipCountry;
+        return ipCountry;
+      }
+      throw new Error('X-Cf-Ipcountry header not found');
+    }
+  } catch (error) {
+    console.log(`There has been a problem with your fetch operation: ${error.message}`);
+    return null;
+  }
+};

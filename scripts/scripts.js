@@ -14,7 +14,7 @@ import {
 } from './lib-franklin.js';
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
-import { DEFAULT_LANGUAGE, instance } from './utils.js';
+import { DEFAULT_LANGUAGE, getIpCountry, instance } from './utils.js';
 
 const productsList = [];
 
@@ -28,32 +28,6 @@ export const productAliases = (name) => {
 
   return newName;
 };
-
-let cachedIpCountry;
-export const getIpCountry = async () => {
-  if (cachedIpCountry) {
-    return cachedIpCountry;
-  }
-
-  try {
-    const response = await fetch('https://pages.bitdefender.com/ip.json');
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    } else {
-      const ipCountry = response.headers.get('X-Cf-Ipcountry').toLowerCase();
-
-      if (ipCountry) {
-        cachedIpCountry = ipCountry;
-        return ipCountry;
-      } else {
-        throw new Error('X-Cf-Ipcountry header not found');
-      }
-    }
-  } catch (error) {
-    console.log('There has been a problem with your fetch operation: ' + error.message);
-  }
-}
 
 // TODO: use the function from adobeDataLayer.js
 export const getParam = (param) => {
@@ -184,14 +158,12 @@ const loadLazy = async (doc) => {
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  addFavIcon(`https://www.bitdefender.com/favicon.ico`);
+  addFavIcon('https://www.bitdefender.com/favicon.ico');
 
-  addScript('https://consent.cookiebot.com/uc.js', { 'culture': 'en', 'cbid': '4a55b566-7010-4633-9b03-7ba7735be0b6' });
+  addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b566-7010-4633-9b03-7ba7735be0b6' });
 
-  if (instance === 'prod')
-    addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js');
-  else
-    addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js');
+  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js');
+  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js');
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
@@ -1003,7 +975,7 @@ const loadPage = async () => {
   await loadLazy(document);
   loadDelayed();
   getIpCountry().then(
-    ipCountry => initSelectors(ipCountry)
+    (ipCountry) => initSelectors(ipCountry),
   );
 
   // adding IDs on each section

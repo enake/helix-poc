@@ -1,5 +1,4 @@
-import { DEFAULT_LANGUAGE, instance } from './utils.js';
-import { getIpCountry } from "./scripts.js";
+import { DEFAULT_LANGUAGE, getIpCountry, instance } from './utils.js';
 
 export function clearDataLayer() {
   window.adobeDataLayer = [];
@@ -133,7 +132,7 @@ export const sendAnalyticsPageEvent = async () => {
       },
     },
   });
-}
+};
 
 /*
  * Sends the user detected event to the Adobe Data Layer
