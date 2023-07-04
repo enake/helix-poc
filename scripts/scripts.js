@@ -14,7 +14,7 @@ import {
 } from './lib-franklin.js';
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
-import { DEFAULT_LANGUAGE, getIpCountry, instance } from './utils.js';
+import { DEFAULT_LANGUAGE, instance } from './utils.js';
 
 const productsList = [];
 
@@ -985,9 +985,11 @@ const loadPage = async () => {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
-  getIpCountry().then(
-    (ipCountry) => initSelectors(ipCountry),
-  );
+  initSelectors();
+
+  // getIpCountry().then(
+  //   (ipCountry) => initSelectors(ipCountry),
+  // );
 
   // adding IDs on each section
   document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
