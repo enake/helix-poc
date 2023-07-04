@@ -128,11 +128,14 @@ const addFavIcon = (href) => {
 };
 
 // add new script file
-export const addScript = (src, data = {}, type = 'async') => new Promise((resolve, reject) => {
+export const addScript = (src, data = {}, type = undefined) => new Promise((resolve, reject) => {
   const s = document.createElement('script');
 
   s.setAttribute('src', src);
-  s.setAttribute(type, true);
+
+  if (type) {
+    s.setAttribute(type, true);
+  }
 
   if (typeof data === 'object' && data !== null) {
     // eslint-disable-next-line no-restricted-syntax
@@ -172,10 +175,10 @@ const loadLazy = async (doc) => {
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon('https://www.bitdefender.com/favicon.ico');
 
-  addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b566-7010-4633-9b03-7ba7735be0b6' });
+  addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b566-7010-4633-9b03-7ba7735be0b6' }, 'defer');
 
-  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js');
-  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js');
+  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
+  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
@@ -1054,7 +1057,8 @@ initBaseUri();
 
 loadPage();
 
+// todo optimize bundle size
+addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', {}, 'defer');
+
 await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
 addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
-// todo optimize bundle size
-addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js');
