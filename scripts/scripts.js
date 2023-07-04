@@ -1058,7 +1058,7 @@ initBaseUri();
 loadPage();
 
 // todo optimize bundle size
-addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', {}, 'defer');
+// addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', {}, 'defer');
 
 await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
 addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
