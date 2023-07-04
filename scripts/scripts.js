@@ -14,7 +14,7 @@ import {
 } from './lib-franklin.js';
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
-import { DEFAULT_LANGUAGE, instance } from './utils.js';
+import { addScript, DEFAULT_LANGUAGE, instance } from './utils.js';
 
 const productsList = [];
 
@@ -126,32 +126,6 @@ const addFavIcon = (href) => {
     document.getElementsByTagName('head')[0].appendChild(link);
   }
 };
-
-// add new script file
-export const addScript = (src, data = {}, type = undefined) => new Promise((resolve, reject) => {
-  const s = document.createElement('script');
-
-  s.setAttribute('src', src);
-
-  if (type) {
-    s.setAttribute(type, true);
-  }
-
-  if (typeof data === 'object' && data !== null) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key in data) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (data.hasOwnProperty(key)) {
-        s.dataset[key] = data[key];
-      }
-    }
-  }
-
-  s.addEventListener('load', resolve);
-  s.addEventListener('error', reject);
-
-  document.body.appendChild(s);
-});
 
 /**
  * Loads everything that doesn't need to be delayed.
@@ -1054,7 +1028,7 @@ loadPage();
 
 addScript('/scripts/vendor/bootstrap/bootstrap.bundle.js', {}, 'defer');
 
-await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
+addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
 addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'defer');
 
 // addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b566-7010-4633-9b03-7ba7735be0b6' }, 'defer');

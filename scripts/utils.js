@@ -51,3 +51,26 @@ export const getIpCountry = async () => {
   }
 };
 */
+
+// add new script file
+export const addScript = (src, data = {}, type = undefined) => {
+  const s = document.createElement('script');
+
+  s.setAttribute('src', src);
+
+  if (type) {
+    s.setAttribute(type, true);
+  }
+
+  if (typeof data === 'object' && data !== null) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in data) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (data.hasOwnProperty(key)) {
+        s.dataset[key] = data[key];
+      }
+    }
+  }
+
+  document.body.appendChild(s);
+};
