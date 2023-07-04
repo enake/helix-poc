@@ -1,4 +1,4 @@
-import { DEFAULT_LANGUAGE, getIpCountry, instance } from './utils.js';
+import { DEFAULT_LANGUAGE, instance } from './utils.js';
 
 export function clearDataLayer() {
   window.adobeDataLayer = [];
@@ -118,7 +118,7 @@ export const sendAnalyticsPageEvent = async () => {
         referringURL: getParamValue('ref') || getParamValue('adobe_mc') || document.referrer || '',
         serverName: 'hlx.live',
         language: navigator.language || navigator.userLanguage || DEFAULT_LANGUAGE,
-        geoRegion: await getIpCountry(),
+        // geoRegion: await getIpCountry(), // TODO: uncomment when we have a way to get the user country
         sysEnv: operatingSystem,
       },
       attributes: {

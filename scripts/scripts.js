@@ -985,9 +985,11 @@ const loadPage = async () => {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
-  getIpCountry().then(
-    (ipCountry) => initSelectors(ipCountry),
-  );
+  initSelectors();
+  
+  // getIpCountry().then(
+  //   (ipCountry) => initSelectors(ipCountry),
+  // );
 
   // adding IDs on each section
   document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {

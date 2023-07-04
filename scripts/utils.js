@@ -19,6 +19,10 @@ export const instance = (() => {
   return 'dev';
 })();
 
+/**
+ * Returns the geoIP country code. Very costly on performance, use with caution.
+ * @returns {String}
+ **/
 let cachedIpCountry;
 export const getIpCountry = async () => {
   if (cachedIpCountry) {
