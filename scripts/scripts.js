@@ -175,11 +175,6 @@ const loadLazy = async (doc) => {
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon('https://www.bitdefender.com/favicon.ico');
 
-  addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b566-7010-4633-9b03-7ba7735be0b6' }, 'defer');
-
-  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
-  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
-
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
@@ -196,9 +191,9 @@ const loadDelayed = () => {
 };
 
 // clean cleanBlockDOM
-export const cleanBlockDOM = (element) => {
-  document.querySelector(element).innerHTML = '';
-};
+// export const cleanBlockDOM = (element) => {
+//   document.querySelector(element).innerHTML = '';
+// };
 
 // create a DOM element
 // export const createDomElement = (parent, tagName, idName, className, content, addAttr) => {
@@ -281,13 +276,13 @@ export async function loadFragment(path) {
 // };
 
 // split only the last element
-export const splitLastOccurrence = (string, element) => {
-  const lastIndex = string.indexOf(element);
-  const before = string.slice(0, lastIndex);
-  const after = string.slice(lastIndex + 1);
-
-  return [before, after];
-};
+// export const splitLastOccurrence = (string, element) => {
+//   const lastIndex = string.indexOf(element);
+//   const before = string.slice(0, lastIndex);
+//   const after = string.slice(lastIndex + 1);
+//
+//   return [before, after];
+// };
 
 // Helper function to find the closest parent with a specific class
 const findClosestParentByClass = (element, className) => {
@@ -1060,4 +1055,9 @@ loadPage();
 addScript('/scripts/vendor/bootstrap/bootstrap.bundle.js', {}, 'defer');
 
 await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
-addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
+addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'defer');
+
+addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b566-7010-4633-9b03-7ba7735be0b6' }, 'defer');
+
+if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
+else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
