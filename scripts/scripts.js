@@ -128,10 +128,11 @@ const addFavIcon = (href) => {
 };
 
 // add new script file
-export const addScript = (src, data) => new Promise((resolve, reject) => {
+export const addScript = (src, data = {}, type = 'async') => new Promise((resolve, reject) => {
   const s = document.createElement('script');
 
   s.setAttribute('src', src);
+  s.setAttribute(type, true);
 
   if (typeof data === 'object' && data !== null) {
     // eslint-disable-next-line no-restricted-syntax
@@ -488,9 +489,11 @@ const addVpnBD = (data, showVpn) => {
   if (document.querySelector(`.checkboxVPN-${productId}`)) {
     checkboxId = document.querySelector(`.checkboxVPN-${productId}`).getAttribute('data-id');
   }
-  if (!$(`.checkboxVPN-${productId}`).is(':checked')) {
-    $(`.${showVpn}`).hide();
-    checkboxId = $(this).attr('data-id');
+
+  const checkboxNotChecked = !document.querySelector(`.checkboxVPN-${productId}`).checked;
+  if (checkboxNotChecked) {
+    document.querySelector(`.${showVpn}`).style.display = 'none';
+    checkboxId = this?.getAttribute('data-id');
   }
 
   const changeHandler = () => {
@@ -512,14 +515,22 @@ const addVpnBD = (data, showVpn) => {
         }
       });
 
-      if (document.querySelector(`.${showVpn}`)) {
-        document.querySelector(`.${showVpn}`).style.display = 'block';
+      const showVpnEl = document.querySelector(`.${showVpn}`);
+
+      if (showVpnEl) {
+        showVpnEl.style.display = 'block';
       }
-      if (document.querySelector(`.${savevpnClass}`)) {
-        document.querySelector(`.${savevpnClass}`).style.display = 'block';
+
+      const saveVpnEl = document.querySelector(`.${savevpnClass}`);
+
+      if (saveVpnEl) {
+        saveVpnEl.style.display = 'block';
       }
-      if (document.querySelector(`.show_vpn-${productId}`)) {
-        document.querySelector(`.show_vpn-${productId}`).style.display = 'block';
+
+      const showVpnProductIdEl = document.querySelector(`.show_vpn-${productId}`);
+
+      if (showVpnProductIdEl) {
+        showVpnProductIdEl.style.display = 'block';
       }
 
       // document.querySelector('.' + save_class).style.display = 'none';
@@ -806,8 +817,11 @@ const addVpnBD = (data, showVpn) => {
         save = Math.round(parseFloat(fullPrice) - parseFloat(priceVpn));
         justVpn = parseFloat(vb.discount.discounted_price.replace('$', '').replace('â‚¬', '').replace('Â£', '').replace('R$', '')
           .replace('AUD', ''));
-        if (document.querySelector(`.show_save_${data.config.product_id}`)) {
-          document.querySelector(`.show_save_${data.config.product_id}`).style.display = 'block';
+
+        const showSaveProductIdEl = document.querySelector(`.show_save_${data.config.product_id}`);
+
+        if (showSaveProductIdEl) {
+          showSaveProductIdEl.style.display = 'block';
         }
       } else {
         justVpn = parseFloat(vb.price.replace('$', '').replace('â‚¬', '').replace('Â£', '').replace('R$', '')
@@ -838,8 +852,10 @@ const addVpnBD = (data, showVpn) => {
         });
       }
 
-      if (document.querySelector(`.price_vpn-${productId}`)) {
-        document.querySelector(`.price_vpn-${productId}`).innerHTML = justVpn;
+      const priceVpnEl = document.querySelector(`.price_vpn-${productId}`);
+
+      if (priceVpnEl) {
+        priceVpnEl.innerHTML = justVpn;
       }
     } else { // not checked
       document.querySelectorAll(`.checkboxVPN-${productId}`).forEach((item) => {
@@ -848,11 +864,16 @@ const addVpnBD = (data, showVpn) => {
         }
       });
 
-      if (document.querySelector(`.${showVpn}`)) {
-        document.querySelector(`.${showVpn}`).style.display = 'none';
+      const showVpnEl = document.querySelector(`.${showVpn}`);
+
+      if (showVpnEl) {
+        showVpnEl.style.display = 'none';
       }
-      if (document.querySelector(`.show_vpn-${productId}`)) {
-        document.querySelector(`.show_vpn-${productId}`).style.display = 'none';
+
+      const showVpnProductIdEl = document.querySelector(`.show_vpn-${productId}`);
+
+      if (showVpnProductIdEl) {
+        showVpnProductIdEl.style.display = 'none';
       }
 
       if (data.selected_variation.discount) {
@@ -866,8 +887,11 @@ const addVpnBD = (data, showVpn) => {
         fullPrice = Math.round(parseFloat(data.selected_variation.price) * 100) / 100;
         newPrice = fullPrice;
         save = 0;
-        if (document.querySelector(`.show_save_${data.config.product_id}`)) {
-          document.querySelector(`.show_save_${data.config.product_id}`).style.display = 'none';
+
+        const showSaveProductIdEl = document.querySelector(`.show_save_${data.config.product_id}`);
+
+        if (showSaveProductIdEl) {
+          showSaveProductIdEl.style.display = 'none';
         }
       }
 
@@ -1031,6 +1055,6 @@ initBaseUri();
 loadPage();
 
 await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
-await addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
+addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
 // todo optimize bundle size
-await addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js');
+addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js');
