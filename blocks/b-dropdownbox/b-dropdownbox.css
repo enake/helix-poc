@@ -40,10 +40,6 @@
   background-color: #f6f6f6;
 }
 
-.b-dropdownbox-container .block > div > div:nth-child(1) {
-  background-color: #e4f2ff;
-}
-
 .b-dropdownbox-container .block > div:not(:first-child) > div:first-child {
   display: flex;
   align-items: center;
