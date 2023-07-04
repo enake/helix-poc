@@ -10,11 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-/* load components style */
-
-@import url("/components/column/column.css");
-@import url("/components/review/review.css");
-
  :root {
   /* colors */
   --link-color: #000;
