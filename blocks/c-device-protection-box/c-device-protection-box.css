@@ -1,6 +1,7 @@
 .c-device-protection-box-wrapper {
     margin: 3em auto!important;
 }
+
 .c-device-protection-box-container {
     padding: 40px 0;
 }
@@ -44,10 +45,12 @@
         margin-left: 0;
     }
 }
+
 @media (max-width: 768px) {
     .c-device-protection-box-container {
         padding: 1em 0;
     }
+
     .c-device-protection-box-wrapper {
         margin: 1em auto!important;
     }

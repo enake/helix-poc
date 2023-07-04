@@ -1,8 +1,6 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable */
-
 export default class SvgLoaderComponent {
   #svgName; // String
+
   #style; // String
 
   /*
@@ -12,35 +10,38 @@ export default class SvgLoaderComponent {
   * */
   constructor(svgName, svgColor = 'black', svgSize = 'small') {
     this.#svgName = svgName;
-    this.#style = this.#reduceStyle(svgColor, svgSize);
+    this.#style = SvgLoaderComponent.#reduceStyle(svgColor, svgSize);
   }
 
   static #generateSvgSize(svgSize) {
-    switch(svgSize) {
+    const defaultSmall = {
+      width: '36px',
+      height: '36px',
+    };
+
+    switch (svgSize) {
       case 'small':
-        return {
-          width: '36px',
-          height: '36px',
-        };
+        return defaultSmall;
 
       case 'medium':
         return {
           width: '60px',
           height: '60px',
         };
+
+      default: return defaultSmall;
     }
   }
 
-  #reduceStyle(svgColor, svgSize) {
+  static #reduceStyle(svgColor, svgSize) {
     const styleObj = {
       color: svgColor,
-      ...SvgLoaderComponent.#generateSvgSize(svgSize)
+      ...SvgLoaderComponent.#generateSvgSize(svgSize),
     };
 
     return Object
       .keys(styleObj)
-      .reduce((inlineStyleString, styleProperty) =>
-        `${inlineStyleString} ${styleProperty}: ${styleObj[styleProperty]};`, '')
+      .reduce((inlineStyleString, styleProperty) => `${inlineStyleString} ${styleProperty}: ${styleObj[styleProperty]};`, '');
   }
 
   render() {
@@ -69,6 +70,7 @@ export default class SvgLoaderComponent {
       case 'gauge-indicator':
         return `<svg style="${this.#style}" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="gauge-indicator" role="img" viewBox="0 0 82 82" xmlns="http://www.w3.org/2000/svg"><path d="M41,0C18.4,0,0,18.4,0,41s18.4,41,41,41s41-18.4,41-41S63.6,0,41,0z M41,78C20.6,78,4,61.4,4,41S20.6,4,41,4 s37,16.6,37,37S61.4,78,41,78z" fill="#050e81"></path><path d="M66.7,48H51.9c-0.4-2.1-1.4-4-2.8-5.5l14.1-20.8c0.6-0.9,0.4-2.2-0.5-2.8c-0.9-0.6-2.2-0.4-2.8,0.5L45.8,40.1 c-1.4-0.7-3.1-1.1-4.8-1.1c-5.4,0-9.9,3.9-10.8,9H15.3c-1.1,0-2,0.9-2,2s0.9,2,2,2h16.6c0.1,0,0.1,0,0.2,0c1.1,0,2-0.9,2-2 c0-3.9,3.1-7,7-7c3.8,0,7,3.1,7,7c0,0,0,0,0,0c0,0.3,0.1,0.5,0.2,0.8c0.3,0.7,1,1.2,1.8,1.2c0.1,0,0.1,0,0.2,0h16.4 c1.1,0,2-0.9,2-2S67.8,48,66.7,48z" fill="url(#svg-gradient) #203694"></path><circle cx="14" cy="41" fill="#050e81" r="4"></circle><circle cx="69" cy="41" fill="#050e81" r="4"></circle><circle cx="41" cy="14" fill="#050e81" r="4"></circle><circle cx="22" cy="22" fill="#050e81" r="4"></circle><path d="M57.9,55.9H24.2c-1.1,0-2,0.9-2,2s0.9,2,2,2h33.7c1.1,0,2-0.9,2-2S59,55.9,57.9,55.9z" fill="#050e81"></path></svg>`;
 
+      default: return '';
     }
   }
 }

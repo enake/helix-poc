@@ -2,11 +2,13 @@
 .c-top-comparative-with-text-container {
     padding-top: 5em!important;
 }
+
 .c-top-comparative-with-text {
     display: flex;
     justify-content: space-between;
     font-size: 18px;
 }
+
 .c-top-comparative-with-text > div {
     width: 21%;
     position: relative;
@@ -23,9 +25,15 @@
     font-size: 18px;
     margin-top: 20px;
 }
+
 .c-top-comparative-with-text > div:nth-child(3) {
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.35);
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 35%);
     border-top-color: #e60093;
+}
+
+.c-top-comparative-with-text > div picture img {
+    height: 20px;
+    margin: 0 5px;
 }
 
 .c-top-comparative-with-text > div img:first-of-type {
@@ -56,10 +64,6 @@
     font-size: 14px;
     line-height: 14px;
 }
-.c-top-comparative-with-text > div picture img {
-    height: 20px;
-    margin: 0 5px;
-}
 
 .c-top-comparative-with-text > div .prod-percent {
     margin-top: -6em;
@@ -67,6 +71,7 @@
     float: left;
     clear: both;
 }
+
 .c-top-comparative-with-text > div .prod-percent span {
     display: block;
     line-height: 26px;
@@ -82,15 +87,18 @@
     font-size: 16px;
     margin: 0;
 }
+
 .c-top-comparative-with-text > div p:nth-of-type(3) {
     font-size: 14px;
     border-top: 1px dashed #ccc;
     padding: 10px 0 0;
     margin: 10px 0 0;
 }
+
 .c-top-comparative-with-text > div div.prices_box  {
     text-align: left;
 }
+
 .c-top-comparative-with-text > div div.prices_box span.prod-oldprice {
     font-size: 18px;
     line-height: 1.3;
@@ -98,14 +106,17 @@
     color: #999;
     text-decoration: line-through;
 }
+
 .c-top-comparative-with-text > div div.prices_box span.prod-newprice {
     font-weight: bold;
     line-height: 1.1;
     font-size: 24px;
 }
+
 .c-top-comparative-with-text > div p:nth-of-type(4) {
     margin-top: 10px;
 }
+
 .c-top-comparative-with-text > div p:nth-of-type(4), .c-top-comparative-with-text > div p:nth-of-type(5), .c-top-comparative-with-text > div p:nth-of-type(5) a {
     color: #999;
     font-size: 12px;
@@ -132,25 +143,31 @@
     margin: 10px 0;
     text-align: left;
 }
+
 .c-top-comparative-with-text > div table:nth-of-type(1) p span {
     margin-left: 6px;
 }
-.c-top-comparative-with-text > div table:nth-of-type(1) p:nth-of-type(3):after {
+
+.c-top-comparative-with-text > div table:nth-of-type(1) p:nth-of-type(3)::after {
     display: none;
 }
+
 .c-top-comparative-with-text > div table:nth-of-type(1) p i {
     float: right;
 }
+
 .c-top-comparative-with-text > div table:nth-of-type(1) p span, .c-top-comparative-with-text > div table:nth-of-type(1) p i {
     color: #666;
     font-size: 16px;
     font-style: normal;
     font-weight: normal;
 }
+
 .c-top-comparative-with-text > div table:nth-of-type(1) p:last-of-type {
     font-size: 24px;
     color: #000;
 }
+
 .c-top-comparative-with-text > div table:nth-of-type(1) p:nth-of-type(3) span {
     color: #fff;
     background: #20b53e;
@@ -160,12 +177,14 @@
     display: inline-block;
     text-align: center;
 }
+
 .c-top-comparative-with-text > div table:nth-of-type(1) p:last-of-type span {
     font-size: 20px;
     font-weight: bold;
     line-height: 1.2;
     color: black;
 }
+
 .c-top-comparative-with-text > div table:nth-of-type(1) p:nth-of-type(4) {
     min-height: auto;
     border: 0 none;
@@ -185,6 +204,7 @@
     align-items: center;
     cursor: pointer;
 }
+
 .c-top-comparative-with-text > div table:last-of-type a {
     width: 100%;
     text-align: center;
@@ -195,18 +215,22 @@
 .c-top-comparative-with-text-container.has4boxes .c-top-comparative-with-text-wrapper {
     max-width: 87%;
 }
+
 .c-top-comparative-with-text-container.has4boxes .c-top-comparative-with-text > div {
     width: 24%;
     padding: 1%;
     border: 0 none;
     overflow: hidden;
 }
+
 .c-top-comparative-with-text-container.has4boxes .c-top-comparative-with-text > div p:nth-of-type(1) {
     margin-top: 40px;
 }
+
 .c-top-comparative-with-text-container.has4boxes .c-top-comparative-with-text > div div.green_tag {
     padding: 9px 0;
 }
+
 .c-top-comparative-with-text-container.has4boxes .c-top-comparative-with-text > div h2 {
     font-size: 30px;
     line-height: 27px;
@@ -219,13 +243,16 @@
         max-width: 1450px;
     }
 }
+
 @media (max-width: 989px) {
     .c-top-comparative-with-text-container.has4boxes .c-top-comparative-with-text {
         display: block;
     }
+
     .c-top-comparative-with-text-container.has4boxes .c-top-comparative-with-text-wrapper {
         max-width: 100%!important;
     }
+
     .c-top-comparative-with-text-container.has4boxes .c-top-comparative-with-text > div {
         width: 100%!important;
         padding: 3%!important;
@@ -233,48 +260,53 @@
         padding-bottom: 10px!important;
     }
 }
+
 @media (max-width: 768px) {
     .c-top-comparative-with-text {
         display: block;
     }
+
     .c-top-comparative-with-text > div{
         width: 100%!important;
         padding: 3%!important;
         margin-bottom: 1em!important;
         padding-bottom: 10px!important;
     }
+
+    .c-top-comparative-with-text > div p:nth-of-type(7) {
+        margin: 0;
+        padding-bottom: 10px;
+    }
+
     .c-top-comparative-with-text > div:nth-child(1) {
         padding: 0!important;
     }
+
     .c-top-comparative-with-text > div:not(:nth-child(1)) {
         width: 33%!important;
         float: left;
         padding: 1%!important;
     }
+
     .c-top-comparative-with-text > div h2 {
         font-size: 24px;
         line-height: 23px;
     }
+
     .c-top-comparative-with-text > div p:nth-of-type(2) {
         font-size: 13px;
     }
+
     .c-top-comparative-with-text > div div.buybtn_box {
         height: auto;
     }
+
     .c-top-comparative-with-text > div:not(:first-child) p:nth-of-type(1) {
         margin-top: 7px;
         font-size: 14px;
     }
-    .c-top-comparative-with-text > div p:nth-of-type(7) {
-        margin: 0;
-        padding-bottom: 10px;
-    }
+
     .c-top-comparative-with-text-container {
         padding-top: 1em!important;
     }
-}
-
-@media (max-width: 576px) {
-    
-    
 }

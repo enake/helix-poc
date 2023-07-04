@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable */
-
 /*
   Information:
 
@@ -11,7 +8,7 @@
   Samples:
   - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/ultimate-flv1.html
 */
-import SvgLoaderComponent from "/components/svg-loader/svg-loader.js";
+import SvgLoaderComponent from '../../components/svg-loader/svg-loader.js';
 
 export default function decorate(block) {
   // todo export this to reusable utils
@@ -31,16 +28,16 @@ export default function decorate(block) {
     <div class="container">
       <div class="row">
         <div class="col-12 col-lg-6">
-          ${ pictureEl.innerHTML }
+          ${pictureEl.innerHTML}
         </div>
         <div class="col-12 col-lg-6 mt-3">
-          ${ rowText.map(row => `
+          ${rowText.map((row) => `
             <div class="d-flex row-box">
-              <div>${ new SvgLoaderComponent(row.children[0].innerText, svgColor, svgSize).render() }</div>
-              <div class="ms-3">${ row.children[1].innerHTML }</div>
+              <div>${new SvgLoaderComponent(row.children[0].innerText, svgColor, svgSize).render()}</div>
+              <div class="ms-3">${row.children[1].innerHTML}</div>
             </div>
-          `).join('') }
-           ${ linkEl.outerHTML }
+          `).join('')}
+           ${linkEl.outerHTML}
         </div>
       </div>
     </div>

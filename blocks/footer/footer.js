@@ -1,8 +1,8 @@
-import { loadFragment } from '../../scripts/scripts.js';
+// import { loadFragment } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // TODO: investigate what's the deal with fragments
-  //const fragment = await loadFragment('/footer');
+  // const fragment = await loadFragment('/footer');
   const fragment = false;
   const footer = block.closest('.footer-wrapper');
 
@@ -13,8 +13,5 @@ export default async function decorate(block) {
     }
   }
 
-  footer.innerHTML = footer.innerHTML.replace("[year]", new Date().getFullYear());
-
+  footer.innerHTML = footer.innerHTML.replace('[year]', new Date().getFullYear());
 }
-
-

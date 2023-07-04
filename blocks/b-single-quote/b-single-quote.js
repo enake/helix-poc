@@ -5,8 +5,6 @@ export default function decorate(block) {
   const [pictureElement] = block.children[3].getElementsByTagName('picture');
   let isDesktopView = isView('desktop');
 
-  render();
-
   function render() {
     block.innerHTML = `
     <div class="main-wrapper">
@@ -39,4 +37,6 @@ export default function decorate(block) {
 
     resizeObserver.observe(ref);
   }
+
+  render();
 }

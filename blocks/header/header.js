@@ -1,6 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
+// import { getMetadata } from '../../scripts/lib-franklin.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -93,8 +91,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  */
 export default async function decorate(block) {
   // fetch nav content
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
+  // const navMeta = getMetadata('nav');
+  // const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
   block.className = 'lp-header py-3';
   block.innerHTML = `
     <div class="container">
