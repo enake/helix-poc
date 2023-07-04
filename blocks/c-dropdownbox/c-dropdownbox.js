@@ -9,6 +9,10 @@
 */
 
 export default function decorate(block) {
+  const parentSelector = block.closest('.section');
+  const metaData = parentSelector.dataset;
+  const { bottomText } = metaData;
+
   // search for [] to replace with span greeenTag class
   const getFirstDivs = block.querySelectorAll('.c-dropdownbox-container .block > div > div:nth-child(1)');
   [].forEach.call(getFirstDivs, (item) => {
@@ -23,6 +27,14 @@ export default function decorate(block) {
       tab.parentNode.classList.toggle('inactive');
     });
   });
+
+  // add bottom text if is set
+  if (typeof metaData.bottomText !== 'undefined') {
+    const bottomLine = document.createElement('p');
+    bottomLine.innerHTML = metaData.bottomText;
+    bottomLine.classList = 'bottomText'
+    block.append(bottomLine)
+  }
 
   // if 3rd div does not exists => has 2 elements
   if (!block.querySelector('.c-dropdownbox-container .block > div > div:nth-child(3)')) {

@@ -131,6 +131,11 @@
   transform: rotate(180deg);
 }
 
+.c-dropdownbox-container .block .bottomText {
+  color: black;
+  font-size: 16px;
+  margin: 1em 0;
+}
 
 /* for mobile */
 @media (max-width: 768px) {
