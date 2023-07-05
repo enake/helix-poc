@@ -5,7 +5,6 @@ import {
   loadFooter,
   decorateButtons,
   decorateIcons,
-  decorateIcons2,
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
