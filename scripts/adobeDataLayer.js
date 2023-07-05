@@ -1,9 +1,5 @@
 import { DEFAULT_LANGUAGE, instance } from './utils.js';
 
-export function clearDataLayer() {
-  window.adobeDataLayer = [];
-}
-
 /**
  * Formats a number to have 2 digits
  * @returns {String}

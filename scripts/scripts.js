@@ -14,7 +14,7 @@ import {
 } from './lib-franklin.js';
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
-import { DEFAULT_LANGUAGE, instance } from './utils.js';
+import { addScript, DEFAULT_LANGUAGE } from './utils.js';
 
 const productsList = [];
 
@@ -127,28 +127,6 @@ const addFavIcon = (href) => {
   }
 };
 
-// add new script file
-export const addScript = (src, data) => new Promise((resolve, reject) => {
-  const s = document.createElement('script');
-
-  s.setAttribute('src', src);
-
-  if (typeof data === 'object' && data !== null) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key in data) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (data.hasOwnProperty(key)) {
-        s.dataset[key] = data[key];
-      }
-    }
-  }
-
-  s.addEventListener('load', resolve);
-  s.addEventListener('error', reject);
-
-  document.body.appendChild(s);
-});
-
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -171,11 +149,6 @@ const loadLazy = async (doc) => {
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon('https://www.bitdefender.com/favicon.ico');
 
-  addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b566-7010-4633-9b03-7ba7735be0b6' });
-
-  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js');
-  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js');
-
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
@@ -192,9 +165,9 @@ const loadDelayed = () => {
 };
 
 // clean cleanBlockDOM
-export const cleanBlockDOM = (element) => {
-  document.querySelector(element).innerHTML = '';
-};
+// export const cleanBlockDOM = (element) => {
+//   document.querySelector(element).innerHTML = '';
+// };
 
 // create a DOM element
 // export const createDomElement = (parent, tagName, idName, className, content, addAttr) => {
@@ -277,13 +250,13 @@ export async function loadFragment(path) {
 // };
 
 // split only the last element
-export const splitLastOccurrence = (string, element) => {
-  const lastIndex = string.indexOf(element);
-  const before = string.slice(0, lastIndex);
-  const after = string.slice(lastIndex + 1);
-
-  return [before, after];
-};
+// export const splitLastOccurrence = (string, element) => {
+//   const lastIndex = string.indexOf(element);
+//   const before = string.slice(0, lastIndex);
+//   const after = string.slice(lastIndex + 1);
+//
+//   return [before, after];
+// };
 
 // Helper function to find the closest parent with a specific class
 const findClosestParentByClass = (element, className) => {
@@ -509,9 +482,11 @@ const addVpnBD = (data, showVpn) => {
   if (document.querySelector(`.checkboxVPN-${productId}`)) {
     checkboxId = document.querySelector(`.checkboxVPN-${productId}`).getAttribute('data-id');
   }
-  if (!$(`.checkboxVPN-${productId}`).is(':checked')) {
-    $(`.${showVpn}`).hide();
-    checkboxId = $(this).attr('data-id');
+
+  const checkboxNotChecked = !document.querySelector(`.checkboxVPN-${productId}`).checked;
+  if (checkboxNotChecked) {
+    document.querySelector(`.${showVpn}`).style.display = 'none';
+    checkboxId = this?.getAttribute('data-id');
   }
 
   const changeHandler = () => {
@@ -533,14 +508,22 @@ const addVpnBD = (data, showVpn) => {
         }
       });
 
-      if (document.querySelector(`.${showVpn}`)) {
-        document.querySelector(`.${showVpn}`).style.display = 'block';
+      const showVpnEl = document.querySelector(`.${showVpn}`);
+
+      if (showVpnEl) {
+        showVpnEl.style.display = 'block';
       }
-      if (document.querySelector(`.${savevpnClass}`)) {
-        document.querySelector(`.${savevpnClass}`).style.display = 'block';
+
+      const saveVpnEl = document.querySelector(`.${savevpnClass}`);
+
+      if (saveVpnEl) {
+        saveVpnEl.style.display = 'block';
       }
-      if (document.querySelector(`.show_vpn-${productId}`)) {
-        document.querySelector(`.show_vpn-${productId}`).style.display = 'block';
+
+      const showVpnProductIdEl = document.querySelector(`.show_vpn-${productId}`);
+
+      if (showVpnProductIdEl) {
+        showVpnProductIdEl.style.display = 'block';
       }
 
       // document.querySelector('.' + save_class).style.display = 'none';
@@ -827,8 +810,11 @@ const addVpnBD = (data, showVpn) => {
         save = Math.round(parseFloat(fullPrice) - parseFloat(priceVpn));
         justVpn = parseFloat(vb.discount.discounted_price.replace('$', '').replace('â‚¬', '').replace('Â£', '').replace('R$', '')
           .replace('AUD', ''));
-        if (document.querySelector(`.show_save_${data.config.product_id}`)) {
-          document.querySelector(`.show_save_${data.config.product_id}`).style.display = 'block';
+
+        const showSaveProductIdEl = document.querySelector(`.show_save_${data.config.product_id}`);
+
+        if (showSaveProductIdEl) {
+          showSaveProductIdEl.style.display = 'block';
         }
       } else {
         justVpn = parseFloat(vb.price.replace('$', '').replace('â‚¬', '').replace('Â£', '').replace('R$', '')
@@ -859,8 +845,10 @@ const addVpnBD = (data, showVpn) => {
         });
       }
 
-      if (document.querySelector(`.price_vpn-${productId}`)) {
-        document.querySelector(`.price_vpn-${productId}`).innerHTML = justVpn;
+      const priceVpnEl = document.querySelector(`.price_vpn-${productId}`);
+
+      if (priceVpnEl) {
+        priceVpnEl.innerHTML = justVpn;
       }
     } else { // not checked
       document.querySelectorAll(`.checkboxVPN-${productId}`).forEach((item) => {
@@ -869,11 +857,16 @@ const addVpnBD = (data, showVpn) => {
         }
       });
 
-      if (document.querySelector(`.${showVpn}`)) {
-        document.querySelector(`.${showVpn}`).style.display = 'none';
+      const showVpnEl = document.querySelector(`.${showVpn}`);
+
+      if (showVpnEl) {
+        showVpnEl.style.display = 'none';
       }
-      if (document.querySelector(`.show_vpn-${productId}`)) {
-        document.querySelector(`.show_vpn-${productId}`).style.display = 'none';
+
+      const showVpnProductIdEl = document.querySelector(`.show_vpn-${productId}`);
+
+      if (showVpnProductIdEl) {
+        showVpnProductIdEl.style.display = 'none';
       }
 
       if (data.selected_variation.discount) {
@@ -887,8 +880,11 @@ const addVpnBD = (data, showVpn) => {
         fullPrice = Math.round(parseFloat(data.selected_variation.price) * 100) / 100;
         newPrice = fullPrice;
         save = 0;
-        if (document.querySelector(`.show_save_${data.config.product_id}`)) {
-          document.querySelector(`.show_save_${data.config.product_id}`).style.display = 'none';
+
+        const showSaveProductIdEl = document.querySelector(`.show_save_${data.config.product_id}`);
+
+        if (showSaveProductIdEl) {
+          showSaveProductIdEl.style.display = 'none';
         }
       }
 
@@ -1053,7 +1049,7 @@ initBaseUri();
 
 loadPage();
 
-await addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
-await addScript('https://www.bitdefender.com/scripts/Store2015.min.js');
-// todo optimize bundle size
-await addScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js');
+addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
+
+addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
+addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'defer');
