@@ -162,7 +162,6 @@ const ICONS_CACHE = {};
  * @param {Element} [element] Element containing icons
  */
 export async function decorateIcons(element) {
-  debugger;
   // Prepare the inline sprite
   let svgSprite = document.getElementById('franklin-svg-sprite');
   if (!svgSprite) {
