@@ -1,2 +1,3 @@
 helix-importer-ui
 **/*.css
+scripts/vendor/**/*.js
