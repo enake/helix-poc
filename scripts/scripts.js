@@ -922,7 +922,6 @@ const addVpnBD = (data, showVpn) => {
 };
 
 const initSelectors = () => {
-  console.log('initSelectors', productsList);
   if (productsList.length > 0) {
     const fakeSelectorsBottom = document.createElement('div');
     fakeSelectorsBottom.id = 'fakeSelectors_bottom';
@@ -981,12 +980,13 @@ const initSelectors = () => {
 const loadPage = async () => {
   await loadEager(document);
   await loadLazy(document);
-  loadDelayed();
 
   addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
   addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', {}, 'async', () => {
     addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'async', initSelectors);
   });
+
+  loadDelayed();
 
   // getIpCountry().then(
   //   (ipCountry) => initSelectors(ipCountry),
