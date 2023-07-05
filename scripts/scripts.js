@@ -335,7 +335,7 @@ const showPriceVPN = (selector) => {
   }
 };
 
-// display prices for normal vpn
+// display prices for normal prods
 const showPrice = (storeObj) => {
   const { currency_label: currencyLabel } = storeObj.selected_variation;
   const { region_id: regionId } = storeObj.selected_variation;
@@ -432,7 +432,28 @@ const showPrice = (storeObj) => {
       parentElement.style.visibility = 'hidden';
     }
   }
+
+  maxDiscount();
 };
+
+// get max discount 
+const maxDiscount = () => {
+  const discountAmounts = [];
+
+  document.querySelectorAll("span.percent").forEach((item) => {
+    const discountAmount = parseInt(item.textContent);
+    if (!isNaN(discountAmount)) {
+      discountAmounts.push(discountAmount);
+    }
+  });
+
+  let maxdiscount = Math.max(...discountAmounts).toString();
+
+  document.querySelectorAll(".max-discount").forEach((item) => {
+    item.textContent = maxdiscount + "%";
+  });
+};
+
 
 // check & update ProductsList
 // TODO: have a look at StoreProducts.product & StoreProducts.initCount
@@ -969,6 +990,7 @@ const initSelectors = () => {
               addVpnBD(fp, `show_vpn_${prodAlias}`);
               showPrice(fp);
             }
+            
           } catch (ex) { /* empty */ }
         },
       });
@@ -976,10 +998,11 @@ const initSelectors = () => {
 
     document.querySelectorAll('.checkboxVPN').forEach((checkbox, idx) => {
       checkbox.id += idx + 1;
-      checkbox.setAttribute('data-id', checkbox.id);
+      checkbox.parentNode.querySelector('label').setAttribute('for', checkbox.id);
     });
   }
 };
+
 
 const loadPage = async () => {
   await loadEager(document);

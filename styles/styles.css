@@ -498,7 +498,7 @@ main .section.highlight {
   font-size: 15px;
 }
 
-.prod-percent.green_bck_circle.bigger span.bulina_text1 b {
+.prod-percent.green_bck_circle.bigger span.bulina_text1 b, .prod-percent.green_bck_circle.bigger.has3txt span:nth-of-type(2) b {
   font-size: 28px;
 }
 

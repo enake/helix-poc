@@ -27,10 +27,28 @@ export default function decorate(block) {
   // get data attributes set in metaData
   const parentSelector = block.closest('.section');
   const metaData = parentSelector.dataset;
-  const { products, bulinaText } = metaData;
+  const { title, subtitle, titlePosition, products, bulinaText } = metaData;
   const productsAsList = products.split(',');
 
   if (productsAsList.length) {
+    /// ///////////////////////////////////////////////////////////////////////
+    // set the title
+    if (typeof title !== 'undefined') {
+      let divTagTitle = document.createElement('div');
+      divTagTitle.classList = `top_title ${typeof titlePosition !== 'undefined' ? 'p_'+titlePosition : ''}`;
+
+      // adding title
+      divTagTitle.innerHTML = document.querySelectorAll('h1').length == 0 ? '<h1> ' + title + ' </h1>' : '<h2> ' + title + ' </h2>';
+
+      // adding subtitle
+      if (typeof subtitle !== 'undefined') {
+        divTagTitle.innerHTML += `<h2>${subtitle}</h2>`;
+      }
+
+      block.parentNode.prepend(divTagTitle);
+    }
+
+    /// ///////////////////////////////////////////////////////////////////////
     // get first prod from the list
     const firstProd = productsAsList[0].split('/')[0];
 
@@ -46,20 +64,22 @@ export default function decorate(block) {
 
     /// ///////////////////////////////////////////////////////////////////////
     // create procent - bulina
-    if (bulinaText) {
+    if (typeof bulinaText !== 'undefined') {
       const bulinaSplitted = bulinaText.split(',');
-      let divBulina = `<div class="prod-percent green_bck_circle bigger bulina-${firstProd} has${bulinaSplitted.length}txt">`;
+      let divBulina = `<div class="prod-percent green_bck_circle bigger has${bulinaSplitted.length}txt">`;
       bulinaSplitted.forEach((item, idx) => {
         let newItem = item;
         if (item.indexOf('0%') !== -1) {
-          newItem = item.replace(/0%/g, `<b class="percent-${firstProd}"></b>`);
+          newItem = item.replace(/0%/g, `<b class="max-discount"></b>`);
         }
         divBulina += `<span class="bulina_text${idx + 1}">${newItem}</span>`;
       });
       divBulina += '</div>';
 
       // add to the previous element
-      block.parentNode.parentNode.previousElementSibling.innerHTML += divBulina;
+      // block.parentNode.parentNode.previousElementSibling.innerHTML += divBulina;
+      block.parentNode.querySelector('.top_title').innerHTML += divBulina;
+
     }
 
     /// ///////////////////////////////////////////////////////////////////////
@@ -70,6 +90,7 @@ export default function decorate(block) {
       pricesDiv.className = 'prices_box';
       pricesDiv.innerHTML += `<span class="prod-oldprice oldprice-${prodName}"></span>`;
       pricesDiv.innerHTML += `<span class="prod-newprice newprice-${prodName}"></span>`;
+      // pricesDiv.innerHTML += `<span class="percent percent-${prodName}"></span>`;
 
       block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table`).after(pricesDiv);
 
@@ -92,7 +113,7 @@ export default function decorate(block) {
       const tableBuybtn = block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table:nth-of-type(3) td`);
 
       const aBuybtn = document.createElement('a');
-      aBuybtn.innerHTML = tableBuybtn.innerHTML.replace(/0%/g, `<span class="percent-${prodName}"></span>`);
+      aBuybtn.innerHTML = tableBuybtn.innerHTML.replace(/0%/g, `<span class="percent percent-${prodName}"></span>`);
       aBuybtn.className = `red-buy-button buylink-${prodName}`;
       aBuybtn.setAttribute('title', 'Buy Now Bitdefender');
 
@@ -118,19 +139,18 @@ export default function decorate(block) {
           Z: '<span class="percent-vpn"></span>',
         };
 
-        const vpnDiv = document.createElement('div');
-        vpnDiv.className = 'vpn_box';
-
-        let vpnContent = `<input id="checkboxVPN-${prodName}" class="checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`;
-        vpnContent += `<label for="checkboxVPN-${prodName}${idx + 1}">`;
+        let vpnContent = `<input id="checkboxVPN-${prodName}" class="here checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`;
+        vpnContent += `<label for="checkboxVPN-${prodName}">`;
         tableVpn.querySelectorAll('td').forEach((td) => {
           vpnContent += `<span>${td.innerHTML.replace(/[XYZ]/g, (m) => replaceData[m])}</span>`;
         });
         vpnContent += '</label>';
 
-        vpnDiv.innerHTML = vpnContent;
+        const vpnBox = document.createElement('div');
+        vpnBox.className = 'vpn_box';
+        vpnBox.innerHTML = `<div>${vpnContent}</div>`
 
-        tableVpn.before(vpnDiv);
+        tableVpn.before(vpnBox);
         tableVpn.remove();
       } else { // no VPN
         // if we don't have vpn we need to set a min-height for the text that comes in place of it
