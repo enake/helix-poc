@@ -5,6 +5,7 @@ import {
   loadFooter,
   decorateButtons,
   decorateIcons,
+  decorateIcons2,
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
@@ -89,6 +90,7 @@ const buildAutoBlocks = (main) => {
 export const decorateMain = (main) => {
   // hopefully forward compatible button decoration
   decorateButtons(main);
+  // decorateIcons2(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
