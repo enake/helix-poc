@@ -989,14 +989,7 @@ const loadPage = async () => {
     addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'async', 'body', initSelectors);
   });
 
-  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'async', 'head');
-  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'async', 'head');
-
   loadDelayed();
-
-  // getIpCountry().then(
-  //   (ipCountry) => initSelectors(ipCountry),
-  // );
 
   // adding IDs on each section
   document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
