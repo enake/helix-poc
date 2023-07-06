@@ -57,8 +57,8 @@
 }
 
 .b-banner-container a.button {
-  background: #e72325!important;
-  color: #fff!important;
+  background: #e72325 !important;
+  color: #fff !important;
   text-transform: uppercase;
   display: inline-block;
   text-align: center;
@@ -66,7 +66,7 @@
   padding: 13px 3%;
   font-size: 14px;
   font-weight: bold;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
   width: auto;
   border-style: none;
   cursor: pointer;
@@ -74,7 +74,7 @@
 }
 
 .b-banner-container a.button:hover {
-  background: #b33027!important;
+  background: #b33027 !important;
   text-decoration: none;
 }
 
@@ -88,34 +88,28 @@
     padding-left: 15px;
   }
 }
-
 @media (max-width: 768px) {
   .b-banner-container {
     min-height: auto;
   }
-
   .b-banner-container .b-banner-wrapper {
     position: relative;
     padding-left: 0;
   }
-
   .b-banner-container img {
     display: none;
   }
-
   .b-banner-container h1 {
     font-size: 24px;
     max-width: unset;
     margin-top: 0;
   }
-
   .b-banner-container h2 {
     font-size: 21px;
     max-width: unset;
     margin-top: 10px;
   }
 }
-
 /* for mobile */
 @media (max-width: 576px) {
   .b-banner-container {

@@ -26,7 +26,7 @@ footer p {
 }
 
 footer a, footer .footer__links a, .footer__copy {
-  color: white !important;
+  color: white!important;
   font-size: 16px;
   padding: 0 2px;
 }
@@ -35,7 +35,7 @@ footer .footer__links a {
   color: #fff;
   text-decoration: none;
   display: block;
-  transition: 0.2s color;
+  transition: .2s color;
   padding: 0 2px;
 }
 
@@ -97,19 +97,24 @@ footer .footer__links li:last-child::after {
   footer {
     padding: 18px 0;
   }
+
   footer .default-content-wrapper {
     display: block;
   }
+
   footer img {
     margin-bottom: 10px;
   }
+
   footer a, footer .footer__links a, .footer__copy {
     font-size: 13px;
     padding: 0 1px;
   }
+
   footer p {
     font-size: 13px;
   }
+
   footer strong {
     font-size: 20px;
     text-align: left;

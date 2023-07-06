@@ -1,0 +1,132 @@
+/* b-boxes .b-dropdownbox-container */
+.b-dropdownbox-container {
+    clear: both;
+  }
+  
+  .b-dropdownbox-container .block img {
+    width: 20px;
+  }
+  
+  .b-dropdownbox-container .block > div {
+    padding: 15px 30px;
+  }
+  
+  /* blue tbs */
+  .b-dropdownbox-container .block > div:nth-child(1) {
+    padding: 0;
+  }
+  
+  .b-dropdownbox-container .block > div:not(:first-child) {
+    padding: 0;
+    font-weight: 500;
+    display: flex;
+  }
+  
+  .b-dropdownbox-container .block > div:nth-child(1) > div {
+    color: #fff;
+    font-weight: 500;
+    background-color: #006eff;
+    cursor: pointer;
+    padding: 15px 30px;
+  }
+  
+  .b-dropdownbox-container .block > div:not(:first-child) > div {
+    width: 33%;
+    padding: 15px 2%;
+    display: inline-block;
+  }
+  
+  .b-dropdownbox-container .block > div > div:nth-child(2) {
+    background-color: #f6f6f6;
+  }
+  
+  .b-dropdownbox-container .block > div:not(:first-child) > div:first-child {
+    display: flex;
+    align-items: center;
+  }
+  
+  .b-dropdownbox-container .block > div:not(:first-child) > div:first-child span {
+    margin-left: 10px;
+  }
+  
+  .b-dropdownbox-container .block.has2divs > div > div:nth-child(2) {
+    width: 66%;
+    background-color: white;
+  }
+  
+  .b-dropdownbox-container .block.inactive > div:not(:first-child) > div, .b-dropdownbox-container .block.closed > div:not(:first-child) > div {
+    display: none;
+  }
+  
+  .b-dropdownbox-container .block.closed.inactive > div:not(:first-child) > div {
+    display: inline-block;
+  }
+  
+  .b-dropdownbox-container .block.has2divs > div > div:nth-child(2) img {
+    width: 400px;
+  }
+  
+  .b-dropdownbox-container .block.inactive > div:nth-child(1) > div::before,
+  .b-dropdownbox-container .block.closed > div:nth-child(1) > div::before  {
+    background: url("../../images/icons/arrow_down.png") bottom left no-repeat transparent;
+    transform: rotate(0deg);
+    background-size: 100%;
+  }
+  
+  /* handling - arrow down/up */
+  
+  /* stylelint-disable no-descending-specificity */
+  .b-dropdownbox-container .block > div:nth-child(1) > div::before,
+  .b-dropdownbox-container .block.closed.inactive > div:nth-child(1) > div::before {
+    content: "";
+    width: 17px;
+    height: 19px;
+    background: url("../../images/icons/arrow_down.png") top left no-repeat transparent;
+    float: left;
+    margin-right: 9px;
+    background-size: 100%;
+    transform: rotate(180deg);
+  }
+  
+  /* for mobile */
+  @media (max-width: 768px) {
+    .b-dropdownbox-container {
+      clear: both;
+      padding: 0 15px 5px;
+    }
+  
+    .b-dropdownbox-container .block > div:nth-child(1) > div::before, .b-dropdownbox-container .block.closed.inactive > div:nth-child(1) > div::before {
+      width: 15px!important;
+      height: 16px!important;
+    }
+  
+    .b-dropdownbox-container .block > div:nth-child(1) > div {
+      padding: 10px 3%!important;
+      display: flex;
+      font-size: 15px;
+      line-height: 17px;
+    }
+  
+    .b-dropdownbox-container .block > div:not(:first-child) > div {
+      padding: 8px 2%!important;
+      font-size: 15px;
+    }
+  
+    .b-dropdownbox-container .block img {
+      width: 15px;
+    }
+  
+    .b-dropdownbox-container .block > div:not(:first-child) > div:nth-child(1)  {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .b-dropdownbox-container .block > div:not(:first-child) > div:not(:first-child) {
+        width: 50%;
+        float: left;
+    }
+  
+    .b-dropdownbox-container .block.has2divs > div:not(:first-child) > div:not(:first-child) {
+      width: 100%;
+    }
+  }
