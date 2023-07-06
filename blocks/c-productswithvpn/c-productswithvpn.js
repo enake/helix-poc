@@ -27,7 +27,13 @@ export default function decorate(block) {
   // get data attributes set in metaData
   const parentSelector = block.closest('.section');
   const metaData = parentSelector.dataset;
-  const { title, subtitle, titlePosition, products, bulinaText } = metaData;
+  const {
+    title,
+    subtitle,
+    titlePosition,
+    products,
+    bulinaText
+  } = metaData;
   const productsAsList = products.split(',');
 
   if (productsAsList.length) {
@@ -35,13 +41,15 @@ export default function decorate(block) {
     // set the title
     if (typeof title !== 'undefined') {
       const divTagTitle = document.createElement('div');
-      /*if (typeof titlePosition !== 'undefined') {
-        divTagTitle.classList = `top_title p_${titlePosition`;`
-      }*/
+      /*
+        if (typeof titlePosition !== 'undefined') {
+          divTagTitle.classList = `top_title p_${titlePosition`;`
+        }
+      */
       divTagTitle.classList = `top_title ${typeof titlePosition !== 'undefined' ? `p_${titlePosition}` : ''}`;
 
       // adding title
-      divTagTitle.innerHTML = document.querySelectorAll('h1').length == 0 ? `<h1>${title}</h1>` : `<h2>${title}</h2>`;
+      divTagTitle.innerHTML = document.querySelectorAll('h1').length === 0 ? `<h1>${title}</h1>` : `<h2>${title}</h2>`;
 
       // adding subtitle
       if (typeof subtitle !== 'undefined') {
@@ -73,9 +81,9 @@ export default function decorate(block) {
       bulinaSplitted.forEach((item, idx) => {
         let newItem = item;
         if (item.indexOf('0%') !== -1) {
-          newItem = item.replace(/0%/g, `<b class="max-discount"></b>`);
+          newItem = item.replace(/0%/g, `<b class='max-discount'></b>`);
         }
-        divBulina += `<span class="bulina_text${idx + 1}">${newItem}</span>`;
+        divBulina += `<span class='bulina_text${idx + 1}'>${newItem}</span>`;
       });
       divBulina += '</div>';
 
@@ -85,7 +93,6 @@ export default function decorate(block) {
       } else {
         block.parentNode.parentNode.previousElementSibling.innerHTML += divBulina;
       }
-
     }
 
     /// ///////////////////////////////////////////////////////////////////////

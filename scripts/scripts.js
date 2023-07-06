@@ -200,7 +200,7 @@ const maxDiscount = () => {
   if (document.querySelector('.percent')) {
     document.querySelectorAll('.percent').forEach((item) => {
       const discountAmount = parseInt(item.textContent, 10);
-      if (!isNaN(discountAmount)) {
+      if (!Number.isNaN(discountAmount)) {
         discountAmounts.push(discountAmount);
       }
     });
@@ -551,7 +551,7 @@ const changeCheckboxVPN = (checkboxId) => {
           .replace('â‚¬', '')
           .replace('Â£', '')
           .replace('R$', '')
-          .replace('AUD', '')
+          .replace('AUD', ''),
       );
     } else if (vpnObj.discount) {
       fullPrice = Math.round((parseFloat(selectedVariation.price) + parseFloat(vpnObj.price)) * 100) / 100;
@@ -563,7 +563,7 @@ const changeCheckboxVPN = (checkboxId) => {
           .replace('â‚¬', '')
           .replace('Â£', '')
           .replace('R$', '')
-          .replace('AUD', '')
+          .replace('AUD', ''),
       );
 
       if (parentDiv.querySelector(`.show_save_${productId}`)) {
@@ -572,11 +572,11 @@ const changeCheckboxVPN = (checkboxId) => {
     } else {
       justVpn = parseFloat(
         vpnObj.price
-        .replace('$', '')
-        .replace('â‚¬', '')
-        .replace('Â£', '')
-        .replace('R$', '')
-        .replace('AUD', '')
+          .replace('$', '')
+          .replace('â‚¬', '')
+          .replace('Â£', '')
+          .replace('R$', '')
+          .replace('AUD', ''),
       );
       fullPrice = Math.round((parseFloat(selectedVariation.price) + parseFloat(justVpn)) * 100) / 100;
       save = Math.round(parseFloat(fullPrice) - parseFloat(priceVpn));
@@ -600,7 +600,12 @@ const changeCheckboxVPN = (checkboxId) => {
       parentDiv.querySelector(`.price_vpn-${productId}`).innerHTML = justVpn;
     }
 
-    newPrice = StoreProducts.formatPrice(newPrice, selectedVariation.currency_label, selectedVariation.region_id, selectedVariation.currency_iso);
+    newPrice = StoreProducts.formatPrice(
+      newPrice,
+      selectedVariation.currency_label,
+      selectedVariation.region_id,
+      selectedVariation.currency_iso,
+    );
 
   } else {
     // not checked
@@ -834,7 +839,7 @@ const initSelectors = () => {
         onSelectorLoad() {
           sendAnalyticsProducts(this);
           try {
-            const fp = this;  
+            const fp = this;
             showPrices(fp);
           } catch (ex) { /* empty */ }
         },
@@ -871,8 +876,8 @@ const loadPage = async () => {
 
   // addEventListener on VPN checkboxes
   if (document.querySelector('.checkboxVPN')) {
-    document.querySelectorAll('.checkboxVPN').forEach(item => {
-      item.addEventListener('click', e => {
+    document.querySelectorAll('.checkboxVPN').forEach((item) => {
+      item.addEventListener('click', (e) => {
         const checkboxId = e.target.getAttribute('id');
         /*
         const checkboxClass = e.target.classList[0];
@@ -882,8 +887,8 @@ const loadPage = async () => {
         */
         changeCheckboxVPN(checkboxId);
       });
-    })
-  };
+    });
+  }
 };
 
 /*
