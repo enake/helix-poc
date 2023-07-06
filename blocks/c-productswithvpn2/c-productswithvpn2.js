@@ -59,12 +59,12 @@ export default function decorate(block) {
       if (typeof bulinaText !== 'undefined') {
         const bulinaSplitted = bulinaText.split(',');
         let divBulina = `<div class="prod-percent green_bck_circle medium bulina-${prodName} has${bulinaSplitted.length}txt">`;
-        bulinaSplitted.forEach((item, idx) => {
+        bulinaSplitted.forEach((item, key) => {
           let newItem = item;
           if (item.indexOf('0%') !== -1) {
             newItem = item.replace(/0%/g, `<b class="percent-${prodName}"></b>`);
           }
-          divBulina += `<span class="bulina_text${idx + 1}">${newItem}</span>`;
+          divBulina += `<span class="bulina_text${key + 1}">${newItem}</span>`;
         });
         divBulina += '</div>';
 
@@ -91,10 +91,8 @@ export default function decorate(block) {
 
       tableVpn.before(vpnDiv);
       tableVpn.remove();
-
       // add prod class on block
       block.querySelector(`.c-productswithvpn2 > div:nth-child(${idx + 1})`).classList.add(`${prodName}_box`, 'prod_box');
-
     });
   }
 }

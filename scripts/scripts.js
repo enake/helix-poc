@@ -194,22 +194,22 @@ export const updateProductsList = (product) => {
   }
 };
 
-// get max discount 
+// get max discount
 const maxDiscount = () => {
   const discountAmounts = [];
-  if (document.querySelector(".percent")) {
-    document.querySelectorAll(".percent").forEach((item) => {
-      const discountAmount = parseInt(item.textContent);
+  if (document.querySelector('.percent')) {
+    document.querySelectorAll('.percent').forEach((item) => {
+      const discountAmount = parseInt(item.textContent, 10);
       if (!isNaN(discountAmount)) {
         discountAmounts.push(discountAmount);
       }
     });
   }
-  
-  let maxdiscount = Math.max(...discountAmounts).toString();
-  if (document.querySelector(".max-discount")) {
-    document.querySelectorAll(".max-discount").forEach((item) => {
-      item.textContent = maxdiscount + "%";
+
+  const maxdiscount = Math.max(...discountAmounts).toString();
+  if (document.querySelector('.max-discount')) {
+    document.querySelectorAll('.max-discount').forEach((item) => {
+      item.textContent = `${maxdiscount}%`;
     });
   }
 };
@@ -233,16 +233,16 @@ const changeCheckboxVPN = (checkboxId) => {
   if (typeof defaultBuyLinks[productId] === 'undefined') {
     defaultBuyLinks[productId] = parentDiv.querySelector(buyClass).href;
   }
-  let buyLinkDefault = defaultBuyLinks[productId];
+  const buyLinkDefault = defaultBuyLinks[productId];
 
   // vpn
   const vpnId = 'vpn';
   const showVpnBox = document.querySelector(`.show_vpn_${productId}`);
   const savevpnClass = `savevpn-${vpnId}`;
-  const vpn_obj = StoreProducts.product[vpnId].variations[10][1];
-  let priceVpn = vpn_obj.price;
+  const vpnObj = StoreProducts.product[vpnId].variations[10][1];
+  const priceVpn = vpnObj.price;
   let linkRef = '';
-  
+
   // missing params
   let currency = 'USD';
   let save = '';
@@ -260,7 +260,7 @@ const changeCheckboxVPN = (checkboxId) => {
   if (getParam('renew_lps') || (getParam('pid') && getParam('pid').toLowerCase().indexOf('renew') !== -1)) {
     renewLps = true;
   }
-  // const v = StoreProducts.getBundleProductsInfo(selectedVariation, vpn_obj);
+  // const v = StoreProducts.getBundleProductsInfo(selectedVariation, vpnObj);
 
   // if is checked
   if (document.getElementById(checkboxId).checked) {
@@ -533,7 +533,7 @@ const changeCheckboxVPN = (checkboxId) => {
       buyLink += `/${vpnId}/${10}/${1}/COUPON.${coupon[selectedVariation.region_id][currency]}/platform.${selectedVariation.platform_id}/region.${selectedVariation.region_id}/CURRENCY.${currency}/DCURRENCY.${currency}`;
       // buylink_vpn += '/' + product_vpn + '/' + 10 + '/' + 1 + '/platform.' + s_variation.platform_id + '/region.' + s_variation.region_id + '/CURRENCY.' + currency + '/DCURRENCY.' + currency;
     } else if (coupon[selectedVariation.region_id].ALL !== 'undefined') {
-      buyLink = `${StoreProducts.product[productId].base_uri}/Store/buybundle/${productId}/${selectedUsers}/${selectedYears}/platform.${selectedVariation.platform_id}/region.${sVariation.region_id}${ref}${pidUrlBundle}/force.2`;
+      buyLink = `${StoreProducts.product[productId].base_uri}/Store/buybundle/${productId}/${selectedUsers}/${selectedYears}/platform.${selectedVariation.platform_id}/region.${selectedVariation.region_id}${ref}${pidUrlBundle}/force.2`;
       buyLink += `/${vpnId}/${10}/${1}/COUPON.${coupon[selectedVariation.region_id].ALL}/platform.${selectedVariation.platform_id}/region.${selectedVariation.region_id}/CURRENCY.${currency}/DCURRENCY.${currency}`;
       // buylink_vpn += '/' + product_vpn + '/' + 10 + '/' + 1 + '/platform.' + s_variation.platform_id + '/region.' + s_variation.region_id + '/CURRENCY.' + currency + '/DCURRENCY.' + currency;
     } else {
@@ -541,22 +541,43 @@ const changeCheckboxVPN = (checkboxId) => {
       buyLink += `/${vpnId}/${10}/${1}/platform.${selectedVariation.platform_id}/region.${selectedVariation.region_id}/CURRENCY.${currency}/DCURRENCY.${currency}`;
     }
 
-    if (selectedVariation.discount && vpn_obj.discount) {
+    if (selectedVariation.discount && vpnObj.discount) {
       fullPrice = Math.round((parseFloat(selectedVariation.price) + parseFloat(priceVpn)) * 100) / 100;
-      newPrice = Math.round((parseFloat(selectedVariation.discount.discounted_price) + parseFloat(vpn_obj.discount.discounted_price)) * 100) / 100;
+      newPrice = Math.round((parseFloat(selectedVariation.discount.discounted_price) + parseFloat(vpnObj.discount.discounted_price)) * 100) / 100;
       save = Math.round(parseFloat(fullPrice) - parseFloat(priceVpn));
-      justVpn = parseFloat(vpn_obj.discount.discounted_price.replace('$', '').replace('â‚¬', '').replace('Â£', '').replace('R$', '').replace('AUD', ''));
-    } else if (vpn_obj.discount) {
-      fullPrice = Math.round((parseFloat(selectedVariation.price) + parseFloat(vpn_obj.price)) * 100) / 100;
-      newPrice = Math.round((parseFloat(selectedVariation.price) + parseFloat(vpn_obj.discount.discounted_price)) * 100) / 100;
+      justVpn = parseFloat(
+        vpnObj.discount.discounted_price
+          .replace('$', '')
+          .replace('â‚¬', '')
+          .replace('Â£', '')
+          .replace('R$', '')
+          .replace('AUD', '')
+      );
+    } else if (vpnObj.discount) {
+      fullPrice = Math.round((parseFloat(selectedVariation.price) + parseFloat(vpnObj.price)) * 100) / 100;
+      newPrice = Math.round((parseFloat(selectedVariation.price) + parseFloat(vpnObj.discount.discounted_price)) * 100) / 100;
       save = Math.round(parseFloat(fullPrice) - parseFloat(priceVpn));
-      justVpn = parseFloat(vpn_obj.discount.discounted_price.replace('$', '').replace('â‚¬', '').replace('Â£', '').replace('R$', '').replace('AUD', ''));
+      justVpn = parseFloat(
+        vpnObj.discount.discounted_price
+          .replace('$', '')
+          .replace('â‚¬', '')
+          .replace('Â£', '')
+          .replace('R$', '')
+          .replace('AUD', '')
+      );
 
-      if (parentDiv.querySelector(`.show_save_${data.config.product_id}`)) {
-        parentDiv.querySelector(`.show_save_${data.config.product_id}`).style.display = 'block';
+      if (parentDiv.querySelector(`.show_save_${productId}`)) {
+        parentDiv.querySelector(`.show_save_${productId}`).style.display = 'block';
       }
     } else {
-      justVpn = parseFloat(vpn_obj.price.replace('$', '').replace('â‚¬', '').replace('Â£', '').replace('R$', '').replace('AUD', ''));
+      justVpn = parseFloat(
+        vpnObj.price
+        .replace('$', '')
+        .replace('â‚¬', '')
+        .replace('Â£', '')
+        .replace('R$', '')
+        .replace('AUD', '')
+      );
       fullPrice = Math.round((parseFloat(selectedVariation.price) + parseFloat(justVpn)) * 100) / 100;
       save = Math.round(parseFloat(fullPrice) - parseFloat(priceVpn));
       if (selectedVariation.discount) {
@@ -568,9 +589,11 @@ const changeCheckboxVPN = (checkboxId) => {
 
     if (parentDiv.querySelector(discPriceClass)) {
       parentDiv.querySelector(discPriceClass).innerHTML = newPrice;
-      /*document.querySelectorAll(discPriceClass).forEach(item => {
+      /*
+      document.querySelectorAll(discPriceClass).forEach(item => {
         item.innerHTML = newPrice;
-      })*/
+      })
+      */
     }
 
     if (parentDiv.querySelector(`.price_vpn-${productId}`)) {
@@ -580,7 +603,7 @@ const changeCheckboxVPN = (checkboxId) => {
     newPrice = StoreProducts.formatPrice(newPrice, selectedVariation.currency_label, selectedVariation.region_id, selectedVariation.currency_iso);
 
   } else {
-     // not checked
+    // not checked
     if (showVpnBox) {
       showVpnBox.style.display = 'none';
     }
@@ -591,11 +614,12 @@ const changeCheckboxVPN = (checkboxId) => {
       save = Math.round(parseFloat(fullPrice) - parseFloat(newPrice));
       if (parentDiv.querySelector(`.show_save_${productId}`)) {
         parentDiv.querySelector(`.show_save_${productId}`).style.display = 'block';
-        /*document.querySelectorAll(`.show_save_${productId}`).forEach(item => {
+        /*
+        document.querySelectorAll(`.show_save_${productId}`).forEach(item => {
           item.style.display = 'block';
-        });*/
+        });
+        */
       }
-      
     } else {
       fullPrice = Math.round(parseFloat(selectedVariation.price) * 100) / 100;
       newPrice = fullPrice;
@@ -603,9 +627,11 @@ const changeCheckboxVPN = (checkboxId) => {
 
       if (parentDiv.querySelector(`.show_save_${productId}`)) {
         parentDiv.querySelector(`.show_save_${productId}`).style.display = 'none';
-        /*document.querySelectorAll(`.show_save_${productId}`).forEach(item => {
+        /*
+        document.querySelectorAll(`.show_save_${productId}`).forEach(item => {
           item.style.display = 'none';
-        });*/
+        });
+        */
       }
     }
 
@@ -620,9 +646,11 @@ const changeCheckboxVPN = (checkboxId) => {
     if (comparativeDiv) {
       comparativeDiv.querySelector(buyClass).setAttribute('href', buyLink);
     }
-    /*document.querySelectorAll(buyClass).forEach(item => {
+    /*
+    document.querySelectorAll(buyClass).forEach(item => {
       item.setAttribute('href', StoreProducts.appendVisitorID(buyLink));
-    });*/
+    });
+    */
   }
 
   if (fullPrice !== '' && parentDiv.querySelector(priceClass)) {
@@ -630,9 +658,11 @@ const changeCheckboxVPN = (checkboxId) => {
     if (comparativeDiv) {
       comparativeDiv.querySelector(priceClass).innerHTML = fullPrice;
     }
-    /*document.querySelectorAll(priceClass).forEach(item => {
+    /*
+    document.querySelectorAll(priceClass).forEach(item => {
       item.innerHTML = fullPrice;
-    });*/
+    });
+    */
   }
 
   if (parentDiv.querySelector(discPriceClass)) {
@@ -640,9 +670,11 @@ const changeCheckboxVPN = (checkboxId) => {
     if (comparativeDiv) {
       comparativeDiv.querySelector(discPriceClass).innerHTML = newPrice;
     }
-    /*document.querySelectorAll(discPriceClass).forEach(item => {
+    /*
+    document.querySelectorAll(discPriceClass).forEach(item => {
       item.innerHTML = newPrice;
-    });*/
+    });
+    */
   }
 
   if (parentDiv.querySelector(saveClass)) {
@@ -650,11 +682,12 @@ const changeCheckboxVPN = (checkboxId) => {
     if (comparativeDiv) {
       comparativeDiv.querySelector(saveClass).innerHTML = save;
     }
-    /*document.querySelectorAll(saveClass).forEach(item => {
+    /*
+    document.querySelectorAll(saveClass).forEach(item => {
       item.innerHTML = save;
-    });*/
+    });
+    */
   }
-  
 };
 
 // display prices
@@ -736,12 +769,14 @@ const showPrices = (storeObj) => {
       parentElement.style.display = 'none';
     }
 
+    /*
     if (document.querySelector(`.oldprice-${productId}`) && document.querySelector(`.save-${productId}`)) {
       const oldPriceElement = document.querySelector(`.oldprice-${productId}`);
       const infoRowElement = findClosestParentByClass(oldPriceElement, 'info-row');
 
       infoRowElement.style.display = 'none';
     }
+    */
 
     if (document.querySelector(`.show_save_${productId}`)) {
       document.querySelector(`.show_save_${productId}`).style.display = 'none';
@@ -783,7 +818,7 @@ const initSelectors = () => {
       createSelectForYears.name = `y_${prodAlias}`;
       createSelectForYears.className = `years_${prodAlias}_fake`;
       document.getElementById('fakeSelectors_bottom').append(createSelectForYears);
-      
+
       StoreProducts.initSelector({
         product_id: prodAlias,
         full_price_class: `oldprice-${prodAlias}`,
@@ -837,16 +872,18 @@ const loadPage = async () => {
   // addEventListener on VPN checkboxes
   if (document.querySelector('.checkboxVPN')) {
     document.querySelectorAll('.checkboxVPN').forEach(item => {
-      item.addEventListener('click', (e) => {
+      item.addEventListener('click', e => {
         const checkboxId = e.target.getAttribute('id');
-        /*const checkboxClass = e.target.classList[0];
+        /*
+        const checkboxClass = e.target.classList[0];
         document.querySelectorAll(`.${checkboxClass}`).forEach(item => {
           item.checked = e.target.checked;
-        })*/
+        })
+        */
         changeCheckboxVPN(checkboxId);
       });
     })
-  }
+  };
 };
 
 /*

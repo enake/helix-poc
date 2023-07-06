@@ -34,11 +34,14 @@ export default function decorate(block) {
     /// ///////////////////////////////////////////////////////////////////////
     // set the title
     if (typeof title !== 'undefined') {
-      let divTagTitle = document.createElement('div');
-      divTagTitle.classList = `top_title ${typeof titlePosition !== 'undefined' ? 'p_'+titlePosition : ''}`;
+      const divTagTitle = document.createElement('div');
+      /*if (typeof titlePosition !== 'undefined') {
+        divTagTitle.classList = `top_title p_${titlePosition`;`
+      }*/
+      divTagTitle.classList = `top_title ${typeof titlePosition !== 'undefined' ? `p_${titlePosition}` : ''}`;
 
       // adding title
-      divTagTitle.innerHTML = document.querySelectorAll('h1').length == 0 ? '<h1> ' + title + ' </h1>' : '<h2> ' + title + ' </h2>';
+      divTagTitle.innerHTML = document.querySelectorAll('h1').length == 0 ? `<h1>${title}</h1>` : `<h2>${title}</h2>`;
 
       // adding subtitle
       if (typeof subtitle !== 'undefined') {
@@ -50,7 +53,7 @@ export default function decorate(block) {
 
     /// ///////////////////////////////////////////////////////////////////////
     // get first prod from the list
-    const firstProd = productsAsList[0].split('/')[0];
+    // const firstProd = productsAsList[0].split('/')[0];
 
     // check and add products into the final array
     productsAsList.forEach((prod) => updateProductsList(prod));
@@ -66,7 +69,7 @@ export default function decorate(block) {
     // create procent - bulina
     if (typeof bulinaText !== 'undefined') {
       const bulinaSplitted = bulinaText.split(',');
-      let divBulina = `<div class="prod-percent green_bck_circle bigger has${bulinaSplitted.length}txt">`;
+      let divBulina = `<div class='prod-percent green_bck_circle bigger has${bulinaSplitted.length}txt'>`;
       bulinaSplitted.forEach((item, idx) => {
         let newItem = item;
         if (item.indexOf('0%') !== -1) {
@@ -151,7 +154,7 @@ export default function decorate(block) {
 
         const vpnBox = document.createElement('div');
         vpnBox.className = 'vpn_box';
-        vpnBox.innerHTML = `<div>${vpnContent}</div>`
+        vpnBox.innerHTML = `<div>${vpnContent}</div>`;
 
         tableVpn.before(vpnBox);
         tableVpn.remove();
