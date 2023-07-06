@@ -53,7 +53,7 @@ export const getIpCountry = async () => {
 */
 
 // add new script file
-export const addScript = (src, data = {}, type = undefined, callback = undefined) => {
+export const addScript = (src, data = {}, type = undefined, position = 'body', callback = undefined) => {
   const s = document.createElement('script');
 
   s.setAttribute('src', src);
@@ -78,5 +78,5 @@ export const addScript = (src, data = {}, type = undefined, callback = undefined
     });
   }
 
-  document.body.appendChild(s);
+  document[position].appendChild(s);
 };
