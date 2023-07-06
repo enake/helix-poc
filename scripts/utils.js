@@ -80,3 +80,10 @@ export const addScript = (src, data = {}, type = undefined, position = 'body', c
 
   document[position].appendChild(s);
 };
+
+export const addInlineScript = (scriptString, position = 'head') => {
+  const scriptEl = document.createElement('script');
+  scriptEl.innerHTML = scriptString;
+
+  document[position].appendChild(scriptEl);
+};
