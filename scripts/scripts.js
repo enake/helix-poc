@@ -984,9 +984,6 @@ const loadPage = async () => {
 
   addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b566-7010-4633-9b03-7ba7735be0b6' }, 'defer');
 
-  // if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
-  // else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
-
   addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
   addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', {}, 'async', () => {
     addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'async', initSelectors);
@@ -1003,9 +1000,6 @@ const loadPage = async () => {
     const getIdentity = item.className;
     item.parentElement.id = `${getIdentity}-${idx + 1}`;
   });
-
-  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
-  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
 };
 
 /*
@@ -1039,3 +1033,8 @@ initMobileDetector('desktop');
 initBaseUri();
 
 loadPage();
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
+  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
+});
