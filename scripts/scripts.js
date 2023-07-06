@@ -89,6 +89,7 @@ const buildAutoBlocks = (main) => {
 export const decorateMain = (main) => {
   // hopefully forward compatible button decoration
   decorateButtons(main);
+  // decorateIcons2(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
@@ -980,8 +981,13 @@ const initSelectors = () => {
 const loadPage = async () => {
   await loadEager(document);
   await loadLazy(document);
+
+  addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
+  addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', {}, 'async', () => {
+    addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'async', initSelectors);
+  });
+
   loadDelayed();
-  initSelectors();
 
   // getIpCountry().then(
   //   (ipCountry) => initSelectors(ipCountry),
@@ -1025,8 +1031,3 @@ initMobileDetector('desktop');
 initBaseUri();
 
 loadPage();
-
-addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
-
-addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
-addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'defer');
