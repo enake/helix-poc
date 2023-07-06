@@ -1003,6 +1003,9 @@ const loadPage = async () => {
     const getIdentity = item.className;
     item.parentElement.id = `${getIdentity}-${idx + 1}`;
   });
+
+  if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
+  else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
 };
 
 /*
