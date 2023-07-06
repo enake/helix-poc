@@ -77,8 +77,11 @@ export default function decorate(block) {
       divBulina += '</div>';
 
       // add to the previous element
-      // block.parentNode.parentNode.previousElementSibling.innerHTML += divBulina;
-      block.parentNode.querySelector('.top_title').innerHTML += divBulina;
+      if (block.parentNode.querySelector('.top_title')) {
+        block.parentNode.querySelector('.top_title').innerHTML += divBulina;
+      } else {
+        block.parentNode.parentNode.previousElementSibling.innerHTML += divBulina;
+      }
 
     }
 
@@ -86,11 +89,11 @@ export default function decorate(block) {
     // create prices sections
     productsAsList.forEach((item, idx) => {
       const prodName = productAliases(productsAsList[idx].split('/')[0]);
+
       const pricesDiv = document.createElement('div');
       pricesDiv.className = 'prices_box';
       pricesDiv.innerHTML += `<span class="prod-oldprice oldprice-${prodName}"></span>`;
       pricesDiv.innerHTML += `<span class="prod-newprice newprice-${prodName}"></span>`;
-      // pricesDiv.innerHTML += `<span class="percent percent-${prodName}"></span>`;
 
       block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table`).after(pricesDiv);
 
@@ -139,7 +142,7 @@ export default function decorate(block) {
           Z: '<span class="percent-vpn"></span>',
         };
 
-        let vpnContent = `<input id="checkboxVPN-${prodName}" class="here checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`;
+        let vpnContent = `<input id="checkboxVPN-${prodName}" class="checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`;
         vpnContent += `<label for="checkboxVPN-${prodName}">`;
         tableVpn.querySelectorAll('td').forEach((td) => {
           vpnContent += `<span>${td.innerHTML.replace(/[XYZ]/g, (m) => replaceData[m])}</span>`;
@@ -160,7 +163,11 @@ export default function decorate(block) {
         }
       }
 
+      // removing last table
       block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1}) table:last-of-type`).remove();
+
+      // add prod class on block
+      block.querySelector(`.c-productswithvpn > div:nth-child(${idx + 1})`).classList.add(`${prodName}_box`, 'prod_box');
     });
   }
 }

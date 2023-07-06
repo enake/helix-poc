@@ -106,16 +106,20 @@
     font-size: 18px;
     color: #666;
 }
-
 .c-productswithvpn2 > div p:nth-of-type(3)::after {
     content: "";
-    border-bottom: 2px solid #df1283;
+    border-bottom: 2px solid #9A9A9A;
     width: 117px;
     display: block;
     margin: 10px auto 0;
 }
-
-.c-productswithvpn2 > div p:nth-of-type(3) h2::after {
+.c-productswithvpn2 > div.tsmd_box p:nth-of-type(3)::after {
+    border-bottom: 2px solid #df1283;
+}
+.c-productswithvpn2 > div.is_box p:nth-of-type(3)::after {
+    border-bottom: 2px solid #019de9;
+}
+.c-productswithvpn2 > div.av_box p:nth-of-type(3)::after {
     border-bottom: 2px solid #e30000;
 }
 
