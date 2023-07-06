@@ -6,6 +6,11 @@
   <script type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
+
+    window.adobeDataLayer = window.adobeDataLayer || [];
+    window.adobeDataLayer.push({
+      event: 'page error'
+    });
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:title" content="Page not found">
