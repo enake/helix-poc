@@ -606,7 +606,6 @@ const changeCheckboxVPN = (checkboxId) => {
       selectedVariation.region_id,
       selectedVariation.currency_iso,
     );
-
   } else {
     // not checked
     if (showVpnBox) {

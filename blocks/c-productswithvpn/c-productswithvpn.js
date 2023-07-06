@@ -32,7 +32,7 @@ export default function decorate(block) {
     subtitle,
     titlePosition,
     products,
-    bulinaText
+    bulinaText,
   } = metaData;
   const productsAsList = products.split(',');
 
@@ -81,7 +81,7 @@ export default function decorate(block) {
       bulinaSplitted.forEach((item, idx) => {
         let newItem = item;
         if (item.indexOf('0%') !== -1) {
-          newItem = item.replace(/0%/g, `<b class='max-discount'></b>`);
+          newItem = item.replace(/0%/g, '<b class=\'max-discount\'></b>');
         }
         divBulina += `<span class='bulina_text${idx + 1}'>${newItem}</span>`;
       });
