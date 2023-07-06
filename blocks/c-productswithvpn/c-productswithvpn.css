@@ -341,6 +341,8 @@
 @media (max-width: 768px) {
     .c-productswithvpn {
         display: block;
+        width: 92%;
+        margin: 0 auto;
     }
 
     .c-productswithvpn > div {
@@ -353,6 +355,13 @@
     .c-productswithvpn > div h2 {
         font-size: 24px;
         line-height: 23px;
+    }
+
+    .c-productswithvpn-container .top_title.p_left h1, .c-productswithvpn-container .top_title.p_left h2 {
+        width: 97%;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 24px;
     }
 
     .c-productswithvpn > div p:nth-of-type(7) {

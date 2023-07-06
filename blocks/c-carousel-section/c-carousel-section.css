@@ -72,4 +72,7 @@
         margin-top: 10px;
         font-weight: 600;
     }
+    .c-carousel-section-container .description p {
+        line-height: 23px;
+    }
 }

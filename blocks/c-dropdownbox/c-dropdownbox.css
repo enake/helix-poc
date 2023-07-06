@@ -144,6 +144,13 @@
     padding: 0 15px 5px;
   }
 
+  .c-dropdownbox-container p {
+    padding: 0 10px;
+  }
+
+  .c-dropdownbox-container .block .bottomText {
+    font-size: 14px;
+  }
   .c-dropdownbox-container .block > div:not(:first-child) > div:nth-child(1) {
     width: 100%;
   }
