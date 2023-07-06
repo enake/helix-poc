@@ -151,6 +151,7 @@
   .c-dropdownbox-container .block .bottomText {
     font-size: 14px;
   }
+  
   .c-dropdownbox-container .block > div:not(:first-child) > div:nth-child(1) {
     width: 100%;
   }
