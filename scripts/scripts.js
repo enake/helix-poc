@@ -650,7 +650,7 @@ const changeCheckboxVPN = (checkboxId) => {
     }
   }
 
-  if (!fullPrice && parentDiv.querySelector(priceClass)) {
+  if (parentDiv.querySelector(priceClass)) {
     parentDiv.querySelector(priceClass).innerHTML = fullPrice;
     if (comparativeDiv) {
       comparativeDiv.querySelector(priceClass).innerHTML = fullPrice;
