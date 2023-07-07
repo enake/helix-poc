@@ -1,5 +1,3 @@
-export const DEFAULT_LANGUAGE = window.location.pathname.split('/')[2];
-
 /**
  * Returns the instance name based on the hostname
  * @returns {String}
@@ -80,3 +78,7 @@ export const addScript = (src, data = {}, type = undefined, callback = undefined
 
   document.body.appendChild(s);
 };
+
+export function getDefaultLanguage() {
+  return window.location.pathname.split('/')[2];
+}

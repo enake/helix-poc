@@ -1,4 +1,4 @@
-import { DEFAULT_LANGUAGE, instance } from './utils.js';
+import { getDefaultLanguage, instance } from './utils.js';
 
 /**
  * Formats a number to have 2 digits
@@ -11,21 +11,30 @@ const formatNumber = (num) => String(num).padStart(2, '0');
  * @returns {Object}
  */
 function getPageNameAndSections() {
+  const DEFAULT_LANGUAGE = getDefaultLanguage();
+
   const pageSectionParts = window.location.pathname.split('/').filter((subPath) => subPath !== '');
   const subSubSection = pageSectionParts[0];
 
-  if (DEFAULT_LANGUAGE === 'en') pageSectionParts[0] = 'us';
-  else pageSectionParts[0] = DEFAULT_LANGUAGE;
+  pageSectionParts[0] = DEFAULT_LANGUAGE === 'en' ? 'us' : DEFAULT_LANGUAGE;
 
-  if (pageSectionParts[1].length === 2) pageSectionParts[1] = 'offers'; // landing pages
+  try {
+    if (pageSectionParts[1].length === 2) pageSectionParts[1] = 'offers'; // landing pages
 
-  pageSectionParts.splice(2, 0, subSubSection);
+    pageSectionParts.splice(2, 0, subSubSection);
 
-  const pageName = pageSectionParts.join(':') || 'Home';
-  return {
-    pageName,
-    sections: pageSectionParts,
-  };
+    const pageName = pageSectionParts.join(':') || 'Home';
+    return {
+      pageName,
+      sections: pageSectionParts,
+    };
+  } catch (e) {
+    return {
+      pageName: 'us:404',
+      section: 'us',
+      subSection: '404',
+    };
+  }
 }
 
 /**
@@ -96,9 +105,11 @@ const currentGMTDate = (() => {
  * Sends the page load started event to the Adobe Data Layer
  */
 export const sendAnalyticsPageEvent = async () => {
+  const DEFAULT_LANGUAGE = getDefaultLanguage();
   window.adobeDataLayer = window.adobeDataLayer || [];
 
-  const { pageName, sections } = getPageNameAndSections();
+  const { pageName, sections, subSection } = getPageNameAndSections();
+
   window.adobeDataLayer.push({
     event: 'page load started',
     pageInstanceID: instance,
@@ -128,6 +139,11 @@ export const sendAnalyticsPageEvent = async () => {
       },
     },
   });
+
+  if (subSection && subSection === '404') {
+    window.adobeDataLayer.push({ event: 'page error' });
+    window.adobeDataLayer.push({ event: 'page loaded' });
+  }
 };
 
 /*
