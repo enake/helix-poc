@@ -688,7 +688,6 @@ const showPrices = (storeObj) => {
     if (document.querySelector(`.oldprice-${productId}`)) {
       document.querySelectorAll(`.oldprice-${productId}`).forEach((item) => {
         item.innerHTML = fullPrice;
-        item.style.display = 'inline-block';
       });
     }
 
@@ -750,15 +749,6 @@ const showPrices = (storeObj) => {
       parentElement.style.visibility = 'hidden';
       parentElement.style.display = 'none';
     }
-
-    /*
-    if (document.querySelector(`.oldprice-${productId}`) && document.querySelector(`.save-${productId}`)) {
-      const oldPriceElement = document.querySelector(`.oldprice-${productId}`);
-      const infoRowElement = findClosestParentByClass(oldPriceElement, 'info-row');
-
-      infoRowElement.style.display = 'none';
-    }
-    */
 
     if (document.querySelector(`.show_save_${productId}`)) {
       document.querySelector(`.show_save_${productId}`).style.display = 'none';
