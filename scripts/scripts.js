@@ -145,8 +145,8 @@ const loadLazy = async (doc) => {
 
   loadHeader(doc.querySelector('header'));
 
-  await sendAnalyticsPageEvent();
   sendAnalyticsUserInfo();
+  await sendAnalyticsPageEvent();
 
   loadFooter(doc.querySelector('footer'));
 
