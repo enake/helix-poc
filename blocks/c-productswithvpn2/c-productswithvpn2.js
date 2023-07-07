@@ -84,8 +84,12 @@ export default function decorate(block) {
       const vpnDiv = document.createElement('div');
       vpnDiv.className = 'vpn_box';
 
-      let vpnContent = `<input id="checkboxVPN-${prodName}" class="checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`;
-      vpnContent += `<label for="checkboxVPN-${prodName}${idx + 1}">${tableVpn.querySelector('td').innerHTML.replace(/0/g, vpnPrices)}</label>`;
+      let labelId = `checkboxVPN-${prodName}`;
+      if (document.getElementById(labelId)) {
+        labelId = `${labelId}-1`;
+      }
+      let vpnContent = `<input id="${labelId}" class="${labelId} checkboxVPN" type="checkbox" value="">`;
+      vpnContent += `<label for="${labelId}">${tableVpn.querySelector('td').innerHTML.replace(/0/g, vpnPrices)}</label>`;
 
       vpnDiv.innerHTML = vpnContent;
 

@@ -647,28 +647,28 @@ const changeCheckboxVPN = (checkboxId) => {
 
   if (parentDiv.querySelector(buyClass)) {
     parentDiv.querySelector(buyClass).setAttribute('href', buyLink);
-    if (comparativeDiv) {
+    if (comparativeDiv && comparativeDiv.querySelector(buyClass)) {
       comparativeDiv.querySelector(buyClass).setAttribute('href', buyLink);
     }
   }
 
   if (parentDiv.querySelector(priceClass)) {
     parentDiv.querySelector(priceClass).innerHTML = fullPrice;
-    if (comparativeDiv) {
+    if (comparativeDiv && comparativeDiv.querySelector(priceClass)) {
       comparativeDiv.querySelector(priceClass).innerHTML = fullPrice;
     }
   }
 
   if (parentDiv.querySelector(discPriceClass)) {
     parentDiv.querySelector(discPriceClass).innerHTML = newPrice;
-    if (comparativeDiv) {
+    if (comparativeDiv && comparativeDiv.querySelector(discPriceClass)) {
       comparativeDiv.querySelector(discPriceClass).innerHTML = newPrice;
     }
   }
 
   if (parentDiv.querySelector(saveClass)) {
     parentDiv.querySelector(saveClass).innerHTML = save;
-    if (comparativeDiv) {
+    if (comparativeDiv && comparativeDiv.querySelector(saveClass)) {
       comparativeDiv.querySelector(saveClass).innerHTML = save;
     }
   }
@@ -690,7 +690,6 @@ const showPrices = (storeObj) => {
     if (document.querySelector(`.oldprice-${productId}`)) {
       document.querySelectorAll(`.oldprice-${productId}`).forEach((item) => {
         item.innerHTML = fullPrice;
-        item.style.display = 'inline-block';
       });
     }
 
@@ -752,15 +751,6 @@ const showPrices = (storeObj) => {
       parentElement.style.visibility = 'hidden';
       parentElement.style.display = 'none';
     }
-
-    /*
-    if (document.querySelector(`.oldprice-${productId}`) && document.querySelector(`.save-${productId}`)) {
-      const oldPriceElement = document.querySelector(`.oldprice-${productId}`);
-      const infoRowElement = findClosestParentByClass(oldPriceElement, 'info-row');
-
-      infoRowElement.style.display = 'none';
-    }
-    */
 
     if (document.querySelector(`.show_save_${productId}`)) {
       document.querySelector(`.show_save_${productId}`).style.display = 'none';
@@ -824,11 +814,6 @@ const initSelectors = () => {
         },
       });
     });
-
-    document.querySelectorAll('.checkboxVPN').forEach((checkbox, idx) => {
-      checkbox.id += `-${idx + 1}`;
-      checkbox.parentNode.querySelector('label').setAttribute('for', checkbox.id);
-    });
   }
 };
 
@@ -853,12 +838,6 @@ const loadPage = async () => {
         document.querySelectorAll('.checkboxVPN').forEach((item) => {
           item.addEventListener('click', (e) => {
             const checkboxId = e.target.getAttribute('id');
-            /*
-            const checkboxClass = e.target.classList[0];
-            document.querySelectorAll(`.${checkboxClass}`).forEach(item => {
-              item.checked = e.target.checked;
-            })
-            */
             changeCheckboxVPN(checkboxId);
           });
         });
