@@ -29,10 +29,10 @@ function getPageNameAndSections() {
       sections: pageSectionParts,
     };
   } catch (e) {
-    const subSection = '404';
     return {
-      pageName: `${DEFAULT_LANGUAGE || 'us'}:${subSection}`,
-      sections: [subSection],
+      pageName: 'us:404',
+      section: 'us',
+      subSection: '404',
     };
   }
 }
@@ -108,7 +108,7 @@ export const sendAnalyticsPageEvent = async () => {
   const DEFAULT_LANGUAGE = getDefaultLanguage();
   window.adobeDataLayer = window.adobeDataLayer || [];
 
-  const { pageName, sections } = getPageNameAndSections();
+  const { pageName, sections, subSection } = getPageNameAndSections();
 
   window.adobeDataLayer.push({
     event: 'page load started',
@@ -140,7 +140,7 @@ export const sendAnalyticsPageEvent = async () => {
     },
   });
 
-  if (sections[0] === '404') {
+  if (subSection && subSection === '404') {
     window.adobeDataLayer.push({ event: 'page loaded' });
   }
 };
