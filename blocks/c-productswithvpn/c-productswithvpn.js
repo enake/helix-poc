@@ -144,8 +144,12 @@ export default function decorate(block) {
           Z: '<span class="percent-vpn"></span>',
         };
 
-        let vpnContent = `<input id="checkboxVPN-${prodName}" class="checkboxVPN-${prodName} checkboxVPN" type="checkbox" value="">`;
-        vpnContent += `<label for="checkboxVPN-${prodName}">`;
+        let labelId = `checkboxVPN-${prodName}`;
+        if (document.getElementById(labelId)) {
+          labelId = `${labelId}-1`;
+        }
+        let vpnContent = `<input id="${labelId}" class="${labelId} checkboxVPN" type="checkbox" value="">`;
+        vpnContent += `<label for="${labelId}">`;
         tableVpn.querySelectorAll('td').forEach((td) => {
           vpnContent += `<span>${td.innerHTML.replace(/[XYZ]/g, (m) => replaceData[m])}</span>`;
         });

@@ -812,11 +812,6 @@ const initSelectors = () => {
         },
       });
     });
-
-    document.querySelectorAll('.checkboxVPN').forEach((checkbox, idx) => {
-      checkbox.id += `-${idx + 1}`;
-      checkbox.parentNode.querySelector('label').setAttribute('for', checkbox.id);
-    });
   }
 };
 
@@ -846,12 +841,6 @@ const loadPage = async () => {
     document.querySelectorAll('.checkboxVPN').forEach((item) => {
       item.addEventListener('click', (e) => {
         const checkboxId = e.target.getAttribute('id');
-        /*
-        const checkboxClass = e.target.classList[0];
-        document.querySelectorAll(`.${checkboxClass}`).forEach(item => {
-          item.checked = e.target.checked;
-        })
-        */
         changeCheckboxVPN(checkboxId);
       });
     });
