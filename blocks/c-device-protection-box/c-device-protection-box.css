@@ -1,5 +1,6 @@
 .c-device-protection-box-wrapper {
     margin: 3em auto!important;
+    max-width: 100%!important;
 }
 
 .c-device-protection-box-container {
@@ -14,10 +15,6 @@
 /* subtext */
 .c-device-protection-box-container .row-box > :nth-child(2) > :not(:first-child) {
     font-size: 12px;
-}
-
-.c-device-protection-box-wrapper {
-    max-width: 100%!important;
 }
 
 @media screen and (min-width: 992px) {
