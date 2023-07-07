@@ -648,23 +648,13 @@ const changeCheckboxVPN = (checkboxId) => {
     if (comparativeDiv) {
       comparativeDiv.querySelector(buyClass).setAttribute('href', buyLink);
     }
-    /*
-    document.querySelectorAll(buyClass).forEach(item => {
-      item.setAttribute('href', StoreProducts.appendVisitorID(buyLink));
-    });
-    */
   }
 
-  if (fullPrice !== '' && parentDiv.querySelector(priceClass)) {
+  if (!fullPrice && parentDiv.querySelector(priceClass)) {
     parentDiv.querySelector(priceClass).innerHTML = fullPrice;
     if (comparativeDiv) {
       comparativeDiv.querySelector(priceClass).innerHTML = fullPrice;
     }
-    /*
-    document.querySelectorAll(priceClass).forEach(item => {
-      item.innerHTML = fullPrice;
-    });
-    */
   }
 
   if (parentDiv.querySelector(discPriceClass)) {
@@ -672,11 +662,6 @@ const changeCheckboxVPN = (checkboxId) => {
     if (comparativeDiv) {
       comparativeDiv.querySelector(discPriceClass).innerHTML = newPrice;
     }
-    /*
-    document.querySelectorAll(discPriceClass).forEach(item => {
-      item.innerHTML = newPrice;
-    });
-    */
   }
 
   if (parentDiv.querySelector(saveClass)) {
@@ -684,11 +669,6 @@ const changeCheckboxVPN = (checkboxId) => {
     if (comparativeDiv) {
       comparativeDiv.querySelector(saveClass).innerHTML = save;
     }
-    /*
-    document.querySelectorAll(saveClass).forEach(item => {
-      item.innerHTML = save;
-    });
-    */
   }
 };
 

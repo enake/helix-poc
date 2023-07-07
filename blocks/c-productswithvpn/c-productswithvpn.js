@@ -41,11 +41,6 @@ export default function decorate(block) {
     // set the title
     if (typeof title !== 'undefined') {
       const divTagTitle = document.createElement('div');
-      /*
-        if (typeof titlePosition !== 'undefined') {
-          divTagTitle.classList = `top_title p_${titlePosition`;`
-        }
-      */
       divTagTitle.classList = `top_title ${typeof titlePosition !== 'undefined' ? `p_${titlePosition}` : ''}`;
 
       // adding title
@@ -60,9 +55,6 @@ export default function decorate(block) {
     }
 
     /// ///////////////////////////////////////////////////////////////////////
-    // get first prod from the list
-    // const firstProd = productsAsList[0].split('/')[0];
-
     // check and add products into the final array
     productsAsList.forEach((prod) => updateProductsList(prod));
 
