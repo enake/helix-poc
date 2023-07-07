@@ -14,7 +14,9 @@ import {
 } from './lib-franklin.js';
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
-import { addScript, DEFAULT_LANGUAGE } from './utils.js';
+import { addScript, getDefaultLanguage } from './utils.js';
+
+const DEFAULT_LANGUAGE = getDefaultLanguage();
 
 const productsList = [];
 
