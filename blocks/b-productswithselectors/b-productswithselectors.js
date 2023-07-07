@@ -1,4 +1,4 @@
-/**
+/*
  * Information:
  * - displays 3 boxes positioned in flex mode:
  *   1. selectors
@@ -27,7 +27,7 @@ export default function decorate(block) {
     products, selectorsName, taxesText, discountText, buttonText,
   } = metaData;
 
-  const productsAsList = products.split(',');
+  const productsAsList = products && products.split(',');
 
   if (productsAsList.length) {
     /// ///////////////////////////////////////////////////////////////////////
@@ -38,24 +38,26 @@ export default function decorate(block) {
     // create the 2 selectors
     const labelName = selectorsName.split(',');
     // devices
-    const optionsDevices = Array(101).fill().map((_, d) => {
-      if (d < 5) return ''; // starts from 5
+    const optionsDevices = Array(100).fill().map((_, d) => {
+      const key = d + 1;
+      if (key < 5) return ''; // starts from 5
       let selected = '';
-      if (d === 10) { // default value selected = 10
+      if (key === 10) { // default value selected = 10
         selected = ' selected';
       }
-      return `<option value="${d}" ${selected}>${d}</option>`;
+      return `<option value="${key}" ${selected}>${key}</option>`;
     });
     block.querySelector('p:nth-child(3)').innerHTML += `<div class="selectorBox"><label>${labelName[0]}</label><select id="select${labelName[0]}" data-trigger="users">${optionsDevices}</select></div>`;
 
     // years
-    const optionsYears = Array(4).fill().map((_, y) => {
-      if (y < 1) return ''; // starts from 1
+    const optionsYears = Array(3).fill().map((_, y) => {
+      const key = y + 1;
+      if (key < 1) return ''; // starts from 1
       let selected = '';
-      if (y === 1) { // default value selected = 1
+      if (key === 1) { // default value selected = 1
         selected = ' selected';
       }
-      return `<option value="${y}" ${selected}>${y}</option>`;
+      return `<option value="${key}" ${selected}>${key}</option>`;
     });
 
     block.querySelector('p:nth-child(3)').innerHTML += `<div class="selectorBox"><label>${labelName[1].trim()}</label><select id="select${labelName[1].trim()}" data-trigger="years">${optionsYears}</select></div>`;

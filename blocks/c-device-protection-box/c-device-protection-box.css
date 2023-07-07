@@ -1,5 +1,6 @@
 .c-device-protection-box-wrapper {
     margin: 3em auto!important;
+    max-width: 100%!important;
 }
 
 .c-device-protection-box-container {
@@ -16,13 +17,6 @@
     font-size: 12px;
 }
 
-.c-device-protection-box-container img {
-    margin-left: -14em;
-    width: 155%;
-    max-width: unset;
-}
-
-
 @media screen and (min-width: 992px) {
     /* heading */
     .c-device-protection-box-container .row-box > :nth-child(2) > *:first-child {
@@ -36,13 +30,6 @@
     .c-device-protection-box-container .row-box > :nth-child(2) > :not(:first-child) {
         font-size: 14px;
         margin-top: 0;
-    }
-}
-
-@media screen and (max-width: 992px) {
-    .c-device-protection-box-container img {
-        width: 100%;
-        margin-left: 0;
     }
 }
 
