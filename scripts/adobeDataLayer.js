@@ -141,6 +141,7 @@ export const sendAnalyticsPageEvent = async () => {
   });
 
   if (subSection && subSection === '404') {
+    window.adobeDataLayer.push({ event: 'page error' });
     window.adobeDataLayer.push({ event: 'page loaded' });
   }
 };
