@@ -645,28 +645,28 @@ const changeCheckboxVPN = (checkboxId) => {
 
   if (parentDiv.querySelector(buyClass)) {
     parentDiv.querySelector(buyClass).setAttribute('href', buyLink);
-    if (comparativeDiv) {
+    if (comparativeDiv && comparativeDiv.querySelector(buyClass)) {
       comparativeDiv.querySelector(buyClass).setAttribute('href', buyLink);
     }
   }
 
   if (parentDiv.querySelector(priceClass)) {
     parentDiv.querySelector(priceClass).innerHTML = fullPrice;
-    if (comparativeDiv) {
+    if (comparativeDiv && comparativeDiv.querySelector(priceClass)) {
       comparativeDiv.querySelector(priceClass).innerHTML = fullPrice;
     }
   }
 
   if (parentDiv.querySelector(discPriceClass)) {
     parentDiv.querySelector(discPriceClass).innerHTML = newPrice;
-    if (comparativeDiv) {
+    if (comparativeDiv && comparativeDiv.querySelector(discPriceClass)) {
       comparativeDiv.querySelector(discPriceClass).innerHTML = newPrice;
     }
   }
 
   if (parentDiv.querySelector(saveClass)) {
     parentDiv.querySelector(saveClass).innerHTML = save;
-    if (comparativeDiv) {
+    if (comparativeDiv && comparativeDiv.querySelector(saveClass)) {
       comparativeDiv.querySelector(saveClass).innerHTML = save;
     }
   }
