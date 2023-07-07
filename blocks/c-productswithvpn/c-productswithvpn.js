@@ -34,7 +34,7 @@ export default function decorate(block) {
     products,
     bulinaText,
   } = metaData;
-  const productsAsList = products.split(',');
+  const productsAsList = products && products.split(',');
 
   if (productsAsList.length) {
     /// ///////////////////////////////////////////////////////////////////////
