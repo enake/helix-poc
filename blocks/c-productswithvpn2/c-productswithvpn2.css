@@ -382,7 +382,7 @@
 
 .c-productswithvpn2-container.has4boxes .c-productswithvpn2 > div {
     width: 24%;
-    padding: 1%;
+    padding: 5px;
     border: 0 none;
     overflow: hidden;
 }
@@ -423,7 +423,7 @@
 
     .c-productswithvpn2-container.has4boxes .c-productswithvpn2 > div {
         width: 100%;
-        padding: 3%;
+        padding: 10px;
         margin-bottom: 1em;
         padding-bottom: 10px;
     }
@@ -439,8 +439,8 @@
     }
 
     .c-productswithvpn2 > div {
-        width: 94%;
-        padding: 3%;
+        width: 90%;
+        padding: 10px;
         margin: 0 auto 1em;
         padding-bottom: 10px;
     }

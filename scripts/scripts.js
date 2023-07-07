@@ -348,9 +348,7 @@ const changeCheckboxVPN = (checkboxId) => {
         linkRef = 'WEBSITE_COM_TSMULTIBUNDLE';
       }
     }
-
     if (linkRef.length > 0) ref = `/REF.${linkRef}`;
-
     if (DEFAULT_LANGUAGE === 'au') currency = 'AUD';
     else currency = selectedVariation.currency_iso;
 
