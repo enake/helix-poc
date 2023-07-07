@@ -25,7 +25,7 @@ export default function decorate(block) {
   const parentSelector = block.closest('.section');
   const metaData = parentSelector.dataset;
   const { products, topText } = metaData;
-  const productsAsList = products.split(',');
+  const productsAsList = products && products.split(',');
 
   /// ///////////////////////////////////////////////////////////////////////
   // adding top text

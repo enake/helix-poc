@@ -27,7 +27,7 @@ export default function decorate(block) {
     products, selectorsName, taxesText, discountText, buttonText,
   } = metaData;
 
-  const productsAsList = products.split(',');
+  const productsAsList = products && products.split(',');
 
   if (productsAsList.length) {
     /// ///////////////////////////////////////////////////////////////////////

@@ -23,7 +23,7 @@ export default function decorate(block) {
   const parentSelector = block.closest('.section');
   const metaData = parentSelector.dataset;
   const { products, bulinaText } = metaData;
-  const productsAsList = products.split(',');
+  const productsAsList = products && products.split(',');
 
   if (productsAsList.length) {
     // check and add products into the final array
