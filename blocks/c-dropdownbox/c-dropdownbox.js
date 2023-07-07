@@ -31,7 +31,7 @@ export default function decorate(block) {
   if (typeof metaData.bottomText !== 'undefined') {
     const bottomLine = document.createElement('p');
     bottomLine.innerHTML = metaData.bottomText;
-    bottomLine.classList = 'bottomText';
+    bottomLine.classList = 'bottom-text';
     block.append(bottomLine);
   }
 

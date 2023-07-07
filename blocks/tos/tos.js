@@ -3,9 +3,9 @@ export default function decorate(block) {
 
   for (let i = 0; i < links.length; i += 1) {
     links[i].addEventListener('click', () => {
-      const svg = this.parentElement.querySelector('svg');
+      const svg = links[i].parentElement.querySelector('svg');
       svg.classList.toggle('tos__link--active');
-      this.parentElement.parentElement.children[1].children[0].classList.toggle('d-block');
+      links[i].parentElement.parentElement.children[1].children[0].classList.toggle('d-block');
     });
   }
 
