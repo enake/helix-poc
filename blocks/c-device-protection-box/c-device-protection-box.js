@@ -25,12 +25,12 @@ export default function decorate(block) {
   const rowText = [...block.children].slice(1, lastElIndex);
 
   block.innerHTML = `
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-lg-6">
           ${pictureEl.innerHTML}
         </div>
-        <div class="col-12 col-lg-6 mt-3">
+        <div class="col-12 col-lg-4 mt-3">
           ${rowText.map((row) => `
             <div class="d-flex row-box">
               <div>${new SvgLoaderComponent(row.children[0].innerText, svgColor, svgSize).render()}</div>

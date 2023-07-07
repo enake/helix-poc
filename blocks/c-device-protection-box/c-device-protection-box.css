@@ -16,10 +16,8 @@
     font-size: 12px;
 }
 
-.c-device-protection-box-container img {
-    margin-left: -14em;
-    width: 120%;
-    max-width: unset;
+.c-device-protection-box-wrapper {
+    max-width: 100%!important;
 }
 
 @media screen and (min-width: 992px) {
@@ -35,13 +33,6 @@
     .c-device-protection-box-container .row-box > :nth-child(2) > :not(:first-child) {
         font-size: 14px;
         margin-top: 0;
-    }
-}
-
-@media screen and (max-width: 992px) {
-    .c-device-protection-box-container img {
-        width: 100%;
-        margin-left: 0;
     }
 }
 
