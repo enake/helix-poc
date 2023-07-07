@@ -818,6 +818,8 @@ const initSelectors = () => {
 };
 
 const loadPage = async () => {
+  addScript('https://assets.adobedtm.com/8a93f8486ba4/e7dc9e6549e5/launch-aef7ddf31563-development.min.js', {}, 'defer');
+  
   await loadEager(document);
   await loadLazy(document);
 
