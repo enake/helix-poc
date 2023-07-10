@@ -48,22 +48,25 @@
   object-fit: cover;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .c-teaser-card .inner-wrapper {
     padding: 50px 0 90px;
   }
 }
-@media (min-width: 992px) {
+
+@media (width >= 992px) {
   .c-teaser-card h3 {
     font-size: 40px;
   }
 }
-@media (max-width: 768px) {
+
+@media (width <= 768px) {
   .c-teaser-card h3, .c-teaser-card h3 p {
     font-size: 26px;
     margin: 0 !important;
     line-height: 29px;
   }
+  
   .c-teaser-card .subtitle {
     padding: 0;
     font-size: 14px;

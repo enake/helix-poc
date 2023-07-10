@@ -93,23 +93,28 @@ footer .footer__links li:last-child::after {
 }
 
 /* for mobile */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   footer {
     padding: 18px 0;
   }
+
   footer .default-content-wrapper {
     display: block;
   }
+
   footer img {
     margin-bottom: 10px;
   }
+
   footer a, footer .footer__links a, .footer__copy {
     font-size: 13px;
     padding: 0 1px;
   }
+
   footer p {
     font-size: 13px;
   }
+  
   footer strong {
     font-size: 20px;
     text-align: left;

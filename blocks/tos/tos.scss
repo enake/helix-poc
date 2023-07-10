@@ -53,13 +53,15 @@
   font-size: 16px;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .tos-container {
     padding: 1em 0;
   }
+
   .tos {
     font-size: 15px;
   }
+
   .tos > div:not(:first-child) {
     margin-bottom: 10px;
   }

@@ -142,54 +142,66 @@
 }
 
 /* for mobile */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .b-productswithselectors-container {
     margin-top: 0;
   }
+
   .b-productswithselectors > div:nth-child(1) h3 {
     font-size: 24px;
   }
+
   .b-productswithselectors > div:not(:first-child) hr {
     margin: 10px 0;
   }
+
   .b-productswithselectors > div:not(:first-child) p:first-of-type u {
     padding: 5px;
     top: -32px;
     font-size: 14px;
   }
+
   .b-productswithselectors > div:nth-child(1) {
     width: 100%;
     margin-bottom: 4em !important;
   }
+
   .b-productswithselectors > div:not(:nth-child(1)) {
     width: 45%;
     float: left;
   }
+
   .b-productswithselectors > div:not(:first-child) h4 {
     font-size: 17px;
     margin-top: 0;
   }
+
   .b-productswithselectors > div:not(:first-child) h3 {
     font-size: 16px;
     line-height: 18px;
     height: 35px;
   }
+
   .b-productswithselectors > div:not(:first-child) ul li {
     font-size: 14px;
     line-height: 19px;
     margin-bottom: 6px;
   }
+
   .b-productswithselectors > div:not(:first-child) p:last-of-type {
     font-size: 14px;
     line-height: 18px;
     margin-bottom: 10px;
   }
+
   .b-dropdownbox-container .block > div:not(:first-child) {
     display: block !important;
   }
+
   .b-productswithselectors, .b-dropdownbox-container .block > div:not(:first-child) {
     display: block;
   }
+  
   .b-productswithselectors > div:not(:first-child) ul:first-of-type {
     min-height: 14.5em;
     margin: 6px 0;

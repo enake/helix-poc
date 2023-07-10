@@ -16,7 +16,7 @@
   font-size: 12px;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >=  992px) {
   /* heading */
   .c-device-protection-box-container .row-box > :nth-child(2) > *:first-child {
     font-weight: 600;
@@ -24,6 +24,7 @@
     font-size: 18px;
     margin-top: 0;
   }
+
   /* subtext */
   .c-device-protection-box-container .row-box > :nth-child(2) > :not(:first-child) {
     font-size: 14px;
@@ -31,10 +32,11 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .c-device-protection-box-container {
     padding: 1em 0;
   }
+
   .c-device-protection-box-wrapper {
     margin: 1em auto !important;
   }

@@ -137,7 +137,7 @@
 }
 
 /* for mobile */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .c-dropdownbox-container {
     clear: both;
     padding: 0 15px 5px;
@@ -154,14 +154,17 @@
   .c-dropdownbox-container .block > div:not(:first-child) > div:nth-child(1) {
     width: 100%;
   }
+
   .c-dropdownbox-container .block > div:first-of-type, .c-dropdownbox-container .block > div:first-of-type > div:first-of-type, .c-dropdownbox-container .block.inactive > div:not(:nth-child(1)) {
     display: block;
     width: 100%;
   }
+
   .c-dropdownbox-container .block > div:nth-child(1) > div {
     font-size: 15px;
     line-height: 17px;
   }
+
   .c-dropdownbox-container .block > div:nth-child(1) > div:not(:nth-child(1)) {
     width: 33%;
     float: left;
@@ -170,19 +173,23 @@
     padding: 10px 0;
     border: 0 none;
   }
+
   .c-dropdownbox-container .block > div > div {
     padding: 5px 0;
     border-top: 1px solid #dfdfdf;
     border-bottom: 0 none;
   }
+
   .c-dropdownbox-container .block > div:first-of-type > div:not(:first-child) {
     text-align: center;
   }
+
   .c-dropdownbox-container .block > div:not(:first-child) > div:not(:first-child) {
     width: 33%;
     float: left;
     border: 0 none;
   }
+  
   .c-dropdownbox-container .block.has2divs > div:not(:first-child) > div:not(:first-child) {
     width: 100%;
   }

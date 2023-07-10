@@ -65,7 +65,7 @@
   margin: 0;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .c-carousel-section-container h2, .c-carousel-section-container h3 {
         font-size: 27px;
         line-height: 30px;

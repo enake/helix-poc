@@ -22,7 +22,7 @@
   margin-top: 0;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
   .c-tough-on-threats-container h2 {
     font-size: 32px;
   }
