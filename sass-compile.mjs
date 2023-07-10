@@ -36,8 +36,10 @@ for (const folder of ["styles","blocks"]) {
     }
 }
 
-fs.watch('.', {recursive: true}, (eventType, fileName) => {
-    if (path.extname(fileName) === ".scss" && eventType === "change") {
-        compileAndSave(path.join(__dirname, fileName));
-    }
-})
+if (process.argv[2] === '--watch') {
+    fs.watch('.', {recursive: true}, (eventType, fileName) => {
+        if (path.extname(fileName) === ".scss" && eventType === "change") {
+            compileAndSave(path.join(__dirname, fileName));
+        }
+    })
+}
