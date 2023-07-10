@@ -1,5 +1,5 @@
 import { getMetadata, decorateIcons2 } from '../../scripts/lib-franklin.js';
-import { instance } from "../../scripts/utils.js";
+import { instance } from '../../scripts/utils.js';
 
 async function extractSpanSvg(html) {
   const div = document.createElement('div');
