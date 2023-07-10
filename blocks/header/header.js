@@ -29,7 +29,7 @@ export default async function decorate(block) {
     block.className = 'lp-header py-3';
     block.innerHTML = `
       <div class="container">
-        <a class="d-inline-block" href="/${homeUrl}">
+        <a class="d-inline-block" href="${homeUrl}">
           ${spanSvg.outerHTML}
         </a>
       </div>`;
