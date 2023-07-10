@@ -25,7 +25,7 @@ export default function decorate(block) {
   const parentSelector = block.closest('.section');
   const metaData = parentSelector.dataset;
   const { products, topText } = metaData;
-  const productsAsList = products.split(',');
+  const productsAsList = products && products.split(',');
 
   /// ///////////////////////////////////////////////////////////////////////
   // adding top text
@@ -60,7 +60,7 @@ export default function decorate(block) {
       pricesSection.innerHTML = pricesDiv;
 
       // add buybtn div & anchor
-      const tableBuybtn = block.querySelector(`div:nth-child(${idx + 1}) table:last-of-type td`);
+      const tableBuybtn = block.querySelector(`div:nth-child(${idx + 1 + 1}) table:last-of-type td`);
       tableBuybtn.innerHTML = `<a href="#" title="Bitdefender ${prodName}" class="red-buy-button buylink-${prodName}">${tableBuybtn.innerText}</a>`;
     });
   }

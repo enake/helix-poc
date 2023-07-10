@@ -137,6 +137,10 @@
   margin: 10px 0;
 }
 
+.b-productswithselectors .prod-oldprice{
+    margin: 10px 0;
+}
+
 /* for mobile */
 @media (max-width: 768px) {
   .b-productswithselectors-container {

@@ -66,10 +66,14 @@
 }
 
 @media (max-width: 768px) {
-  .c-carousel-section-container h2, .c-carousel-section-container h3 {
-    font-size: 27px;
-    line-height: 30px;
-    margin-top: 10px;
-    font-weight: 600;
-  }
+    .c-carousel-section-container h2, .c-carousel-section-container h3 {
+        font-size: 27px;
+        line-height: 30px;
+        margin-top: 10px;
+        font-weight: 600;
+    }
+    
+    .c-carousel-section-container .description p {
+        line-height: 23px;
+    }
 }

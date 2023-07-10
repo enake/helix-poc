@@ -76,4 +76,10 @@
     padding-bottom: 0;
     margin-bottom: 0;
   }
+
+  .columns > div > .columns-img-col img {
+    max-width: 100%;
+    margin-left: 0;
+  }
+ 
 }
