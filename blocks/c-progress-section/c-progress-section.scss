@@ -25,7 +25,7 @@
 }
 
 .c-progress-section-container .progress-bar--first {
-  background: linear-gradient(90deg, rgb(1, 14, 128) 0%, rgb(0, 110, 255) 100%);
+  background: linear-gradient(90deg, rgb(1 14 128) 0%, rgb(0 110 255) 100%);
   color: white;
 }
 
@@ -87,10 +87,12 @@
     display: block;
   }
 }
+
 @media screen and (width <= 767px) {
   .c-progress-section-container .heading {
     margin-bottom: 0;
   }
+
   .c-progress-section-container .subheading {
     font-size: 27px;
     line-height: 30px;

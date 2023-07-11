@@ -13,5 +13,6 @@ jobs:
         node-version: '14'
     - run: npm install
     - run: npm run lint
+    - run: npm run compile-sass
       env:
         CI: true

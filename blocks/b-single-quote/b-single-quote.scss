@@ -49,6 +49,7 @@
   .b-single-quote-container .main-wrapper {
     height: 550px;
   }
+
   .b-single-quote-container .main-wrapper::before {
     content: "";
     position: absolute;
@@ -60,6 +61,7 @@
     border-radius: 0 50% 50% 0;
     z-index: 1;
   }
+
   .b-single-quote-container .main-wrapper .inner-wrapper {
     width: 100%;
     height: 100%;
@@ -67,22 +69,26 @@
     z-index: 1;
     color: white;
   }
+
   .b-single-quote-container .main-wrapper .inner-wrapper .container {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
   }
+
   .b-single-quote-container .main-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
   .b-single-quote-container .main-wrapper q {
     display: block;
     font-size: 32px;
     max-width: 550px;
   }
+  
   .b-single-quote-container .main-wrapper .author {
     font-weight: 500;
     font-size: 18px;
