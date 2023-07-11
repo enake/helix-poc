@@ -1835,16 +1835,13 @@ StoreProducts.requestPricingInfo = function (so) {
               // Handle any error that occurred during the request
           });
     } else {
-        let params = new URLSearchParams();
-        params.append('data', so);
+        // let params = new URLSearchParams();
+        // params.append('data', so);
 
         let formData = new FormData();
-        formData.append('data', params.toString());
+        formData.append('data', so);
         fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            },
             body: formData
         })
           .then(function(response) {
