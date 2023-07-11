@@ -1,4 +1,5 @@
 import { getMetadata, decorateIcons2 } from '../../scripts/lib-franklin.js';
+import { adobeMcAppendVisitorId, GLOBAL_EVENTS } from '../../scripts/utils.js';
 
 async function extractSpanSvg(html) {
   const div = document.createElement('div');
@@ -30,5 +31,9 @@ export default async function decorate(block) {
           ${spanSvg.outerHTML}
         </a>
       </div>`;
+
+    document.addEventListener(GLOBAL_EVENTS.ADOBE_MC_LOADED, () => {
+      adobeMcAppendVisitorId('header');
+    });
   }
 }
