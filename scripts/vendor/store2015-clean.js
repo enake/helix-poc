@@ -1843,7 +1843,7 @@ StoreProducts.requestPricingInfo = function (so) {
         fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             },
             body: formData
         })
