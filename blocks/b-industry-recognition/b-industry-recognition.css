@@ -1,0 +1,31 @@
+.b-industry-recognition-container .main-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.b-industry-recognition .main-wrapper .item {
+  flex: 1 0 calc(33.33% - 20px);
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100px;
+}
+
+.b-industry-recognition .main-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.b-industry-recognition .main-wrapper .subtitle {
+  color: #3c3c3c;
+  font-size: 18px;
+}
+
+@media screen and (width >= 992px) {
+  .b-industry-recognition .main-wrapper .item {
+    flex: 1 0 calc(16.66% - 20px);
+    height: 150px;
+  }
+}
