@@ -16,6 +16,5 @@ addScript('https://consent.cookiebot.com/uc.js', { culture: 'en', cbid: '4a55b56
 addScript(instance === 'prod'
   ? 'https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js'
   : 'https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer', () => {
-  document.dispatchEvent(new Event(GLOBAL_EVENTS.ADOBE_MC_LOADED, { bubbles: true }));
-  console.log('adobe_mc fired event');
+  document.dispatchEvent(new Event(GLOBAL_EVENTS.ADOBE_MC_LOADED));
 });
