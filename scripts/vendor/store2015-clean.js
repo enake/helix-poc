@@ -1835,18 +1835,18 @@ StoreProducts.requestPricingInfo = function (so) {
               // Handle any error that occurred during the request
           });
     } else {
-        let formData = new FormData();
-        for (let key in so) {
-            if (so.hasOwnProperty(key)) {
-                formData.append(key, so[key]);
-            }
-        }
+        // let formData = new FormData();
+        // for (let key in so) {
+        //     if (so.hasOwnProperty(key)) {
+        //         formData.append(key, so[key]);
+        //     }
+        // }
         fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: formData
+            body: new URLSearchParams(so)
         })
           .then(function(response) {
               return response.json();
