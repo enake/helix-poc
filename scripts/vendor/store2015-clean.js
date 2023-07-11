@@ -1820,9 +1820,9 @@ StoreProducts.setInfo = function(buy_class, product_id, variation){
 StoreProducts.requestPricingInfo = function (so) {
     const url = so.url;
     let config = so.config;
-    so = JSON.stringify(so);
 
     if (config.method && config.method.toLowerCase() == 'get') {
+        so = JSON.stringify(so);
         let urlGet = new URL(url);
         const soBase64 = Base64.encode(so);
         urlGet.searchParams.set('data', encodeURI(soBase64));
@@ -1835,16 +1835,18 @@ StoreProducts.requestPricingInfo = function (so) {
               // Handle any error that occurred during the request
           });
     } else {
-        const data = new URLSearchParams();
-        for (const pair of new FormData(so)) {
-            data.append(pair[0], pair[1]);
+        let formData = new FormData();
+        for (let key in so) {
+            if (so.hasOwnProperty(key)) {
+                formData.append(key, so[key]);
+            }
         }
         fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: data
+            body: formData
         })
           .then(function(response) {
               return response.json();
