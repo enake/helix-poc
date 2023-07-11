@@ -1835,12 +1835,16 @@ StoreProducts.requestPricingInfo = function (so) {
               // Handle any error that occurred during the request
           });
     } else {
+        const data = new URLSearchParams();
+        for (const pair of new FormData(so)) {
+            data.append(pair[0], pair[1]);
+        }
         fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ data: so })
+            body: data
         })
           .then(function(response) {
               return response.json();
