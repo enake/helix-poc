@@ -14,12 +14,13 @@ import {
 } from './lib-franklin.js';
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
-import { addScript, getDefaultLanguage, instance } from './utils.js';
+import {
+  addScript, getDefaultLanguage, instance, isZuoraForNetherlandsLangMode, productsList, showPrices,
+} from './utils.js';
 
 const DEFAULT_LANGUAGE = getDefaultLanguage();
 window.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
 
-const productsList = [];
 const defaultBuyLinks = {};
 
 export const productAliases = (name) => {
@@ -176,11 +177,11 @@ const loadLazy = async (doc) => {
  * Loads everything that happens a lot later,
  * without impacting the user experience.
  */
-const loadDelayed = () => {
+function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
-};
+}
 
 /**
  * Loads a fragment.
@@ -201,36 +202,7 @@ export async function loadFragment(path) {
   return null;
 }
 
-// check & update ProductsList
-// TODO: have a look at StoreProducts.product & StoreProducts.initCount
-// maybe we can use them instead of this function
-export const updateProductsList = (product) => {
-  if (productsList.indexOf(product) === -1) {
-    productsList.push(product);
-  }
-};
-
-// get max discount
-const maxDiscount = () => {
-  const discountAmounts = [];
-  if (document.querySelector('.percent')) {
-    document.querySelectorAll('.percent').forEach((item) => {
-      const discountAmount = parseInt(item.textContent, 10);
-      if (!Number.isNaN(discountAmount)) {
-        discountAmounts.push(discountAmount);
-      }
-    });
-  }
-
-  const maxdiscount = Math.max(...discountAmounts).toString();
-  if (document.querySelector('.max-discount')) {
-    document.querySelectorAll('.max-discount').forEach((item) => {
-      item.textContent = `${maxdiscount}%`;
-    });
-  }
-};
-
-// trigger for VPN checkbox click
+// trigger for VPN checkbox click - not for ZuoraNL
 const changeCheckboxVPN = (checkboxId) => {
   const parentDiv = document.getElementById(checkboxId).closest('div.prod_box');
   const comparativeDiv = document.querySelector('.c-top-comparative-with-text');
@@ -603,16 +575,18 @@ const changeCheckboxVPN = (checkboxId) => {
 
     if (parentDiv.querySelector(discPriceClass)) {
       parentDiv.querySelector(discPriceClass).innerHTML = newPrice;
-      /*
-      document.querySelectorAll(discPriceClass).forEach(item => {
-        item.innerHTML = newPrice;
-      })
-      */
     }
 
     if (parentDiv.querySelector(`.price_vpn-${productId}`)) {
       parentDiv.querySelector(`.price_vpn-${productId}`).innerHTML = justVpn;
     }
+
+    fullPrice = StoreProducts.formatPrice(
+      fullPrice,
+      selectedVariation.currency_label,
+      selectedVariation.region_id,
+      selectedVariation.currency_iso,
+    );
 
     newPrice = StoreProducts.formatPrice(
       newPrice,
@@ -688,101 +662,10 @@ const changeCheckboxVPN = (checkboxId) => {
   }
 };
 
-// display prices
-const showPrices = (storeObj) => {
-  const { currency_label: currencyLabel } = storeObj.selected_variation;
-  const { region_id: regionId } = storeObj.selected_variation;
-  const { product_id: productId } = storeObj.config;
+function initSelectors() {
+  const productsExistsOnPage = productsList.length;
 
-  if (typeof storeObj.selected_variation.discount === 'object') {
-    const fullPrice = StoreProducts.formatPrice(storeObj.selected_variation.price, currencyLabel, regionId);
-    const offerPrice = StoreProducts.formatPrice(storeObj.selected_variation.discount.discounted_price, currencyLabel, regionId);
-    const savingsPrice = storeObj.selected_variation.price - storeObj.selected_variation.discount.discounted_price;
-    const savings = StoreProducts.formatPrice(savingsPrice.toFixed(0), currencyLabel, regionId);
-    const percentageSticker = (((storeObj.selected_variation.price - storeObj.selected_variation.discount.discounted_price) / storeObj.selected_variation.price) * 100).toFixed(0);
-
-    if (document.querySelector(`.oldprice-${productId}`)) {
-      document.querySelectorAll(`.oldprice-${productId}`).forEach((item) => {
-        item.innerHTML = fullPrice;
-      });
-    }
-
-    if (document.querySelector(`.newprice-${productId}`)) {
-      document.querySelectorAll(`.newprice-${productId}`).forEach((item) => {
-        item.innerHTML = offerPrice;
-      });
-    }
-
-    if (document.querySelector(`.save-${productId}`)) {
-      document.querySelectorAll(`.save-${productId}`).forEach((item) => {
-        item.innerHTML = savings;
-        item.style.visibility = 'visible';
-      });
-    }
-
-    if (document.querySelector(`.percent-${productId}`)) {
-      document.querySelectorAll(`.percent-${productId}`).forEach((item) => {
-        item.innerHTML = `${percentageSticker}%`;
-        item.style.visibility = 'visible';
-        const parentElement = item.parentNode;
-        parentElement.style.visibility = 'visible';
-      });
-    }
-
-    if (document.querySelector(`.bulina-${productId}`)) {
-      const bulinaElement = document.querySelector(`.bulina-${productId}`);
-      const parentElement = bulinaElement.parentNode;
-      parentElement.style.visibility = 'visible';
-    }
-
-    if (document.querySelector(`.show_save_${productId}`)) {
-      document.querySelector(`.show_save_${productId}`).style.display = 'block';
-    }
-  } else {
-    const fullPrice = StoreProducts.formatPrice(storeObj.selected_variation.price, currencyLabel, regionId);
-    if (document.querySelector(`.newprice-${productId}`)) {
-      document.querySelector(`.newprice-${productId}`).innerHTML = fullPrice;
-    }
-    if (document.querySelector(`.oldprice-${productId}`)) {
-      document.querySelector(`.oldprice-${productId}`).style.display = 'none';
-    }
-
-    if (document.querySelector(`.save-${productId}`)) {
-      const saveElement = document.querySelector(`.save-${productId}`);
-      const parentElement = saveElement.parentNode;
-      const siblingElements = parentElement.parentNode.querySelectorAll('div');
-
-      siblingElements.forEach((element) => {
-        element.style.visibility = 'hidden';
-        element.style.display = 'none';
-      });
-    }
-
-    if (document.querySelector(`.percent-${productId}`)) {
-      const percentElement = document.querySelector(`.percent-${productId}`);
-      const parentElement = percentElement.parentNode;
-
-      parentElement.style.visibility = 'hidden';
-      parentElement.style.display = 'none';
-    }
-
-    if (document.querySelector(`.show_save_${productId}`)) {
-      document.querySelector(`.show_save_${productId}`).style.display = 'none';
-    }
-
-    if (document.querySelector(`.bulina-${productId}`)) {
-      const bulinaElement = document.querySelector(`.bulina-${productId}`);
-      const parentElement = bulinaElement.parentNode;
-
-      parentElement.style.visibility = 'hidden';
-    }
-  }
-
-  maxDiscount();
-};
-
-const initSelectors = () => {
-  if (productsList.length > 0) {
+  if (productsExistsOnPage) {
     const fakeSelectorsBottom = document.createElement('div');
     fakeSelectorsBottom.id = 'fakeSelectors_bottom';
     document.querySelector('footer').before(fakeSelectorsBottom);
@@ -829,34 +712,66 @@ const initSelectors = () => {
       });
     });
   }
-};
+}
+
+function addIdsToEachSection() {
+  document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
+    const getIdentity = item.className;
+    item.parentElement.id = `${getIdentity}-${idx + 1}`;
+  });
+}
+
+function addEventListenersOnVpnCheckboxes() {
+  if (document.querySelector('.checkboxVPN')) {
+    document.querySelectorAll('.checkboxVPN').forEach((item) => {
+      item.addEventListener('click', (e) => {
+        const checkboxId = e.target.getAttribute('id');
+        if (isZuoraForNetherlandsLangMode() && window.StoreProducts.product) {
+          const prodxId = e.target.getAttribute('id').split('-')[1];
+          const storeObjprod = window.StoreProducts.product[prodxId] || {};
+          showPrices(storeObjprod, e.target.checked, checkboxId);
+        } else {
+          changeCheckboxVPN(checkboxId);
+        }
+      });
+    });
+  }
+}
+
+function initializeProductsPriceLogic() {
+  if (!isZuoraForNetherlandsLangMode()) {
+    addScript('/scripts/vendor/store2015.js', {}, 'async', () => {
+      initSelectors();
+
+      // todo move this elsewhere
+      addIdsToEachSection();
+
+      // todo move this elsewhere
+      addEventListenersOnVpnCheckboxes();
+    });
+
+    loadDelayed();
+  } else {
+    loadDelayed();
+  }
+
+  // todo move this elsewhere, also executed twice for non zuora mode
+  addIdsToEachSection();
+
+  // todo move this elsewhere, also executed twice for non zuora mode
+  addEventListenersOnVpnCheckboxes();
+}
 
 const loadPage = async () => {
   await loadEager(document);
   await loadLazy(document);
 
   addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
-  addScript('/scripts/vendor/store2015.js', {}, 'async', () => {
-    initSelectors();
 
-    // adding IDs on each section
-    document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
-      const getIdentity = item.className;
-      item.parentElement.id = `${getIdentity}-${idx + 1}`;
-    });
+  initializeProductsPriceLogic();
 
-    // addEventListener on VPN checkboxes
-    if (document.querySelector('.checkboxVPN')) {
-      document.querySelectorAll('.checkboxVPN').forEach((item) => {
-        item.addEventListener('click', (e) => {
-          const checkboxId = e.target.getAttribute('id');
-          changeCheckboxVPN(checkboxId);
-        });
-      });
-    }
-  });
-
-  loadDelayed();
+  // todo this should be present here and uncommented after todos are fixed from initializeProductsPriceLogic()
+  // loadDelayed();
 };
 
 /*
