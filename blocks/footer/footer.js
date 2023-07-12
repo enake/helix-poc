@@ -1,4 +1,5 @@
 import { loadFragment } from '../../scripts/scripts.js';
+import { adobeMcAppendVisitorId, GLOBAL_EVENTS } from '../../scripts/utils.js';
 
 export default async function decorate(block) {
   // TODO: investigate what's the deal with fragments
@@ -13,4 +14,8 @@ export default async function decorate(block) {
   }
 
   footer.innerHTML = footer.innerHTML.replace('[year]', new Date().getFullYear());
+
+  document.addEventListener(GLOBAL_EVENTS.ADOBE_MC_LOADED, () => {
+    adobeMcAppendVisitorId('footer');
+  });
 }
