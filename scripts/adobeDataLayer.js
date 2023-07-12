@@ -212,7 +212,7 @@ export async function sendAnalyticsPageLoadedEvent() {
     return;
   }
 
-  if (StoreProducts?.initCount === 0) {
+  if (typeof StoreProducts !== 'undefined' && StoreProducts.initCount === 0) {
     window.adobeDataLayer.push({ event: 'page loaded' });
   }
 }

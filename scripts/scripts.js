@@ -836,28 +836,27 @@ const loadPage = async () => {
   await loadLazy(document);
 
   addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
-  addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', {}, 'async', () => {
-    addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'async', () => {
-      initSelectors();
-      loadDelayed();
+  addScript('/scripts/vendor/store2015.js', {}, 'async', () => {
+    initSelectors();
 
-      // adding IDs on each section
-      document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
-        const getIdentity = item.className;
-        item.parentElement.id = `${getIdentity}-${idx + 1}`;
-      });
-
-      // addEventListener on VPN checkboxes
-      if (document.querySelector('.checkboxVPN')) {
-        document.querySelectorAll('.checkboxVPN').forEach((item) => {
-          item.addEventListener('click', (e) => {
-            const checkboxId = e.target.getAttribute('id');
-            changeCheckboxVPN(checkboxId);
-          });
-        });
-      }
+    // adding IDs on each section
+    document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
+      const getIdentity = item.className;
+      item.parentElement.id = `${getIdentity}-${idx + 1}`;
     });
+
+    // addEventListener on VPN checkboxes
+    if (document.querySelector('.checkboxVPN')) {
+      document.querySelectorAll('.checkboxVPN').forEach((item) => {
+        item.addEventListener('click', (e) => {
+          const checkboxId = e.target.getAttribute('id');
+          changeCheckboxVPN(checkboxId);
+        });
+      });
+    }
   });
+
+  loadDelayed();
 };
 
 /*
