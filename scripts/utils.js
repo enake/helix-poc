@@ -82,3 +82,4 @@ export const addScript = (src, data = {}, type = undefined, callback = undefined
 export function getDefaultLanguage() {
   return window.location.pathname.split('/')[2];
 }
+

@@ -19,7 +19,8 @@ import initZuoraNL from './zuora.js';
 
 const DEFAULT_LANGUAGE = getDefaultLanguage();
 window.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
-const isZuoraNL = DEFAULT_LANGUAGE === 'nl';
+
+const isZuoraNL = window.DEFAULT_LANGUAGE === 'nl';
 
 const productsList = [];
 const defaultBuyLinks = {};
@@ -911,21 +912,7 @@ const loadPage = async () => {
   await loadLazy(document);
 
   addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
-  if (isZuoraNL) {
-    // for NL - Zuora
-    window.config = initZuoraNL.config();
-    addScript('https://checkout.bitdefender.com/static/js/sdk.js', {}, 'defer', () => {
-      console.log('initZuoraNL');
-      // if (productsList.length) {
-      //   productsList.forEach(async (item) => {
-      //     const zuoraResult = await initZuoraNL.loadProduct(item);
-      //     showPrices(zuoraResult);
-      //   });
-      // }
-
-      loadDelayed();
-    });
-  } else {
+  if (!isZuoraNL) {
     addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', {}, 'async', () => {
       addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'async', () => {
         initSelectors();

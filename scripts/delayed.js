@@ -3,11 +3,27 @@ import { sampleRUM } from './lib-franklin.js';
 
 import { sendAnalyticsPageLoadedEvent } from './adobeDataLayer.js';
 import { addScript, instance } from './utils.js';
+import initZuoraNL from './zuora.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
 // add more delayed functionality here
+const isZuoraNL = window.DEFAULT_LANGUAGE === 'nl';
+
+if (isZuoraNL) {
+  // for NL - Zuora
+  window.config = initZuoraNL.config();
+  addScript('https://checkout.bitdefender.com/static/js/sdk.js', {}, 'defer', () => {
+    console.log('initZuoraNL');
+    // if (productsList.length) {
+    //   productsList.forEach(async (item) => {
+    //     const zuoraResult = await initZuoraNL.loadProduct(item);
+    //     showPrices(zuoraResult);
+    //   });
+    // }
+  });
+}
 
 sendAnalyticsPageLoadedEvent();
 
