@@ -759,7 +759,7 @@ const showPrices = (storeObj, triggerVPN = false, checkboxId = '') => {
     document.querySelector(`.show_vpn_${productId}`).style.display = 'none';
   }
 
-  const storeObjVPN = window.StoreProducts.product['vpn'] || {};
+  const storeObjVPN = window.StoreProducts.product.vpn || {};
   if (triggerVPN && storeObjVPN) {
     parentDiv = document.getElementById(checkboxId).closest('div.prod_box');
     buyLink += '&bundle_id=com.bitdefender.vpn&bundle_payment_period=1d1y';
