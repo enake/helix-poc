@@ -17,7 +17,9 @@ export default class initZuoraNL {
     pspm: 'com.bitdefender.premiumsecurityplus',
     soho: 'com.bitdefender.soho',
     mac: 'com.bitdefender.avformac',
-    vpn: 'com.bitdefender.vpn', 'vpn-monthly': 'com.bitdefender.vpn',
+    vpn: 'com.bitdefender.vpn', 
+    'vpn-monthly': 
+    'com.bitdefender.vpn',
     pass: 'com.bitdefender.passwordmanager',
     passm: 'com.bitdefender.passwordmanager',
     pass_sp: 'com.bitdefender.passwordmanager',
@@ -67,7 +69,6 @@ export default class initZuoraNL {
         }
 
         const payload = payloadObj[payloadObj.length - 1];
-
         /* if (this.names[id]) {
           payload = payload.filter((id) => this.productId[id]=== this.names[id]);
         } */
