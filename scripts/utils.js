@@ -97,7 +97,7 @@ export function adobeMcAppendVisitorId(selector) {
       marketingCloudServerSecure: 'sstats.adobe.com',
     });
     const wrapperSelector = document.querySelector(selector);
-    const hrefSelector = '[href*="bitdefender.com"]';
+    const hrefSelector = '[href*="bitdefender"]';
     wrapperSelector.querySelectorAll(hrefSelector).forEach((href) => {
       href.addEventListener('mousedown', (event) => {
         const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(event.currentTarget.href);
