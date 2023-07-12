@@ -551,7 +551,7 @@ StoreProducts.initSelector = function(config)
         catch (ex)
         {}
 
-        users.forEach(function (key,value) {
+        users.forEach(function (value) {
             var label = users_label_prefix + ' ' + value + ' ' + users_label;
             if(value == 1)
                 label = user_label_prefix + ' ' + value + ' ' + user_label;
