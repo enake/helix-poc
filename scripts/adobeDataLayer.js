@@ -41,7 +41,7 @@ function getPageNameAndSections() {
  * Returns the value of a query parameter
  * @returns {String}
  */
-function getParamValue(paramName) {
+export function getParamValue(paramName) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(paramName);
 }
@@ -212,7 +212,7 @@ export async function sendAnalyticsPageLoadedEvent() {
     return;
   }
 
-  if (StoreProducts?.initCount === 0) {
+  if (typeof StoreProducts !== 'undefined' && StoreProducts.initCount === 0) {
     window.adobeDataLayer.push({ event: 'page loaded' });
   }
 }

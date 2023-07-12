@@ -14,7 +14,7 @@ import {
 } from './lib-franklin.js';
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
-import { addScript, getDefaultLanguage } from './utils.js';
+import { addScript, getDefaultLanguage, instance } from './utils.js';
 
 const DEFAULT_LANGUAGE = getDefaultLanguage();
 window.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
@@ -146,8 +146,21 @@ const loadLazy = async (doc) => {
 
   loadHeader(doc.querySelector('header'));
 
-  sendAnalyticsUserInfo();
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'gtm.start': new Date().getTime(),
+    event: 'gtm.js',
+  });
+
+  if (getParam('t') === '1') {
+    if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
+    else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
+
+    addScript('https://www.googletagmanager.com/gtm.js?id=GTM-PLJJB3', {}, 'defer');
+  }
+
   await sendAnalyticsPageEvent();
+  await sendAnalyticsUserInfo();
 
   loadFooter(doc.querySelector('footer'));
 
@@ -823,28 +836,27 @@ const loadPage = async () => {
   await loadLazy(document);
 
   addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
-  addScript('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', {}, 'async', () => {
-    addScript('https://www.bitdefender.com/scripts/Store2015.min.js', {}, 'async', () => {
-      initSelectors();
-      loadDelayed();
+  addScript('/scripts/vendor/store2015.js', {}, 'async', () => {
+    initSelectors();
 
-      // adding IDs on each section
-      document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
-        const getIdentity = item.className;
-        item.parentElement.id = `${getIdentity}-${idx + 1}`;
-      });
-
-      // addEventListener on VPN checkboxes
-      if (document.querySelector('.checkboxVPN')) {
-        document.querySelectorAll('.checkboxVPN').forEach((item) => {
-          item.addEventListener('click', (e) => {
-            const checkboxId = e.target.getAttribute('id');
-            changeCheckboxVPN(checkboxId);
-          });
-        });
-      }
+    // adding IDs on each section
+    document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
+      const getIdentity = item.className;
+      item.parentElement.id = `${getIdentity}-${idx + 1}`;
     });
+
+    // addEventListener on VPN checkboxes
+    if (document.querySelector('.checkboxVPN')) {
+      document.querySelectorAll('.checkboxVPN').forEach((item) => {
+        item.addEventListener('click', (e) => {
+          const checkboxId = e.target.getAttribute('id');
+          changeCheckboxVPN(checkboxId);
+        });
+      });
+    }
   });
+
+  loadDelayed();
 };
 
 /*
