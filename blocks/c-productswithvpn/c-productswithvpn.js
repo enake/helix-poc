@@ -20,7 +20,8 @@
   - https://www.bitdefender.com/media/html/consumer/new/2020/cl-offer1-opt/ultimate-flv1.html - http://localhost:3000/consumer/en/new/ultimate-flv1
 */
 
-import { updateProductsList, productAliases } from '../../scripts/scripts.js';
+import { productAliases } from '../../scripts/scripts.js';
+import { updateProductsList } from '../../scripts/utils.js';
 
 export default function decorate(block) {
   /// ///////////////////////////////////////////////////////////////////////
