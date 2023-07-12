@@ -221,47 +221,10 @@ const truncatePrice = (price) => {
 // formatPrice
 const formatPrice = (priceVal, currency, region) => {
   const price = truncatePrice(priceVal);
+  const currencyPrice = [3, 4, 8, 2, 11, 12, 16];
 
-  if (region === 3) {
-    return currency + price;
-  }
-
-  if (region === 4) {
-    return currency + price;
-  }
-
-  if (region === 5) {
-    return price + ' ' + currency;
-  }
-
-  if (region === 7) {
-    return price + ' ' + currency;
-  }
-
-  if (region === 8 || region === 2 || region === 11) {
-    return currency + price;
-  }
-
-  if (region === 13) {
-    return currency + price;
-  }
-
-	if (region === 16 && DEFAULT_LANGUAGE === 'nl') {
-		try {
-			price = price.replace('.', ',');
-		} catch (err) { console.log(err); }
-
-		return `${currency} ${price}`;
-	}
-
-  if(region == 17 || region == 18) {
-    let fprice = price + ' ' + currency;
-
-    try {
-      fprice = parseFloat(price).toFixed(2) + ' ' + currency;
-    } catch(ex) {}
-
-    return fprice;
+  if (currencyPrice.includes(region)) {
+    return `${currency} ${price}`;
   }
 
   return `${price} ${currency}`;

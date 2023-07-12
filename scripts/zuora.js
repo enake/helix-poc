@@ -66,7 +66,7 @@ export default class initZuoraNL {
           reject();
         }
 
-        payload = payloadObj[payloadObj.length - 1];
+        const payload = payloadObj[payloadObj.length - 1];
 
         /* if (this.names[id]) {
           payload = payload.filter((id) => this.productId[id]=== this.names[id]);
