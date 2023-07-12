@@ -14,7 +14,9 @@ import {
 } from './lib-franklin.js';
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
-import { addScript, getDefaultLanguage, instance, isZuoraNL, productsList, showPrices } from './utils.js';
+import {
+  addScript, getDefaultLanguage, instance, isZuoraNL, productsList, showPrices,
+} from './utils.js';
 
 const DEFAULT_LANGUAGE = getDefaultLanguage();
 window.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
