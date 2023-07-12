@@ -914,13 +914,14 @@ const loadPage = async () => {
   if (isZuoraNL) {
     // for NL - Zuora
     window.config = initZuoraNL.config();
-    addScript('https://checkout.bitdefender.com/static/js/sdk.js', {}, 'async', async () => {
-      if (productsList.length) {
-        productsList.forEach(async (item) => {
-          const zuoraResult = await initZuoraNL.loadProduct(item);
-          showPrices(zuoraResult);
-        });
-      }
+    addScript('https://checkout.bitdefender.com/static/js/sdk.js', {}, 'async', () => {
+      console.log('initZuoraNL');
+      // if (productsList.length) {
+      //   productsList.forEach(async (item) => {
+      //     const zuoraResult = await initZuoraNL.loadProduct(item);
+      //     showPrices(zuoraResult);
+      //   });
+      // }
 
       loadDelayed();
     });
