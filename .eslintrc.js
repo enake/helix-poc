@@ -8,6 +8,7 @@ module.exports = {
   globals: {
     StoreProducts: true,
     adobeDataLayer: true,
+    Visitor: true,
     BitCheckoutSDK: true,
   },
   parser: '@babel/eslint-parser',
