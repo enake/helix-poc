@@ -322,3 +322,8 @@ export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
 
   maxDiscount();
 }
+
+export function getDatasetFromSection(block) {
+  const parentSelector = block.closest('.section');
+  return parentSelector.dataset;
+}

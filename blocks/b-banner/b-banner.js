@@ -64,5 +64,3 @@ export default function decorate(block) {
     paragraph.innerHTML += percentRadius;
   }
 }
-
-// todo:  display bulina: top-right
