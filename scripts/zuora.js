@@ -62,7 +62,7 @@ export default class initZuoraNL {
     const devicesNo = prod[1];
     const yearsNo = prod[2];
     return new Promise((resolve, reject) => {
-      BitCheckoutSDK && BitCheckoutSDK.getProductVariationsPrice({ bundle: this.productId[id], campaign: campaignId }, (payloadObj) => {
+      BitCheckoutSDK.getProductVariationsPrice({ bundle: this.productId[id], campaign: campaignId }, (payloadObj) => {
         if (!payloadObj || payloadObj.length === 0) {
           reject();
         }
