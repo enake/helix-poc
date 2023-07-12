@@ -148,14 +148,14 @@ const loadLazy = async (doc) => {
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    'gtm.start':
-      new Date().getTime(), event: 'gtm.js'
+    'gtm.start': new Date().getTime(),
+    event: 'gtm.js',
   });
 
   if (getParam('t') === '1') {
     if (instance === 'prod') addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-b1f76be4d2ee.min.js', {}, 'defer');
     else addScript('https://assets.adobedtm.com/8a93f8486ba4/5492896ad67e/launch-3e7065dd10db-staging.min.js', {}, 'defer');
-  
+
     addScript('https://www.googletagmanager.com/gtm.js?id=GTM-PLJJB3', {}, 'defer');
   }
 
