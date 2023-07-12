@@ -201,55 +201,55 @@ export const updateProductsList = (product) => {
 };
 
 // truncatePrice
-const truncatePrice = price => {
-    let ret = price;
-    try {
-      if(ret >= 0) {
-        ret = Math.floor(ret);
-      } else {
-        ret = Math.ceil(ret);
-      }
+const truncatePrice = (price) => {
+  let ret = price;
+  try {
+    if (ret >= 0) {
+      ret = Math.floor(ret);
+    } else {
+      ret = Math.ceil(ret);
+    }
 
-      if (price != ret) {
-        ret = price;
-      }
-    } catch(ex) {}
+    if (price !== ret) {
+      ret = price;
+    }
+  } catch (e) { console.log(e); }
 
-    return ret;
-}
+  return ret;
+};
 
 // formatPrice
 const formatPrice = (price, currency, region) => {
   price = truncatePrice(price);
 
-  if(region == 3) {
+  if (region == 3) {
     return currency + price;
   }
 
-  if(region == 4) {
+  if (region == 4) {
     return currency + price;
   }
 
-  if(region == 5) {
+  if (region == 5) {
     return price + ' ' + currency;
   }
 
-  if(region == 7) {
+  if (region == 7) {
     return price + ' ' + currency;
   }
 
-  if(region == 8 || region == 2 || region == 11) {
+  if (region == 8 || region == 2 || region == 11) {
     return currency + price;
   }
 
-  if(region == 13) {
+  if (region == 13) {
     return currency + price;
   }
 
 	if (region == 16 && DEFAULT_LANGUAGE == 'nl') {
 		try{
 			price = price.replace('.', ',');
-		} catch(err){}
+		} catch(err){ console.log(err); }
 		
 		return currency + ' ' + price;
 	}
@@ -265,7 +265,7 @@ const formatPrice = (price, currency, region) => {
   }
 
   return price + ' ' + currency;
-}
+};
 
 // get max discount
 const maxDiscount = () => {
@@ -287,7 +287,7 @@ const maxDiscount = () => {
   }
 };
 
-// trigger for VPN checkbox click
+// trigger for VPN checkbox click - not for ZuoraNL
 const changeCheckboxVPN = (checkboxId) => {
   const parentDiv = document.getElementById(checkboxId).closest('div.prod_box');
   const comparativeDiv = document.querySelector('.c-top-comparative-with-text');
@@ -748,59 +748,87 @@ const changeCheckboxVPN = (checkboxId) => {
 };
 
 // display prices
-const showPrices = (storeObj, triggerVPN = false) => {
-  // console.log(storeObj)
+const showPrices = (storeObj, triggerVPN = false, checkboxId = '') => {
   const { currency_label: currencyLabel } = storeObj.selected_variation;
   const { region_id: regionId } = storeObj.selected_variation;
   const { product_id: productId } = storeObj.config;
-  const buyLink = storeObj.buy_link;
-  let selected_var_price = storeObj.selected_variation.price;
-  
+  let parentDiv = '';
+  let buyLink = storeObj.buy_link;
+  let selectedVarPrice = storeObj.selected_variation.price;
+  if (document.querySelector(`.show_vpn_${productId}`)) {
+    document.querySelector(`.show_vpn_${productId}`).style.display = 'none';
+  }
+
   const storeObjVPN = window.StoreProducts.product['vpn'] || {};
   if (triggerVPN && storeObjVPN) {
-    selected_var_price += storeObjVPN.selected_variation.price || 0;
-    selected_var_price = selected_var_price.toFixed(2);
+    parentDiv = document.getElementById(checkboxId).closest('div.prod_box');
+    buyLink += '&bundle_id=com.bitdefender.vpn&bundle_payment_period=1d1y';
+    selectedVarPrice += storeObjVPN.selected_variation.price || 0;
+    selectedVarPrice = selectedVarPrice.toFixed(2);
+
+    if (document.querySelector(`.show_vpn_${productId}`)) {
+      document.querySelector(`.show_vpn_${productId}`).style.display = 'block';
+    }
   }
-  
+
   // if has discount
   if (typeof storeObj.selected_variation.discount === 'object') {
-    let selected_var_discount = storeObj.selected_variation.discount.discounted_price;
+    let selectedVarDiscount = storeObj.selected_variation.discount.discounted_price;
     if (triggerVPN && storeObjVPN) {
-      selected_var_discount += storeObjVPN.selected_variation.discount.discounted_price || 0;
+      selectedVarDiscount += storeObjVPN.selected_variation.discount.discounted_price || 0;
     }
 
-    const fullPrice = formatPrice(selected_var_price, currencyLabel, regionId);
-    const offerPrice = formatPrice(selected_var_discount, currencyLabel, regionId);
-    const savingsPrice = selected_var_price - selected_var_discount;
+    const fullPrice = formatPrice(selectedVarPrice, currencyLabel, regionId);
+    const offerPrice = formatPrice(selectedVarDiscount, currencyLabel, regionId);
+    const savingsPrice = selectedVarPrice - selectedVarDiscount;
     const savings = formatPrice(savingsPrice.toFixed(0), currencyLabel, regionId);
-    const percentageSticker = (((selected_var_price - selected_var_discount) / selected_var_price) * 100).toFixed(0);
+    const percentageSticker = (((selectedVarPrice - selectedVarDiscount) / selectedVarPrice) * 100).toFixed(0);
 
     if (document.querySelector(`.oldprice-${productId}`)) {
-      document.querySelectorAll(`.oldprice-${productId}`).forEach((item) => {
-        item.innerHTML = fullPrice;
-      });
+      if (triggerVPN) {
+        parentDiv.querySelector(`.oldprice-${productId}`).innerHTML = fullPrice;
+      } else {
+        document.querySelectorAll(`.oldprice-${productId}`).forEach((item) => {
+          item.innerHTML = fullPrice;
+        });
+      }
     }
 
     if (document.querySelector(`.newprice-${productId}`)) {
-      document.querySelectorAll(`.newprice-${productId}`).forEach((item) => {
-        item.innerHTML = offerPrice;
-      });
+      if (triggerVPN) {
+        parentDiv.querySelector(`.newprice-${productId}`).innerHTML = offerPrice;
+      } else {
+        document.querySelectorAll(`.newprice-${productId}`).forEach((item) => {
+          item.innerHTML = offerPrice;
+        });
+      }
     }
 
     if (document.querySelector(`.save-${productId}`)) {
-      document.querySelectorAll(`.save-${productId}`).forEach((item) => {
-        item.innerHTML = savings;
-        item.style.visibility = 'visible';
-      });
+      if (triggerVPN) {
+        parentDiv.querySelector(`.save-${productId}`).innerHTML = savings;
+        parentDiv.querySelector(`.save-${productId}`).style.visibility = 'visible';
+      } else {
+        document.querySelectorAll(`.save-${productId}`).forEach((item) => {
+          item.innerHTML = savings;
+          item.style.visibility = 'visible';
+        });
+      }
     }
 
     if (document.querySelector(`.percent-${productId}`)) {
-      document.querySelectorAll(`.percent-${productId}`).forEach((item) => {
-        item.innerHTML = `${percentageSticker}%`;
-        item.style.visibility = 'visible';
-        const parentElement = item.parentNode;
-        parentElement.style.visibility = 'visible';
-      });
+      if (triggerVPN) {
+        parentDiv.querySelector(`.percent-${productId}`).innerHTML = `${percentageSticker}%`;
+        parentDiv.querySelector(`.percent-${productId}`).style.visibility = 'visible';
+        parentDiv.querySelector(`.percent-${productId}`).parentNode.style.visibility = 'visible';
+      } else {
+        document.querySelectorAll(`.percent-${productId}`).forEach((item) => {
+          item.innerHTML = `${percentageSticker}%`;
+          item.style.visibility = 'visible';
+          const parentElement = item.parentNode;
+          parentElement.style.visibility = 'visible';
+        });
+      }
     }
 
     if (document.querySelector(`.bulina-${productId}`)) {
@@ -813,7 +841,7 @@ const showPrices = (storeObj, triggerVPN = false) => {
       document.querySelector(`.show_save_${productId}`).style.display = 'block';
     }
   } else {
-    const fullPrice = formatPrice(selected_var_price, currencyLabel, regionId);
+    const fullPrice = formatPrice(selectedVarPrice, currencyLabel, regionId);
     if (document.querySelector(`.newprice-${productId}`)) {
       document.querySelector(`.newprice-${productId}`).innerHTML = fullPrice;
     }
@@ -853,13 +881,18 @@ const showPrices = (storeObj, triggerVPN = false) => {
   }
 
   if (isZuoraNL && document.querySelector(`.buylink-${productId}`)) {
-    document.querySelector(`.buylink-${productId}`).href = buyLink;
+    if (triggerVPN) {
+      parentDiv.querySelector(`.buylink-${productId}`).href = buyLink;
+    } else {
+      document.querySelectorAll(`.buylink-${productId}`).forEach((item) => {
+        item.href = buyLink;
+      });
+    }
   }
 
   maxDiscount();
 };
 
-// for !NL
 const initSelectors = () => {
   if (productsList.length > 0) {
     const fakeSelectorsBottom = document.createElement('div');
@@ -910,9 +943,6 @@ const initSelectors = () => {
   }
 };
 
-// for NL - Zuora
-
-
 const loadPage = async () => {
   await loadEager(document);
   await loadLazy(document);
@@ -939,7 +969,7 @@ const loadPage = async () => {
       });
     });
   }
-  
+
   // adding IDs on each section
   document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
     const getIdentity = item.className;
@@ -954,14 +984,13 @@ const loadPage = async () => {
         if (isZuoraNL && window.StoreProducts.product) {
           const prodxId = e.target.getAttribute('id').split('-')[1];
           const storeObjprod = window.StoreProducts.product[prodxId] || {};
-          showPrices(storeObjprod, e.target.checked);
+          showPrices(storeObjprod, e.target.checked, checkboxId);
         } else {
           changeCheckboxVPN(checkboxId);
         }
       });
     });
   }
-
 };
 
 /*
