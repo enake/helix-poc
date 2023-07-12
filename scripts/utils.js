@@ -88,6 +88,7 @@ export const GLOBAL_EVENTS = {
 };
 
 export function adobeMcAppendVisitorId(selector) {
+  // https://experienceleague.adobe.com/docs/id-service/using/id-service-api/methods/appendvisitorid.html?lang=en
   try {
     const adbeDomains = ['bitdefender.com'];
     const visitor = Visitor.getInstance('0E920C0F53DA9E9B0A490D45@AdobeOrg', {
