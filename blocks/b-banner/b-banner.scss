@@ -88,28 +88,34 @@
     padding-left: 15px;
   }
 }
+
 @media (width <= 768px) {
   .b-banner-container {
     min-height: auto;
   }
+
   .b-banner-container .b-banner-wrapper {
     position: relative;
     padding-left: 0;
   }
+
   .b-banner-container img {
     display: none;
   }
+
   .b-banner-container h1 {
     font-size: 24px;
     max-width: unset;
     margin-top: 0;
   }
+
   .b-banner-container h2 {
     font-size: 21px;
     max-width: unset;
     margin-top: 10px;
   }
 }
+
 /* for mobile */
 @media (width <= 576px) {
   .b-banner-container {
