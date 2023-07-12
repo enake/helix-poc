@@ -825,7 +825,6 @@ const loadPage = async () => {
   addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
   addScript('/scripts/vendor/store2015.js', {}, 'async', () => {
     initSelectors();
-    loadDelayed();
 
     // adding IDs on each section
     document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
@@ -843,6 +842,8 @@ const loadPage = async () => {
       });
     }
   });
+
+  loadDelayed();
 };
 
 /*
