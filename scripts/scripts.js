@@ -15,7 +15,7 @@ import {
 
 import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } from './adobeDataLayer.js';
 import {
-  addScript, getDefaultLanguage, instance, isZuoraNL, productsList, showPrices,
+  addScript, getDefaultLanguage, instance, isZuoraForNetherlandsLangMode, productsList, showPrices,
 } from './utils.js';
 
 const DEFAULT_LANGUAGE = getDefaultLanguage();
@@ -177,11 +177,11 @@ const loadLazy = async (doc) => {
  * Loads everything that happens a lot later,
  * without impacting the user experience.
  */
-const loadDelayed = () => {
+function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
-};
+}
 
 /**
  * Loads a fragment.
@@ -662,8 +662,10 @@ const changeCheckboxVPN = (checkboxId) => {
   }
 };
 
-const initSelectors = () => {
-  if (productsList.length > 0) {
+function initSelectors() {
+  const productsExistsOnPage = productsList.length;
+
+  if (productsExistsOnPage) {
     const fakeSelectorsBottom = document.createElement('div');
     fakeSelectorsBottom.id = 'fakeSelectors_bottom';
     document.querySelector('footer').before(fakeSelectorsBottom);
@@ -710,49 +712,21 @@ const initSelectors = () => {
       });
     });
   }
-};
+}
 
-const loadPage = async () => {
-  await loadEager(document);
-  await loadLazy(document);
-
-  addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
-  if (!isZuoraNL()) {
-    addScript('/scripts/vendor/store2015.js', {}, 'async', () => {
-      initSelectors();
-
-      // adding IDs on each section
-      document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
-        const getIdentity = item.className;
-        item.parentElement.id = `${getIdentity}-${idx + 1}`;
-      });
-
-      // addEventListener on VPN checkboxes
-      if (document.querySelector('.checkboxVPN')) {
-        document.querySelectorAll('.checkboxVPN').forEach((item) => {
-          item.addEventListener('click', (e) => {
-            const checkboxId = e.target.getAttribute('id');
-            changeCheckboxVPN(checkboxId);
-          });
-        });
-      }
-    });
-
-    loadDelayed();
-  } else {
-    loadDelayed();
-  }
-  // adding IDs on each section
+function addIdsToEachSection() {
   document.querySelectorAll('main .section > div:first-of-type').forEach((item, idx) => {
     const getIdentity = item.className;
     item.parentElement.id = `${getIdentity}-${idx + 1}`;
   });
-  // addEventListener on VPN checkboxes
+}
+
+function addEventListenersOnVpnCheckboxes() {
   if (document.querySelector('.checkboxVPN')) {
     document.querySelectorAll('.checkboxVPN').forEach((item) => {
       item.addEventListener('click', (e) => {
         const checkboxId = e.target.getAttribute('id');
-        if (isZuoraNL() && window.StoreProducts.product) {
+        if (isZuoraForNetherlandsLangMode() && window.StoreProducts.product) {
           const prodxId = e.target.getAttribute('id').split('-')[1];
           const storeObjprod = window.StoreProducts.product[prodxId] || {};
           showPrices(storeObjprod, e.target.checked, checkboxId);
@@ -762,6 +736,41 @@ const loadPage = async () => {
       });
     });
   }
+}
+
+function initializeProductsPriceLogic() {
+  if (!isZuoraForNetherlandsLangMode()) {
+    addScript('/scripts/vendor/store2015.js', {}, 'async', () => {
+      initSelectors();
+
+      // todo move this elsewhere
+      addIdsToEachSection();
+
+      // todo move this elsewhere
+      addEventListenersOnVpnCheckboxes();
+    });
+
+    loadDelayed();
+  } else {
+    loadDelayed();
+  }
+
+  // todo move this elsewhere
+  addIdsToEachSection();
+
+  // todo move this elsewhere
+  addEventListenersOnVpnCheckboxes();
+}
+
+const loadPage = async () => {
+  await loadEager(document);
+  await loadLazy(document);
+
+  addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
+
+  initializeProductsPriceLogic();
+
+  // loadDelayed();
 };
 
 /*

@@ -148,7 +148,7 @@ const formatPrice = (priceVal, currency, region) => {
   return `${price} ${currency}`;
 };
 
-export function isZuoraNL() {
+export function isZuoraForNetherlandsLangMode() {
   return getDefaultLanguage() === 'nl';
 }
 
@@ -164,27 +164,30 @@ const maxDiscount = () => {
     });
   }
 
-  const maxdiscount = Math.max(...discountAmounts).toString();
+  const maxDiscountValue = Math.max(...discountAmounts).toString();
   if (document.querySelector('.max-discount')) {
     document.querySelectorAll('.max-discount').forEach((item) => {
-      item.textContent = `${maxdiscount}%`;
+      item.textContent = `${maxDiscountValue}%`;
     });
   }
 };
 
 // display prices
-export const showPrices = (storeObj, triggerVPN = false, checkboxId = '') => {
+export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
   const { currency_label: currencyLabel } = storeObj.selected_variation;
   const { region_id: regionId } = storeObj.selected_variation;
   const { product_id: productId } = storeObj.config;
+
   let parentDiv = '';
   let buyLink = storeObj.buy_link;
   let selectedVarPrice = storeObj.selected_variation.price;
+
   if (document.querySelector(`.show_vpn_${productId}`)) {
     document.querySelector(`.show_vpn_${productId}`).style.display = 'none';
   }
 
   const storeObjVPN = window.StoreProducts.product.vpn || {};
+  // todo storeObjVPN will always be truthy, so this if condition expression will always evaluate to true; fix this line: const storeObjVPN = window.StoreProducts.product.vpn || {};
   if (triggerVPN && storeObjVPN) {
     parentDiv = document.getElementById(checkboxId).closest('div.prod_box');
     buyLink += '&bundle_id=com.bitdefender.vpn&bundle_payment_period=1d1y';
@@ -196,7 +199,9 @@ export const showPrices = (storeObj, triggerVPN = false, checkboxId = '') => {
     }
   }
 
-  // if has discount
+  // if it has discount
+  // todo we shouldn't check if a variable is a specific type, because we must know in advance what is the shape of it; in advance you should know if storeObj.selected_variation.discount is an object / string / number / boolean / etc
+  // todo adapt the if() condition from bellow
   if (typeof storeObj.selected_variation.discount === 'object') {
     let selectedVarDiscount = storeObj.selected_variation.discount.discounted_price;
     if (triggerVPN && storeObjVPN) {
@@ -305,7 +310,7 @@ export const showPrices = (storeObj, triggerVPN = false, checkboxId = '') => {
     }
   }
 
-  if (isZuoraNL() && document.querySelector(`.buylink-${productId}`)) {
+  if (isZuoraForNetherlandsLangMode() && document.querySelector(`.buylink-${productId}`)) {
     if (triggerVPN) {
       parentDiv.querySelector(`.buylink-${productId}`).href = buyLink;
     } else {
@@ -316,4 +321,4 @@ export const showPrices = (storeObj, triggerVPN = false, checkboxId = '') => {
   }
 
   maxDiscount();
-};
+}
