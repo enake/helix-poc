@@ -61,19 +61,19 @@ export default class initZuoraNL {
     const devicesNo = prod[1];
     const yearsNo = prod[2];
     return new Promise((resolve, reject) => {
-      BitCheckoutSDK.getProductVariationsPrice({ bundle: this.productId[id], campaign: campaignId }, (payload) => {
-        if (!payload || payload.length === 0) {
+      BitCheckoutSDK.getProductVariationsPrice({ bundle: this.productId[id], campaign: campaignId }, (payloadObj) => {
+        if (!payloadObj || payloadObj.length === 0) {
           reject();
         }
 
-        payload = payload[payload.length - 1];
+        payload = payloadObj[payloadObj.length - 1];
 
         /* if (this.names[id]) {
           payload = payload.filter((id) => this.productId[id]=== this.names[id]);
         } */
 
         const pricing = {};
-        payload.pricing.map((item) => {
+        payload.pricing.forEach((item) => {
           if (item.devices_no === Number(devicesNo)) {
             pricing.total = item.price;
             pricing.discount = item.discount;
@@ -83,7 +83,7 @@ export default class initZuoraNL {
 
         // buylink:
         const zuoraCart = new URL('https://checkout.bitdefender.com/index.html:step=cart?theme=light');
-        zuoraCart.searchParams.set("campaign", campaignId);
+        zuoraCart.searchParams.set('campaign', campaignId);
         zuoraCart.searchParams.set('product_id', this.productId[id]);
         zuoraCart.searchParams.set('session_id', BitCheckoutSDK.getSessionId());
         zuoraCart.searchParams.set('payment_period', this.monthlyProducts[id] ? `${devicesNo}d1m` : `${devicesNo}d${yearsNo}y`);

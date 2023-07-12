@@ -194,9 +194,9 @@ export async function loadFragment(path) {
 // TODO: have a look at StoreProducts.product & StoreProducts.initCount
 // maybe we can use them instead of this function
 export const updateProductsList = (product) => {
-  product = product.trim();
-  if (productsList.indexOf(product) === -1) {
-    productsList.push(product);
+  const productTrim = product.trim();
+  if (productsList.indexOf(productTrim) === -1) {
+    productsList.push(productTrim);
   }
 };
 
@@ -219,52 +219,52 @@ const truncatePrice = (price) => {
 };
 
 // formatPrice
-const formatPrice = (price, currency, region) => {
-  price = truncatePrice(price);
+const formatPrice = (priceVal, currency, region) => {
+  const price = truncatePrice(priceVal);
 
-  if (region == 3) {
+  if (region === 3) {
     return currency + price;
   }
 
-  if (region == 4) {
+  if (region === 4) {
     return currency + price;
   }
 
-  if (region == 5) {
+  if (region === 5) {
     return price + ' ' + currency;
   }
 
-  if (region == 7) {
+  if (region === 7) {
     return price + ' ' + currency;
   }
 
-  if (region == 8 || region == 2 || region == 11) {
+  if (region === 8 || region === 2 || region === 11) {
     return currency + price;
   }
 
-  if (region == 13) {
+  if (region === 13) {
     return currency + price;
   }
 
-	if (region == 16 && DEFAULT_LANGUAGE == 'nl') {
-		try{
+	if (region === 16 && DEFAULT_LANGUAGE === 'nl') {
+		try {
 			price = price.replace('.', ',');
-		} catch(err){ console.log(err); }
-		
-		return currency + ' ' + price;
+		} catch (err) { console.log(err); }
+
+		return `${currency} ${price}`;
 	}
 
   if(region == 17 || region == 18) {
     let fprice = price + ' ' + currency;
-    
+
     try {
       fprice = parseFloat(price).toFixed(2) + ' ' + currency;
     } catch(ex) {}
-    
+
     return fprice;
   }
 
-  return price + ' ' + currency;
+  return `${price} ${currency}`;
 };
 
 // get max discount
