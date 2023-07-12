@@ -822,7 +822,7 @@ const loadPage = async () => {
   await loadLazy(document);
 
   addScript('/scripts/vendor/bootstrap/bootstrap.bundle.min.js', {}, 'defer');
-  addScript('/scripts/vendor/store2015-clean.js', {}, 'async', () => {
+  addScript('/scripts/vendor/store2015.js', {}, 'async', () => {
     initSelectors();
     loadDelayed();
 
