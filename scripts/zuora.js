@@ -128,9 +128,9 @@ export default class initZuoraNL {
     });
   }
 
-  static async loadProduct(id, campaign) {
+  static loadProduct(id, campaign) {
     window.StoreProducts = window.StoreProducts || [];
     window.StoreProducts.product = window.StoreProducts.product || {};
-    return await this.getProductVariationPrice(id, campaign);
+    return this.getProductVariationPrice(id, campaign);
   }
 }
