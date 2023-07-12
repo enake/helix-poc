@@ -17,8 +17,9 @@ import { sendAnalyticsPageEvent, sendAnalyticsUserInfo, sendAnalyticsProducts } 
 import { addScript, getDefaultLanguage } from './utils.js';
 import initZuoraNL from './zuora.js';
 
-const DEFAULT_LANGUAGE = getDefaultLanguage();
+window.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
 const isZuoraNL = DEFAULT_LANGUAGE === 'nl';
+
 const productsList = [];
 const defaultBuyLinks = {};
 
