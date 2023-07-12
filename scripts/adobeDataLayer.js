@@ -212,7 +212,5 @@ export async function sendAnalyticsPageLoadedEvent() {
     return;
   }
 
-  if (StoreProducts?.initCount === 0) {
-    window.adobeDataLayer.push({ event: 'page loaded' });
-  }
+  window.adobeDataLayer.push({ event: 'page loaded' });
 }
