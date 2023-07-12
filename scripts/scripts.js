@@ -914,7 +914,7 @@ const loadPage = async () => {
   if (isZuoraNL) {
     // for NL - Zuora
     window.config = initZuoraNL.config();
-    addScript('https://checkout.bitdefender.com/static/js/sdk.js', {}, 'async', () => {
+    addScript('https://checkout.bitdefender.com/static/js/sdk.js', {}, 'defer', () => {
       console.log('initZuoraNL');
       // if (productsList.length) {
       //   productsList.forEach(async (item) => {
