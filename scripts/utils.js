@@ -90,7 +90,6 @@ export const GLOBAL_EVENTS = {
 export function adobeMcAppendVisitorId(selector) {
   // https://experienceleague.adobe.com/docs/id-service/using/id-service-api/methods/appendvisitorid.html?lang=en
   try {
-    const adbeDomains = ['bitdefender.com'];
     const visitor = Visitor.getInstance('0E920C0F53DA9E9B0A490D45@AdobeOrg', {
       trackingServer: 'sstats.adobe.com',
       trackingServerSecure: 'sstats.adobe.com',
@@ -98,17 +97,12 @@ export function adobeMcAppendVisitorId(selector) {
       marketingCloudServerSecure: 'sstats.adobe.com',
     });
     const wrapperSelector = document.querySelector(selector);
-    adbeDomains.forEach((domain) => {
-      const domainRegex = RegExp(domain);
-      if (!domainRegex.test(window.location.hostname)) {
-        const hrefSelector = `[href*="${domain}"]`;
-        wrapperSelector.querySelectorAll(hrefSelector).forEach((href) => {
-          href.addEventListener('mousedown', (event) => {
-            const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(event.currentTarget.href);
-            event.currentTarget.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
-          });
-        });
-      }
+    const hrefSelector = '[href*="bitdefender.com"]';
+    wrapperSelector.querySelectorAll(hrefSelector).forEach((href) => {
+      href.addEventListener('mousedown', (event) => {
+        const destinationURLWithVisitorIDs = visitor.appendVisitorIDsTo(event.currentTarget.href);
+        event.currentTarget.href = destinationURLWithVisitorIDs.replace(/MCAID%3D.*%7CMCORGID/, 'MCAID%3D%7CMCORGID');
+      });
     });
   } catch (e) {
     console.error('Failed to load https://assets.adobedtm.com script, Visitor will not be defined');
