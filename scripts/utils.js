@@ -182,6 +182,7 @@ export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
   let buyLink = storeObj.buy_link;
   let selectedVarPrice = storeObj.selected_variation.price;
 
+  // todo: extract query selector just to used once for perf reasons
   if (document.querySelector(`.show_vpn_${productId}`)) {
     document.querySelector(`.show_vpn_${productId}`).style.display = 'none';
   }
@@ -194,6 +195,7 @@ export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
     selectedVarPrice += storeObjVPN.selected_variation.price || 0;
     selectedVarPrice = selectedVarPrice.toFixed(2);
 
+    // todo: extract query selector just to used once for perf reasons
     if (document.querySelector(`.show_vpn_${productId}`)) {
       document.querySelector(`.show_vpn_${productId}`).style.display = 'block';
     }
@@ -246,6 +248,7 @@ export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
       }
     }
 
+    // todo: extract query selector just to used once for perf reasons
     if (document.querySelector(`.percent-${productId}`)) {
       if (triggerVPN) {
         parentDiv.querySelector(`.percent-${productId}`).innerHTML = `${percentageSticker}%`;
@@ -267,18 +270,22 @@ export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
       parentElement.style.visibility = 'visible';
     }
 
+    // todo: extract query selector just to used once for perf reasons
     if (document.querySelector(`.show_save_${productId}`)) {
       document.querySelector(`.show_save_${productId}`).style.display = 'block';
     }
   } else {
+    // todo: extract query selector just to used once for perf reasons
     const fullPrice = formatPrice(selectedVarPrice, currencyLabel, regionId);
     if (document.querySelector(`.newprice-${productId}`)) {
       document.querySelector(`.newprice-${productId}`).innerHTML = fullPrice;
     }
+    // todo: extract query selector just to used once for perf reasons
     if (document.querySelector(`.oldprice-${productId}`)) {
       document.querySelector(`.oldprice-${productId}`).style.display = 'none';
     }
 
+    // todo: extract query selector just to used once for perf reasons
     if (document.querySelector(`.save-${productId}`)) {
       const saveElement = document.querySelector(`.save-${productId}`);
       const parentElement = saveElement.parentNode;
@@ -290,6 +297,7 @@ export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
       });
     }
 
+    // todo: extract query selector just to used once for perf reasons
     if (document.querySelector(`.percent-${productId}`)) {
       const percentElement = document.querySelector(`.percent-${productId}`);
       const parentElement = percentElement.parentNode;
@@ -298,6 +306,7 @@ export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
       parentElement.style.display = 'none';
     }
 
+    // todo: extract query selector just to used once for perf reasons
     if (document.querySelector(`.show_save_${productId}`)) {
       document.querySelector(`.show_save_${productId}`).style.display = 'none';
     }
@@ -310,6 +319,8 @@ export function showPrices(storeObj, triggerVPN = false, checkboxId = '') {
     }
   }
 
+  // todo: extract query selector just to used once for perf reasons
+  // todo: why document.querySelector(`.buylink-${productId}`) and then parentDiv.querySelector(`.buylink-${productId}`) ?
   if (isZuoraForNetherlandsLangMode() && document.querySelector(`.buylink-${productId}`)) {
     if (triggerVPN) {
       parentDiv.querySelector(`.buylink-${productId}`).href = buyLink;

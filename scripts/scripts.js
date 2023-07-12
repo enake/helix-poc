@@ -755,10 +755,10 @@ function initializeProductsPriceLogic() {
     loadDelayed();
   }
 
-  // todo move this elsewhere
+  // todo move this elsewhere, also executed twice for non zuora mode
   addIdsToEachSection();
 
-  // todo move this elsewhere
+  // todo move this elsewhere, also executed twice for non zuora mode
   addEventListenersOnVpnCheckboxes();
 }
 
@@ -770,6 +770,7 @@ const loadPage = async () => {
 
   initializeProductsPriceLogic();
 
+  // todo this should be present here and uncommented after todos are fixed from initializeProductsPriceLogic()
   // loadDelayed();
 };
 
