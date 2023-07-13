@@ -4,6 +4,9 @@
   justify-content: space-between;
   font-size: 18px;
 }
+.c-productswithvpn.overflow-top {
+  margin-top: -3em;
+}
 
 .c-productswithvpn > div {
   width: 32%;
@@ -171,6 +174,10 @@
   text-align: left;
   margin-top: 10px;
 }
+.c-productswithvpn > div ul li.check-full {
+  background: url("../../images/icons/check_full.png") 0 3px no-repeat transparent;
+  background-size: 16px;
+}
 
 .c-productswithvpn > div ul {
   padding-left: 0;
@@ -318,6 +325,9 @@
     display: block;
     width: 90%;
     margin: 0 auto;
+  }
+  .c-productswithvpn.overflow-top {
+    margin-top: -1em;
   }
   .c-productswithvpn > div {
     width: 100% !important;

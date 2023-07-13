@@ -26,18 +26,27 @@ export default function decorate(block) {
 
   // move picture below
   const bannerImage = block.querySelector('picture');
+  const bannerContainer = document.querySelector('.b-banner-container');
+
+  bannerImage.classList.add('b-banner-hero-image');
   parentSelector.append(bannerImage);
 
   // config new elements
   const paragraph = block.querySelector('p');
+  const banner = document.querySelector('.b-banner-container');
   const {
-    product, discountStyle, discountText, backgroundColor, imageVariation,
+    product, discountStyle, discountText, backgroundColor, imageVariation, paragraphColor,
+    bannerHeight, bannerImageCover, hasAwardImage, awardImageWidth, bannerColor,
   } = metaData;
 
   // update background color if set
   if (typeof backgroundColor !== 'undefined') {
-    const block1 = document.querySelector('.b-banner-container');
-    block1.style.backgroundColor = backgroundColor;
+    bannerContainer.style.backgroundColor = backgroundColor;
+    bannerContainer.style.filter = 'inverse(100%)';
+  }
+
+  if (typeof bannerColor !== 'undefined') {
+    bannerContainer.style.color = bannerColor;
   }
 
   if (typeof imageVariation !== 'undefined') {
@@ -48,6 +57,29 @@ export default function decorate(block) {
       const block3 = document.querySelector('picture');
       block3.style.marginLeft = 'auto';
     }
+  }
+
+  if (bannerHeight !== 'undefinded') {
+    banner.style.height = bannerHeight;
+  }
+
+  if (bannerImageCover !== 'undefinded') {
+    const image = bannerImage.querySelector('img');
+    image.style.height = '-webkit-fill-available';
+    image.style.objectFit = 'cover';
+  }
+
+  if (hasAwardImage !== 'undefinded') {
+    const bBanner = document.querySelector('.b-banner');
+    bBanner.classList.add('d-flex');
+
+    const AwardImage = block.querySelectorAll('picture')[0];
+    const AwardImage2 = AwardImage.querySelector('img');
+    AwardImage2.style.width = awardImageWidth || '11rem';
+  }
+
+  if (paragraphColor !== 'undefinded') {
+    paragraph.style.color = paragraphColor;
   }
 
   if (typeof product !== 'undefined' && product !== '') {
